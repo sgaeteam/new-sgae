@@ -1,5 +1,5 @@
 <?php
-include('inc/conexao.php');
+include('inc/config.php');
 include('inc/verificasession.php');
 
 $usuarioID      = $_SESSION['UsuarioID'];

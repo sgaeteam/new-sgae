@@ -1,5 +1,5 @@
 <?php
-include('inc/conexao.php');
+include('inc/config.php');
 include('inc/verificasession.php');
 
 $usuarioID      = $_SESSION['UsuarioID'];
@@ -13,138 +13,145 @@ header('Content-Type: text/html; charset=utf-8');
 
 if (isset($_GET['idusu']) && is_numeric($_GET['idusu'])) {
     $idusu = $_GET['idusu'];
-    $sql = "select * from usuario where id = '$idusu'";
-    $res = mysql_query($sql);
-    $num = mysql_num_rows($res);
-    if ($num > 0) {
+    $pdo  = $registry->get('sgaedb');
+	$stmt = $pdo->prepare("select * from usuario where id = :id");
+	$stmt->bindParam(":id", $idusu);	
+	$stmt->execute();
+    $result = $stmt->fetch(PDO::FETCH_ASSOC);
+    	
+    if ($stmt->rowCount() > 0) {
 
-                $login = mysql_result($res, $i, 'login');
-                $nome = mysql_result($res, $i, 'nome');
-                $email = mysql_result($res, $i, 'email');
-                $perfil = mysql_result($res, $i, 'perfil_id');
-                $unidade = mysql_result($res, $i, 'unidade_id');       
+                $login = $result['login'];
+                $nome = $result['nome'];
+                $email = $result['email'];
+                $perfil = $result['perfil_id'];
+                $unidade = $result['unidade_id'];
     }
     else {
         header('location: usuario_list.php');
         exit;
     }
+
 }
 
 ?>
-
 <!-- Include header here-->
-    <?php include 'header.php';?> 
+    <?php include 'header.php';?>
+
     <div class="wrapper row-offcanvas row-offcanvas-left">
         <aside class="right-side">
-            <div class="alert alert-success alert-dismissable margin5">
-                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                <strong>Unidade: <?php echo utf8_encode($unidadeNome);  ?> </strong>
-            </div>
             <!-- Main content -->
             <section class="content-header">
-                <h1>Administra&ccedil;&atilde;o > Cadastro > Usu&aacute;rio</h1>
+                <h1>Unidade: <?php echo utf8_encode($unidadeNome);?></h1>
                 <ol class="breadcrumb">
-                    <li class="active">
-                        <a href="index.php">
-                            <i class="livicon" data-name="home" data-size="14" data-color="#333" data-hovercolor="#333"></i> Painel de Controle
-                        </a>
-                    </li>
+                    <li><a href="index.php"><i class="livicon" data-name="home" data-size="14" data-loop="true"></i>Painel de Controle</a></li>
+                    <li><a href="#">Administra&ccedil;&atilde;o</a></li>
+                    <li><a href="#">Cadastro</a></li>
+                    <li><a href="#">Usu&aacute;rio</a></li>
+                    <li class="active">Editar Usu&aacute;rio</li>
                 </ol>
             </section>
             <section class="content">
-                    <!-- BEGIN EXAMPLE TABLE PORTLET-->
-                    <div class="portlet box default">
-                        <div class="portlet-title">
-                            <div class="caption">
-                                <i class="livicon" data-name="edit" data-size="16" data-loop="true" data-c="#fff" data-hc="white"></i>
-                                Editar Usu&aacute;rio
+            <?php
+                if (isset($_GET['msg'])) {                
+            ?>                
+                <div class="row">
+                        <div class="col-lg-12">
+                            <div class="alert alert-success alert-dismissable margin5 fade in" >
+                                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                                <strong>
+                                    <?php
+                                            $msg = $_GET['msg'];
+                                            include('inc/mensagens.php');
+                                    ?>
+                                </strong>
                             </div>
-                            <div class="pull-right" id="tools"></div>
                         </div>
-                        <div class="portlet-body">
-                            <div class="table-toolbar">
-                            <form class="form-horizontal" action="usuario_exec.php" method="post">
-                            <fieldset>
-                                <div class="row">
-                                <div style="display: block;" class="col-md-6 display-no">
-                                    <div style="" class="form-group">
-                                        <label for="input-text-2">
-                                            Usu&aacute;rio</label>
-                                        <input class="form-control" id="input-text-2" placeholder="insira usuario" type="text" name="login" value="<?php echo $login; ?>" autofocus>
-                                    </div>
-                                    <div style="position: static;" class="form-group">
-                                        <label for="input-text-1">
-                                            Nome completo</label>
-                                        <input class="form-control" id="input-text-1" placeholder="insira nome" type="text" name="nome" value="<?php echo utf8_encode($nome) ; ?>">
-                                    </div>
-                                    <div style="position: static;" class="form-group">
-                                        <label for="input-text-3">
-                                            E-mail</label>
-                                        <input class="form-control" id="input-text-3" placeholder="insira e-mail" type="email"  name="email" value="<?php echo $email; ?>">
-                                    </div>
-                                </div>
-                                <div style="display: block;" class="col-md-6 display-no">
-                                    <div style="position: static;" class="form-group">
-                                        <label for="select-1">
-                                            Perfil</label>                                            
-                                            <select class="form-control" name="perfil">
-                                            <?php  $sqltipo = "select * from perfil";
-                                                   $restipo = mysql_query($sqltipo);
-                                              
-                                                   while ($rowTipo = mysql_fetch_array($restipo)) {
-                                                        if ($rowTipo['id'] == $perfil) {
-                                                            $selected = "selected='selected'";
-                                                        } 
-                                                        else {
-                                                                $selected = "";
-                                                        }
-                                                
-                                            ?>
-                                          
-                                              <option <?=$selected; ?> value="<?=$rowTipo['id']; ?>"><?php echo utf8_encode($rowTipo['tipo']); ?></option>
-                                           
-                                            <?php  } ?>  
-                                            </select>
-                                    </div>
-                                    <div style="position: static;" class="form-group">
-                                        <label for="select-2">
-                                            Unidade</label>
-                                            <select class="form-control" name="unidade">
-                                            <?php  $sqltipo = "select * from unidade";
-                                                   $restipo = mysql_query($sqltipo);
-                                              
-                                                   while ($rowTipo = mysql_fetch_array($restipo)) {
-                                                        if ($rowTipo['id'] == $unidade) {
-                                                            $selected = "selected='selected'";
-                                                        } 
-                                                        else {
-                                                                $selected = "";
-                                                        }
-                                                
-                                            ?>
-                                          
-                                              <option <?=$selected; ?> value="<?=$rowTipo['id']; ?>"><?php echo utf8_encode($rowTipo['nomefantasia']); ?></option>
-                                           
-                                            <?php   } ?>  
-                                            </select>
-                                    </div>
-                                    <br>
-                                    <div class="btn-group">
-                                        <input type="hidden" name="act" value="update" />
-                                        <input type="hidden" name="idusu" value="<?=$idusu; ?>" />
-                                        <button type="submit" class="btn btn-default" name="sub" value="Atualizar">
-                                            Confirmar</button>
-                                        <button type="submit" class="btn btn-default" onclick="location.href='usuario_list.php'">
-                                            Voltar</button>
-                                    </div>
-                                </div>
-                                </div>
-                            </fieldset>
-                            </form> 
+                </div>
+            <?php
+                }
+            ?>                 
+            </section>
+            <section class="content">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="panel panel-primary">
+                            <div class="panel-heading">
+                                                <h3 class="panel-title">
+                                                    <i class="livicon" data-name="doc-portrait" data-c="#fff" data-hc="#fff" data-size="18" data-loop="true"></i>
+                                                    Informe os dados para alteração
+                                                </h3>
+                                                <!--
+                                                <span class="pull-right">
+                                                    <i class="fa fa-fw fa-chevron-up clickable"></i>
+                                                    <i class="fa fa-fw fa-times removepanel clickable"></i>
+                                                </span> -->
+                             </div>
+                            <div class="panel-body">
+                                    <form class="form-horizontal" action="usuario_exec.php" method="post">
+                                        <div class="row">
+                                                    <div class="col-md-6">
+                                                            <div class="form-group">
+                                                                <label class="control-label col-md-3" for="campo1">Usu&aacute;rio*</label>
+                                                                <div class="col-md-9">
+                                                                    <input type="text" class="form-control" id="campo1" name="login" value="<?php echo $login; ?>" autofocus/>
+                                                                </div>
+                                                            </div>
+                                                         
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                            <div class="form-group">
+                                                                <label class="control-label col-md-3" for="campo2">E-mail</label>
+                                                                <div class="col-md-9">
+                                                                    <input type="email" class="form-control" id="campo2" placeholder="Trazer preenchido o campo">
+                                                                </div>
+                                                            </div>   
+                                                    </div>
+                                        </div>
+                                        <div class="row">
+                                                    <div div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label class="control-label col-md-3" for="campo3">Campo 3</label>
+                                                            <div class="col-md-9">
+                                                                <select id="filtro3" class="form-control">
+                                                                    <option>1</option>
+                                                                    <option>2</option>
+                                                                    <option>3</option>
+                                                                    <option>4</option>
+                                                                    <option>5</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div div class="col-md-6">
+                                                         <div class="form-group">
+                                                             <label class="control-label col-md-3">Campo 4</label>
+                                                             <div class="col-md-9">
+                                                                 <label class="radio-inline">
+                                                                    <input name="optionsRadiosInline" id="optionsRadiosInline1" type="radio" checked="" value="0">Ativo</label>
+                                                                 <label class="radio-inline">
+                                                                    <input name="optionsRadiosInline" id="optionsRadiosInline2" type="radio" checked="" value="1">Inativo</label>
+                                                             </div>   
+                                                         </div>
+                                                    </div>
+                                        </div>
+                                    </form>
+                                    </br></br>
+                                    <div class="form-group form-actions">
+                                                <div class="col-md-9 col-md-offset-5">
+
+                                                    <button type="button" onclick="" class="btn btn-labeled btn-success btn-responsive"><span class="btn-label"><i class="livicon" data-name="save" data-size="17" data-loop="true" data-c="#fff" data-hc="#fff" title="Alterar"></i></span>&nbsp;Alterar</button>
+
+                                                    <button type="button" onclick="location.href='usuario_list.php'" class="btn btn-labeled btn-warning btn-responsive"><span class="btn-label"><i class="livicon" data-name="remove-circle" data-size="17" data-loop="true" data-c="#fff" data-hc="#fff" title="Cancelar"></i></span>Cancelar</button>
+
+                                                </div>
+                                    </div>    
+                                </div>   
+                              </div>          
                             </div>
-                    <!-- END EXAMPLE TABLE PORTLET-->
-                         </div>
+                        </div>
                     </div> 
+                </div>  
             </section>
         </aside>  
     </div>

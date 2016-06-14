@@ -54,7 +54,7 @@
                             <a tabindex="-1" href="">Cadastro</a>
                             <ul class="dropdown-menu">
                               <li><a href="exemplo_list.php">Exemplo</a></li>
-                              <li><a href="#">Filial</a></li>
+                              <li><a href="#">Unidade</a></li>
                               <li role="separator" class="divider"></li>
                               <li><a href="usuario_list.php">Usu&aacute;rio</a></li>
                              </ul>

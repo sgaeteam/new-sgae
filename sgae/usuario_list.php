@@ -1,5 +1,5 @@
 <?php
-include('inc/conexao.php');
+include('inc/config.php');
 include('inc/verificasession.php');
 
 $usuarioID      = $_SESSION['UsuarioID'];
@@ -11,148 +11,231 @@ $unidadeNome    = $_SESSION['UnidadeNome'];
 
 header('Content-Type: text/html; charset=utf-8');
 ?>
-
 <!-- Include header here-->
-    <?php include 'header.php';?> 
+<?php include 'header.php';?>
+    
+<!-- JQuery imports here-->
+<script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
+<script>
+//triggered when modal is about to be shown
+    $('#my_modal').on('show.bs.modal', function(e) {
+    
+        //get data-id attribute of the clicked element
+        var userId = $(e.relatedTarget).data('user-id');
+    
+        //populate the textbox
+        $(e.currentTarget).find('input[name="Id"]').val(bookId);
+    });
+</script>
+
     <div class="wrapper row-offcanvas row-offcanvas-left">
         <aside class="right-side">
-            <div class="alert alert-success alert-dismissable margin5">
-                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                <strong>Unidade: <?php echo utf8_encode($unidadeNome);  ?> </strong>
-            </div>
             <!-- Main content -->
             <section class="content-header">
-                <h1>Administra&ccedil;&atilde;o > Cadastro > Usu&aacute;rio</h1>
+                <h1>Unidade: <?php echo utf8_encode($unidadeNome);?></h1>
                 <ol class="breadcrumb">
-                    <li class="active">
-                        <a href="index.php">
-                            <i class="livicon" data-name="home" data-size="14" data-color="#333" data-hovercolor="#333"></i> Painel de Controle
-                        </a>
-                    </li>
+                    <li><a href="index.php"><i class="livicon" data-name="home" data-size="14" data-loop="true"></i>Painel de Controle</a></li>
+                    <li><a href="#">Administra&ccedil;&atilde;o</a></li>
+                    <li><a href="#">Cadastro</a></li>
+                    <li><a href="#">Usu&aacute;rio</a></li>                    
+                    <li class="active">Buscar Usu&aacute;rio</li>
                 </ol>
             </section>
             <section class="content">
-                    <!-- BEGIN EXAMPLE TABLE PORTLET-->
-                    <div class="portlet box default">
-                        <div class="portlet-title">
-                            <div class="caption">
-                                <i class="livicon" data-name="edit" data-size="16" data-loop="true" data-c="#fff" data-hc="white"></i>
-                                Gerenciamento de Usu&aacute;rios
-                            </div>
-                            <div class="pull-right" id="tools"></div>
-                        </div>
-                        <div class="portlet-body">
-                            <div class="table-toolbar">
-                                <div class="btn-group">
-                                    <button id="sample_editable_1_new" class="btn btn-custom" onclick="location.href='usuario_insert.php'">
-                                        Novo
-                                        <i class="fa fa-plus"></i>
-                                    </button>
-                                    <button id="sample_editable_1_new" class="btn btn-danger" onclick="location.href='usuario_ilist.php'">
-                                        Inativos
-                                    </button>                                    
+            <?php
+                if (isset($_GET['msg'])) {                
+            ?>                
+	            <div class="row">
+	                    <div class="col-lg-12">
+				            <div class="alert alert-success alert-dismissable margin5">
+				                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+				                <strong>
+                                    <?php
+                                            $msg = $_GET['msg'];
+                                            include('inc/mensagens.php');
+                                    ?>
+                                </strong>
+				            </div>
+		            	</div>
+		        </div>
+            <?php
+                }
+            ?>   		        
+	        </section>
+            <section class="content">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="panel panel-primary">
+                            <div class="panel-heading">
+                                                <h3 class="panel-title">
+                                                    <i class="livicon" data-name="doc-portrait" data-c="#fff" data-hc="#fff" data-size="18" data-loop="true"></i>
+                                                    Informe os critérios para busca
+                                                </h3>
+                                                <!--
+                                                <span class="pull-right">
+                                                    <i class="fa fa-fw fa-chevron-up clickable"></i>
+                                                    <i class="fa fa-fw fa-times removepanel clickable"></i>
+                                                </span> -->
+                             </div>
+                            <div class="panel-body">
+                                    <!--<form class="form-horizontal">-->
+                                    <form class="form-horizontal" method="post" action="" id="ajax_form">
+                                        <div class="row">
+                                                    <div class="col-md-6">
+                                                            <div class="form-group">
+                                                                <label class="control-label col-md-3" for="nomeFiltro">Nome</label>
+                                                                <div class="col-md-9">
+                                                                    <input type="text" class="form-control" id="nomeFiltro" placeholder="insira o nome para busca">
+                                                                </div>
+                                                            </div>
+                                                         
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                            <div class="form-group">
+                                                                <label class="control-label col-md-3" for="usuarioFiltro">Usu&aacute;rio</label>
+                                                                <div class="col-md-9">
+                                                                    <input type="text" class="form-control" id="usuarioFiltro" placeholder="insira o usu&aacute;rio para busca">
+                                                                </div>
+                                                            </div>   
+                                                    </div>
+                                        </div>
+                                        <div class="row">
+                                                    <div div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label class="control-label col-md-3" for="perfilFiltro">Perfil</label>
+                                                            <div class="col-md-9">
+                                                                <select id="perfilFiltro" class="form-control">
+                                                                    <option>Selecione para busca</option>
+                                                                    <?php 
+                                                                    	$registry = Registry::getInstance();
+                                                                        $pdo  = $registry->get('sgaedb');
+                                                                    	$stmt = $pdo->prepare("SELECT * FROM perfil ORDER BY tipo ASC"); 
+                                                                    	$stmt->execute();
+                                                                    	$perfilItem = $stmt->fetchAll();
+                                                                        foreach ($perfilItem as $item) {
+                                                                            echo "<option value=".$item['id'].">".$item['tipo']."</option>";
+                                                                        }
+                                                                    ?>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div div class="col-md-6">
+                                                         <div class="form-group">
+                                                             <label class="control-label col-md-3">Status</label>
+                                                             <div class="col-md-9">
+                                                                 <label class="radio-inline">
+                                                                    <input name="status" id="optionsRadiosInline1" type="radio" checked="" value="0">Ativo</label>
+                                                                 <label class="radio-inline">
+                                                                    <input name="optionsRadiosInline" id="optionsRadiosInline2" type="radio" value="1">Inativo</label>
+                                                             </div>   
+                                                         </div>
+                                                    </div>
+                                        </div>
+                                    </form>
+                                    </br></br>
+                                    <div class="form-group form-actions">
+                                                <div class="col-md-9 col-md-offset-4">
+
+                                                    <button type="button" onclick="javascript:document.getElementById('tabela').style.display='block';" class="btn btn-labeled btn-success btn-responsive"><span class="btn-label"><i class="livicon" data-name="search" data-size="17" data-loop="true" data-c="#fff" data-hc="#fff" title="Buscar"></i></span>&nbsp;Buscar</button>
+
+                                                    <button type="button" onclick="javascipt:document.getElementById('tabela').style.display='none';" class="btn btn-labeled btn-danger btn-responsive"><span class="btn-label"><i class="livicon" data-name="remove-circle" data-size="17" data-loop="true" data-c="#fff" data-hc="#fff" title="Limpar"></i></span>Limpar</button>
+
+                                                    <button type="button" onclick="location.href='usuario_insert.php'" class="btn btn-labeled btn-warning btn-responsive"><span class="btn-label"><i class="livicon" data-name="plus-alt" data-size="17" data-loop="true" data-c="#fff" data-hc="#fff" title="Buscar"></i></span>&nbsp;&nbsp;Novo</button>
+
+                                                </div>
+                                    </div>  
+                                    </br></br></br>  
+
+                                       
+                                    <div id="tabela" class="panel panel-primary" style="display:none;">
+                                        <div class="panel-heading">
+                                            <h4 class="panel-title">
+                                                <i class="livicon" data-name="pencil" data-size="16" data-loop="true" data-c="#fff" data-hc="white"></i>
+                                                  Resultado da busca
+                                            </h4>
+                                    </div>
+                            <br />
+                            
+                            <div class="panel-body">
+                            <table class="table table-bordered " id="table">
+                                <thead>
+                                    <tr class="filters">
+                                        <th>Nome</th>
+                                        <th>Usu&aacute;rio</th>
+                                        <th>E-mail</th>
+                                        <th>Perfil</th>
+                                        <th>Unidade</th>
+                                        <th>Ações</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                <?php 
+                                	$stmt2 = $pdo->prepare("SELECT usuario.id,usuario.nome,usuario.login,usuario.email,perfil.tipo,unidade.nomefantasia
+                                	                          FROM usuario, perfil, unidade
+                                	                         WHERE usuario.perfil_id = perfil.id 
+                                	                           AND usuario.unidade_id = unidade.id 
+                                	                           AND usuario.inativo = 0 
+                                	                        ORDER BY usuario.nome DESC"); 
+                                	$stmt2->execute();
+                                    $results = $stmt2->fetchAll();
+                                    
+                                    if ($stmt2->rowCount() > 0) {
+                                        foreach ($results as $result) {
+                                ?>
+                                            <tr>
+                                                <td width="18%"><?php echo $result['nome'];?></td>
+                                                <td width="18%"><?php echo $result['login'];?></td>
+                                                <td width="19%"><?php echo $result['email'];?></td>
+                                                <td width="19%"><?php echo $result['tipo'];?></td>
+                                                <td width="19%"><?php echo $result['nomefantasia'];?></td>
+                                                <td width="7%">
+                                                    <a href="usuario_view.php?idusu=<?php echo $result['id']; ?>">
+                                                        <i class="livicon" data-name="eye-open" data-size="19" data-loop="true" data-c="#428BCA" data-hc="#428BCA" title="Visualizar"></i>
+                                                    </a>
+        
+                                                    <a href="usuario_edit.php?idusu=<?php echo $result['id']; ?>">
+                                                        <i class="livicon" data-name="pen" data-size="19" data-loop="true" data-c="#F89A14" data-hc="#f56954" title="Editar"></i>
+                                                    </a>
+                                                    <a href="#" data-toggle="modal" data-target="#delete_confirm" data-id="<?php echo $result['id']; ?>">
+                                                        <i class="livicon" data-name="trash" data-size="19" data-loop="true" data-c="#f56954" data-hc="#f56954" title="Excluir"></i>
+                                                    </a>
+                                                    
+                                                </td>
+                                             </tr>
+                                <?php
+                                        }
+                                    }
+                                ?>
+                                </tbody>
+                            </table>
+                            <!-- Modal for showing delete confirmation -->
+                            <div class="modal fade" id="delete_confirm" tabindex="-1" role="dialog" aria-labelledby="user_delete_confirm_title" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                                            <h4 class="modal-title" id="user_delete_confirm_title">
+                                                Excluir
+                                            </h4>
+                                        </div>
+                                        <div class="modal-body">
+                                            Você deseja excluir esse registro? Esta operação não poderá ser desfeita.
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-warning" data-dismiss="modal">Cancelar</button>
+                                            <a href="#" id="modalDelete" type="button" class="btn btn-danger">Excluir</a>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                            <div id="sample_editable_1_wrapper" class="">
-                            <?php
-                                if (isset($_GET['msg'])) {
-                                    
-                                    $msg = $_GET['msg'];
-
-                                    echo "<span class=\"contador\">";
-                                    include('inc/mensagens.php');
-                                    echo "</span><br/><br/><br/>";
-                                }
-                            ?>
-                                <table class="table table-striped table-bordered table-hover dataTable no-footer" id="sample_editable_1" role="grid">
-                                    <thead>
-                                    <tr role="row">
-                                        <th class="sorting_asc" tabindex="0" aria-controls="sample_editable_1" rowspan="1" colspan="1">Nome</th>
-                                        <th class="sorting" tabindex="0" aria-controls="sample_editable_1" rowspan="1" colspan="1" aria-label="
-                                                 Full Name
-                                            : activate to sort column ascending" style="width: 350px;">E-mail</th>
-                                        <th class="sorting" tabindex="0" aria-controls="sample_editable_1" rowspan="1" colspan="1" aria-label="
-                                                 Points
-                                            : activate to sort column ascending" style="width: 150px;">Usu&aacute;rio</th>
-                                        <th class="sorting" tabindex="0" aria-controls="sample_editable_1" rowspan="1" colspan="1" aria-label="
-                                                 Notes
-                                            : activate to sort column ascending" style="width: 50px;">Perfil</th>
-                                        <th class="sorting" tabindex="0" aria-controls="sample_editable_1" rowspan="1" colspan="1" aria-label="
-                                                 Notes
-                                            : activate to sort column ascending" style="width: 150px;">Unidade</th>    
-                                        <th class="sorting" tabindex="0" aria-controls="sample_editable_1" rowspan="1" colspan="1" aria-label="
-                                                 Edit
-                                            : activate to sort column ascending" style="width: 50px;">Editar</th>
-                                        <th class="sorting" tabindex="0" aria-controls="sample_editable_1" rowspan="1" colspan="1" aria-label="
-                                                 Delete
-                                            : activate to sort column ascending" style="width: 50px;">Desabilitar</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                        <?php 
-                                            $ssql = "SELECT * FROM usuario, perfil, unidade WHERE usuario.perfil_id = perfil.id and usuario.unidade_id = unidade.id and usuario.inativo = 0 ORDER BY usuario.nome DESC";
-                                            $rs = mysql_query($ssql);
-                                            $num_total_registros = mysql_num_rows($rs);
-
-                                            if ($num_total_registros > 0) {
-
-                                                for ($i = 0; $i < $num_total_registros; $i++) {
-
-                                                    $id = mysql_result($rs, $i, 'id');
-                                                    $login = mysql_result($rs, $i, 'login');
-                                                    $nome = mysql_result($rs, $i, 'nome');
-                                                    $email = mysql_result($rs, $i, 'email');
-                                                    $perfil = mysql_result($rs, $i, 'tipo');
-                                                    $unidade = mysql_result($rs, $i, 'nomefantasia');
-
-
-                                                    if (($i % 2) == 1) { 
-                                        ?>                                       
-                                                        <tr role="row" class="odd">
-                                                            <td class="sorting_1"><?php echo utf8_encode($nome);?></td>
-                                                            <td><?php echo $email;?></td>
-                                                            <td><?php echo $login;?></td>
-                                                            <td class="center"><?php echo utf8_encode($perfil);?></td>
-                                                            <td class="center"><?php echo utf8_encode($unidade);?></td>
-                                                            <td align="center">
-                                                                <a class="edit" href="usuario_edit.php?idusu=<?php echo $id; ?>"><img src="img/bt_edit.gif" width="20" height="17" title="editar" alt="editar" border="0" align="absmiddle" style="padding-right:10px;"/></a>
-                                                            </td>
-                                                            <td align="center">
-                                                                <a class="delete" href="usuario_exec.php?act=delete&idusu=<?php echo $id; ?>"><img src="img/bt_del.gif" width="20" height="17" title="desabilitar" alt="desabilitar" border="0" align="absmiddle" style="padding-right:10px;"/></a>
-                                                            </td>                                                            
-                                                        </tr>
-                                        <?php      
-                                                    } 
-                                                    
-                                                    else if (($i % 2) == 0) { 
-                                        ?>
-                                                        <tr role="row" class="even">
-                                                            <td class="sorting_1"><?php echo utf8_encode($nome);?></td>
-                                                            <td><?php echo $email;?></td>
-                                                            <td><?php echo $login;?></td>
-                                                            <td class="center"><?php echo utf8_encode($perfil);?></td>
-                                                            <td class="center"><?php echo utf8_encode($unidade);?></td>
-                                                            <td align="center">
-                                                                <a class="edit" href="usuario_edit.php?idusu=<?php echo $id; ?>"><img src="img/bt_edit.gif" width="20" height="17" title="editar" alt="editar" border="0" align="absmiddle" style="padding-right:10px;"/></a>
-                                                            </td>
-                                                            <td align="center">
-                                                                <a class="delete" href="usuario_exec.php?act=delete&idusu=<?php echo $id; ?>"><img src="img/bt_del.gif" width="20" height="17" title="desabilitar" alt="desabilitar" border="0" align="absmiddle" style="padding-right:10px;"/></a>
-                                                            </td>  
-                                                        </tr>
-                                        <?php       
-                                                    } 
-                                                }
-                                            } 
-                                            else {
-
-                                                echo ('<div id="nada_consta" align="center"><span class="txt">Nenhum resultado encontrado!</span></div>');
-                                            }
-                                        ?>
-                                    </tbody>
-                                </table>
+                        </div>
+                    </div>
+                </div>   </div>          
                             </div>
-                    <!-- END EXAMPLE TABLE PORTLET-->
+                        </div>
                     </div> 
+                </div>  
             </section>
         </aside>  
     </div>
