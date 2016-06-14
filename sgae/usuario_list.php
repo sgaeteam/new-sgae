@@ -14,20 +14,6 @@ header('Content-Type: text/html; charset=utf-8');
 <!-- Include header here-->
 <?php include 'header.php';?>
     
-<!-- JQuery imports here-->
-<script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
-<script>
-//triggered when modal is about to be shown
-    $('#my_modal').on('show.bs.modal', function(e) {
-    
-        //get data-id attribute of the clicked element
-        var userId = $(e.relatedTarget).data('user-id');
-    
-        //populate the textbox
-        $(e.currentTarget).find('input[name="Id"]').val(bookId);
-    });
-</script>
-
     <div class="wrapper row-offcanvas row-offcanvas-left">
         <aside class="right-side">
             <!-- Main content -->
@@ -197,38 +183,39 @@ header('Content-Type: text/html; charset=utf-8');
                                                     <a href="usuario_edit.php?idusu=<?php echo $result['id']; ?>">
                                                         <i class="livicon" data-name="pen" data-size="19" data-loop="true" data-c="#F89A14" data-hc="#f56954" title="Editar"></i>
                                                     </a>
-                                                    <a href="#" data-toggle="modal" data-target="#delete_confirm" data-id="<?php echo $result['id']; ?>">
+                                                    <a href="#" data-toggle="modal" data-target="#delete_confirm_<?php echo $result['id']; ?>" data-id="<?php echo $result['id']; ?>">
                                                         <i class="livicon" data-name="trash" data-size="19" data-loop="true" data-c="#f56954" data-hc="#f56954" title="Excluir"></i>
                                                     </a>
                                                     
                                                 </td>
                                              </tr>
+
+                                             <!-- Modal for showing delete confirmation -->
+					                            <div class="modal fade" id="delete_confirm_<?php echo $result['id']; ?>" tabindex="-1" role="dialog" aria-labelledby="user_delete_confirm_title" aria-hidden="true">
+					                                <div class="modal-dialog">
+					                                    <div class="modal-content">
+					                                        <div class="modal-header">
+					                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+					                                            <h4 class="modal-title" id="user_delete_confirm_title">
+					                                                Excluir
+					                                            </h4>
+					                                        </div>
+					                                        <div class="modal-body">
+					                                            Você deseja excluir o usuário <?php echo $result['login'];?> ? Esta operação não poderá ser desfeita.
+					                                        </div>
+					                                        <div class="modal-footer">
+					                                            <button type="button" class="btn btn-warning" data-dismiss="modal">Cancelar</button>
+					                                            <a href="usuario_exec.php?act=delete&idusu=<?php echo $result['id']; ?>" id="modalDelete" type="button" class="btn btn-danger">Excluir</a>
+					                                        </div>
+					                                    </div>
+					                                </div>
+					                            </div>
                                 <?php
                                         }
                                     }
                                 ?>
                                 </tbody>
                             </table>
-                            <!-- Modal for showing delete confirmation -->
-                            <div class="modal fade" id="delete_confirm" tabindex="-1" role="dialog" aria-labelledby="user_delete_confirm_title" aria-hidden="true">
-                                <div class="modal-dialog">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                                            <h4 class="modal-title" id="user_delete_confirm_title">
-                                                Excluir
-                                            </h4>
-                                        </div>
-                                        <div class="modal-body">
-                                            Você deseja excluir esse registro? Esta operação não poderá ser desfeita.
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-warning" data-dismiss="modal">Cancelar</button>
-                                            <a href="#" id="modalDelete" type="button" class="btn btn-danger">Excluir</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
                         </div>
                     </div>
                 </div>   </div>          

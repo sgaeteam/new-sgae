@@ -96,7 +96,7 @@ if ( isset($_REQUEST['act']) && !empty($_REQUEST['act']) ) {
 			else {
 				$pdo  = $registry->get('sgaedb');
         		$stmt = $pdo->prepare("UPDATE usuario 
-        								  SET inativo=:inativo
+        								  SET inativo=1
 										WHERE id=:id");	
 				$stmt->bindParam(":id", $idusu);
 		     	$stmt->execute();
