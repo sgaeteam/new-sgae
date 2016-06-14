@@ -55,7 +55,7 @@ header('Content-Type: text/html; charset=utf-8');
                             <div class="panel-heading">
                                                 <h3 class="panel-title">
                                                     <i class="livicon" data-name="doc-portrait" data-c="#fff" data-hc="#fff" data-size="18" data-loop="true"></i>
-                                                    Informe os critérios para busca
+                                                    Informe os crit&eacute;rios para busca
                                                 </h3>
                                                 <!--
                                                 <span class="pull-right">
@@ -201,7 +201,7 @@ header('Content-Type: text/html; charset=utf-8');
 					                                            </h4>
 					                                        </div>
 					                                        <div class="modal-body">
-					                                            Você deseja excluir o usuário <?php echo $result['login'];?> ? Esta operação não poderá ser desfeita.
+					                                            Você deseja excluir o usuário <strong><?php echo $result['login'];?></strong>? Esta operação não poderá ser desfeita.
 					                                        </div>
 					                                        <div class="modal-footer">
 					                                            <button type="button" class="btn btn-warning" data-dismiss="modal">Cancelar</button>

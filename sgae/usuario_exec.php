@@ -46,14 +46,7 @@ if ( isset($_REQUEST['act']) && !empty($_REQUEST['act']) ) {
 			$idusu 	 = $_POST['idusu'];
 			$login 	 = $_POST['login'];
 			$nome  	 = $_POST['nome'];	
-			$email	 = $_POST['email'];	
-			$perfil  = $_POST['perfil'];		
-			$unidade = $_POST['unidade'];
-			
-			$login 	 = $_POST['login'];
-			$nome  	 = $_POST['nome'];	
-			//$senha 	 = md5($_POST['senha']);
-			$senha 	 = md5("12345");
+			$senha 	 = $_POST['senha'];
 			$email	 = $_POST['email'];	
 			$perfil  = $_POST['perfil'];		
 			$unidade = $_POST['unidade'];			
@@ -62,7 +55,8 @@ if ( isset($_REQUEST['act']) && !empty($_REQUEST['act']) ) {
 			$pdo  = $registry->get('sgaedb');
         	$stmt = $pdo->prepare("UPDATE usuario 
         							  SET login=:login,
-										  nome=:nome,										  
+										  nome=:nome,
+										  senha=:senha,
 										  email=:email,
 										  perfil_id=:perfil,
 										  unidade_id=:unidade,
@@ -76,7 +70,6 @@ if ( isset($_REQUEST['act']) && !empty($_REQUEST['act']) ) {
 			$stmt->bindParam(":unidade", $unidade);
 			$stmt->bindParam(":inativo", $inativo);
 			$stmt->bindParam(":id", $idusu);
-
         	$stmt->execute();
 			
 			$msg = md5(101);
