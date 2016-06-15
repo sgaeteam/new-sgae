@@ -24,7 +24,7 @@ header('Content-Type: text/html; charset=utf-8');
                     <li><a href="#">Administra&ccedil;&atilde;o</a></li>
                     <li><a href="#">Cadastro</a></li>
                     <li><a href="#">Usu&aacute;rio</a></li>                    
-                    <li class="active">Buscar Usu&aacute;rio</li>
+                    <li class="active">Buscar</li>
                 </ol>
             </section>
             <section class="content">
@@ -71,7 +71,7 @@ header('Content-Type: text/html; charset=utf-8');
                                                             <div class="form-group">
                                                                 <label class="control-label col-md-3" for="nomeFiltro">Nome</label>
                                                                 <div class="col-md-9">
-                                                                    <input type="text" class="form-control" id="nomeFiltro" placeholder="insira o nome para busca">
+                                                                    <input type="text" class="form-control" id="nomeFiltro" placeholder="Digite o nome">
                                                                 </div>
                                                             </div>
                                                          
@@ -80,7 +80,7 @@ header('Content-Type: text/html; charset=utf-8');
                                                             <div class="form-group">
                                                                 <label class="control-label col-md-3" for="usuarioFiltro">Usu&aacute;rio</label>
                                                                 <div class="col-md-9">
-                                                                    <input type="text" class="form-control" id="usuarioFiltro" placeholder="insira o usu&aacute;rio para busca">
+                                                                    <input type="text" class="form-control" id="usuarioFiltro" placeholder="Digite o login">
                                                                 </div>
                                                             </div>   
                                                     </div>
@@ -91,7 +91,7 @@ header('Content-Type: text/html; charset=utf-8');
                                                             <label class="control-label col-md-3" for="perfilFiltro">Perfil</label>
                                                             <div class="col-md-9">
                                                                 <select id="perfilFiltro" class="form-control">
-                                                                    <option>Selecione para busca</option>
+                                                                    <option>Selecione o perfil</option>
                                                                     <?php 
                                                                     	$registry = Registry::getInstance();
                                                                         $pdo  = $registry->get('sgaedb');
@@ -113,7 +113,7 @@ header('Content-Type: text/html; charset=utf-8');
                                                                  <label class="radio-inline">
                                                                     <input name="status" id="optionsRadiosInline1" type="radio" checked="" value="0">Ativo</label>
                                                                  <label class="radio-inline">
-                                                                    <input name="optionsRadiosInline" id="optionsRadiosInline2" type="radio" value="1">Inativo</label>
+                                                                    <input name="status" id="optionsRadiosInline2" type="radio" value="1">Inativo</label>
                                                              </div>   
                                                          </div>
                                                     </div>
@@ -181,7 +181,7 @@ header('Content-Type: text/html; charset=utf-8');
                                                     </a>
         
                                                     <a href="usuario_edit.php?idusu=<?php echo $result['id']; ?>">
-                                                        <i class="livicon" data-name="pen" data-size="19" data-loop="true" data-c="#F89A14" data-hc="#f56954" title="Editar"></i>
+                                                        <i class="livicon" data-name="pen" data-size="19" data-loop="true" data-c="#F89A14" data-hc="#f56954" title="Alterar"></i>
                                                     </a>
                                                     <a href="#" data-toggle="modal" data-target="#delete_confirm_<?php echo $result['id']; ?>" data-id="<?php echo $result['id']; ?>">
                                                         <i class="livicon" data-name="trash" data-size="19" data-loop="true" data-c="#f56954" data-hc="#f56954" title="Excluir"></i>

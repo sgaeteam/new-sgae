@@ -50,7 +50,7 @@ if (isset($_GET['idusu']) && is_numeric($_GET['idusu'])) {
                     <li><a href="#">Administra&ccedil;&atilde;o</a></li>
                     <li><a href="#">Cadastro</a></li>
                     <li><a href="#">Usu&aacute;rio</a></li>
-                    <li class="active">Editar Usu&aacute;rio</li>
+                    <li class="active">Alterar</li>
                 </ol>
             </section>
             <section class="content">
@@ -94,17 +94,17 @@ if (isset($_GET['idusu']) && is_numeric($_GET['idusu'])) {
                                         <div class="row">
                                                     <div class="col-md-6">
                                                             <div class="form-group">
-                                                                <label class="control-label col-md-3" for="campo1">Usu&aacute;rio*</label>
+                                                                <label class="control-label col-md-3" for="login">Usu&aacute;rio*</label>
                                                                 <div class="col-md-9">
-                                                                    <input type="text" class="form-control" id="campo1" name="login" value="<?php echo $login; ?>" autofocus required/>
+                                                                    <input type="text" class="form-control" id="login" name="login" placeholder="Digite o login" value="<?php echo $login; ?>" autofocus required/>
                                                                 </div>
                                                             </div>
                                                     </div>
                                                     <div class="col-md-6">
                                                             <div class="form-group">
-                                                                <label class="control-label col-md-3" for="campo2">E-mail</label>
+                                                                <label class="control-label col-md-3" for="email">E-mail</label>
                                                                 <div class="col-md-9">
-                                                                    <input type="email" class="form-control" id="email" name="email" value="<?php echo $email; ?>">
+                                                                    <input type="email" class="form-control" id="email" name="email" placeholder="Digite o e-mail" data-bv-field="validateEmail" value="<?php echo $email; ?>">
                                                                 </div>
                                                             </div>   
                                                     </div>                                                      
@@ -112,24 +112,22 @@ if (isset($_GET['idusu']) && is_numeric($_GET['idusu'])) {
                                         <div class="row">                                        
                                                     <div class="col-md-6">
                                                             <div class="form-group">
-                                                                <label class="control-label col-md-3" for="campo3">Nome*</label>
+                                                                <label class="control-label col-md-3" for="nome">Nome completo*</label>
                                                                 <div class="col-md-9">
-                                                                    <input type="text" class="form-control" id="campo3" name="nome" value="<?php echo $nome; ?>" required>
+                                                                    <input type="text" class="form-control" id="nome" name="nome" placeholder="Digite o nome" value="<?php echo $nome; ?>" required>
                                                                 </div>
                                                             </div>   
                                                     </div>
-                                        </div>                                                    
-                                        <div class="row">
                                                     <div div class="col-md-6">
                                                         <div class="form-group">
-                                                            <label class="control-label col-md-3" for="campo4">Perfil</label>
+                                                            <label class="control-label col-md-3" for="perfil">Perfil*</label>
                                                             <div class="col-md-9">
-                                                                <select id="perfil" class="form-control" name="perfil" class="required">
+                                                                <select id="perfil" class="form-control" name="perfil" required>
                                                                     <?php 
                                                                         $pdo  = $registry->get('sgaedb');
-                                                                    	$stmt = $pdo->prepare("SELECT * FROM perfil ORDER BY tipo ASC"); 
-                                                                    	$stmt->execute();
-                                                                    	$perfilItem = $stmt->fetchAll();
+                                                                        $stmt = $pdo->prepare("SELECT * FROM perfil ORDER BY tipo ASC"); 
+                                                                        $stmt->execute();
+                                                                        $perfilItem = $stmt->fetchAll();
                                                                         foreach ($perfilItem as $item) {
                                                                             if ($item['id'] == $perfil) {
                                                                                     echo "<option selected="."selected"." value=".$item['id'].">".$item['tipo']."</option>";                                                                            
@@ -143,6 +141,8 @@ if (isset($_GET['idusu']) && is_numeric($_GET['idusu'])) {
                                                             </div>
                                                         </div>
                                                     </div>
+                                        </div>                                                    
+                                        <div class="row">
                                                     <div div class="col-md-6">
                                                          <div class="form-group">
                                                              <label class="control-label col-md-3">Status</label>

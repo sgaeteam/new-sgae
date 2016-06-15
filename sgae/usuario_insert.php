@@ -24,7 +24,7 @@ header('Content-Type: text/html; charset=utf-8');
                     <li><a href="#">Administra&ccedil;&atilde;o</a></li>
                     <li><a href="#">Cadastro</a></li>
                     <li><a href="#">Usu&aacute;rio</a></li>
-                    <li class="active">Novo Usu&aacute;rio</li>
+                    <li class="active">Cadastrar</li>
                 </ol>
             </section>
             <section class="content">
@@ -68,18 +68,18 @@ header('Content-Type: text/html; charset=utf-8');
                                         <div class="row">
                                                     <div class="col-md-6">
                                                             <div class="form-group">
-                                                                <label class="control-label col-md-3" for="campo1">Usu&aacute;rio*</label>
+                                                                <label class="control-label col-md-3" for="login">Usu&aacute;rio*</label>
                                                                 <div class="col-md-9">
-                                                                    <input type="text" class="form-control" id="campo1" placeholder="insira o usu&aacute;rio" name="login" required>
+                                                                    <input type="text" class="form-control" id="login" placeholder="Digite o login" name="login" required>
                                                                 </div>
                                                             </div>
                                                          
                                                     </div>
                                                     <div class="col-md-6">
                                                             <div class="form-group">
-                                                                <label class="control-label col-md-3" for="filtro2">E-mail</label>
+                                                                <label class="control-label col-md-3" for="email">E-mail</label>
                                                                 <div class="col-md-9">
-                                                                    <input type="email" class="form-control" id="campo2" placeholder="insira o e-mail" name="email">
+                                                                    <input type="email" class="form-control" id="email" placeholder="Digite o e-mail" name="email" data-bv-field="validateEmail">
                                                                 </div>
                                                             </div>   
                                                     </div>
@@ -87,19 +87,19 @@ header('Content-Type: text/html; charset=utf-8');
                                         <div class="row">
                                                     <div class="col-md-6">
                                                             <div class="form-group">
-                                                                <label class="control-label col-md-3" for="campo5">Nome completo*</label>
+                                                                <label class="control-label col-md-3" for="nome">Nome completo*</label>
                                                                 <div class="col-md-9">
-                                                                    <input type="text" class="form-control" id="campo5" placeholder="insira o nome" name="nome" required>
+                                                                    <input type="text" class="form-control" id="nome" placeholder="Digite o nome" name="nome" required>
                                                                 </div>
                                                             </div>
                                                          
                                                     </div>                                            
                                                     <div div class="col-md-6">
                                                         <div class="form-group">
-                                                            <label class="control-label col-md-3" for="campo3">Perfil</label>
+                                                            <label class="control-label col-md-3" for="perfil">Perfil*</label>
                                                             <div class="col-md-9">
-                                                                <select id="perfil" class="form-control" name="perfil" class="required">
-                                                                    <option value="">Selecione para busca</option>
+                                                                <select id="perfil" class="form-control" name="perfil" required>
+                                                                    <option value="">Selecione o perfil</option>
                                                                     <?php 
                                                                         $pdo  = $registry->get('sgaedb');
                                                                     	$stmt = $pdo->prepare("SELECT * FROM perfil ORDER BY tipo ASC"); 
