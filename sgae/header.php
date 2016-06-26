@@ -1,9 +1,8 @@
 <!DOCTYPE html>
 <html>
-
 <head>
     <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
-    <title>.:: SGAE ::.. Sistema para Gerenciamento de Auto Escolas</title>
+    <title>.:: SGAE ::. Sistema para Gerenciamento de Auto Escolas</title>
     <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -29,9 +28,7 @@
     <link href="css/pages/tables.css" rel="stylesheet" type="text/css" />
     <link href="css/pages/advbuttons.css" rel="stylesheet" type="text/css" />
     <!--end of page level css-->
-    <script src="js/sgae.js" type="text/javascript"></script>
 </head>
-
 <body class="skin-josh">
     <header class="header">
         <a href="index.php" class="logo">
