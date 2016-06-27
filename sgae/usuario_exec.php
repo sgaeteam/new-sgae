@@ -257,7 +257,12 @@ if ( isset($_REQUEST['act']) && !empty($_REQUEST['act']) ) {
 
             }
 			else {
-            		$return[] = null;//array('','','','','','');
+            		$return[] = array($result[''],
+            						  $result[''],
+            						  $result[''],
+            						  $result[''],
+            						  $result[''],
+            						  $result['']);
 			}
             	
 			echo json_encode($return);
