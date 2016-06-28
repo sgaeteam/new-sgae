@@ -140,12 +140,12 @@ header('Content-Type: text/html; charset=utf-8');
                                         <table class="table table-bordered " id="ajax_table">
                                             <thead>
                                                 <tr class="filters">
-                                                    <th>Nome</th>
-                                                    <th>Usu&aacute;rio</th>
-                                                    <th>E-mail</th>
-                                                    <th>Perfil</th>
-                                                    <th>Unidade</th>
-                                                    <th>Ações</th>
+                                                    <th style="width:200px">Nome</th>
+                                                    <th style="width:50px">Usu&aacute;rio</th>
+                                                    <th style="width:70px">E-mail</th>
+                                                    <th style="width:40px">Perfil</th>
+                                                    <th style="width:150px">Unidade</th>
+                                                    <th style="width:30px">Ações</th>
                                                 </tr>
                                             </thead> 
                                         </table>
