@@ -33,17 +33,19 @@ $(document).ready(function() {
 				success: function(s) {
 					console.log(s);
 					oTable.fnClearTable();
-				 	for(var i = 0; i < s.length; i++) {
-                         // Alterar para definir a quantidade de colunas da tabela
-                         oTable.fnAddData([
-		                                    s[i][0],
-											s[i][1],
-											s[i][2],
-											s[i][3],
-											s[i][4],
-											s[i][5]									
-                                      	 ]);										
-					} 	
+					if (s !== null) {
+					 	for(var i = 0; i < s.length; i++) {
+	                         // Alterar para definir a quantidade de colunas da tabela
+	                         oTable.fnAddData([
+			                                    s[i][0],
+												s[i][1],
+												s[i][2],
+												s[i][3],
+												s[i][4],
+												s[i][5]									
+	                                      	 ]);										
+						} 
+					}
 					showDiv();							
 				},
 				beforeSend: function(){

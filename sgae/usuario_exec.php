@@ -130,117 +130,83 @@ if ( isset($_REQUEST['act']) && !empty($_REQUEST['act']) ) {
 			
 			if (empty($nome) && empty($usuario) && empty($perfil)) {
 			
-				$type = "all"; 
-	    		$stmt = $pdo->prepare("SELECT usuario.id,usuario.nome,usuario.login,usuario.email,perfil.tipo,unidade.nomefantasia
-            	                         FROM usuario, perfil, unidade
-            	                        WHERE usuario.perfil_id = perfil.id 
-            	                          AND usuario.unidade_id = unidade.id 
-            	                          AND usuario.unidade_id = :unidade_id
-            	                          AND usuario.inativo = :inativo
-									   ORDER BY usuario.nome ASC");	
-				$stmt->execute(array(':unidade_id'=>$unidade,':inativo'=>$status));	
-				
+				$type 	 = "all"; 
+				$p_array = array(':unidade_id'=>$unidade,':inativo'=>$status);
+	    		$p_where = "AND usuario.unidade_id 	= :unidade_id
+            	            AND usuario.inativo 	= :inativo";	
+
 			} elseif (!empty($nome) && empty($usuario) && empty($perfil)) {
 			
-				$type = "nome"; 
-	    		$stmt = $pdo->prepare("SELECT usuario.id,usuario.nome,usuario.login,usuario.email,perfil.tipo,unidade.nomefantasia
-            	                         FROM usuario, perfil, unidade
-            	                        WHERE usuario.perfil_id = perfil.id 
-            	                          AND usuario.unidade_id = unidade.id 
-            	                          AND usuario.unidade_id = :unidade_id
-            	                          AND usuario.inativo = :inativo
-            	                          AND usuario.nome LIKE :nome
-									   ORDER BY usuario.nome ASC");
-				$stmt->execute(array(':unidade_id'=>$unidade,':inativo'=>$status,':nome'=>"%$nome%"));
-
+				$type 	 = "nome";
+				$p_array = array(':unidade_id'=>$unidade,':inativo'=>$status,':nome'=>"%$nome%");
+	    		$p_where = "AND usuario.unidade_id 	= :unidade_id
+            	            AND usuario.inativo 	= :inativo
+            	            AND usuario.nome 	 LIKE :nome";
+	    		
 			} elseif (empty($nome) && !empty($usuario) && empty($perfil) ) {
 			
-				$type = "usuario"; 
-	    		$stmt = $pdo->prepare("SELECT usuario.id,usuario.nome,usuario.login,usuario.email,perfil.tipo,unidade.nomefantasia
-            	                         FROM usuario, perfil, unidade
-            	                        WHERE usuario.perfil_id = perfil.id 
-            	                          AND usuario.unidade_id = unidade.id 
-            	                          AND usuario.unidade_id = :unidade_id
-            	                          AND usuario.inativo = :inativo
-            	                          AND usuario.login LIKE :usuario
-									   ORDER BY usuario.nome ASC");	
-				$stmt->execute(array(':unidade_id'=>$unidade,':inativo'=>$status,':usuario'=>"%$usuario%"));	
+				$type 	 = "usuario"; 
+	    		$p_array = array(':unidade_id'=>$unidade,':inativo'=>$status,':usuario'=>"%$usuario%");
+	    		$p_where = "AND usuario.unidade_id 	= :unidade_id
+            	            AND usuario.inativo 	= :inativo
+            	            AND usuario.login 	 LIKE :usuario";
 			
 			} elseif (empty($nome) && empty($usuario) && !empty($perfil) ) {			
 			
-				$type = "perfil"; 
-	    		$stmt = $pdo->prepare("SELECT usuario.id,usuario.nome,usuario.login,usuario.email,perfil.tipo,unidade.nomefantasia
-            	                         FROM usuario, perfil, unidade
-            	                        WHERE usuario.perfil_id = perfil.id 
-            	                          AND usuario.unidade_id = unidade.id 
-            	                          AND unidade_id = :unidade_id
-            	                          AND usuario.inativo = :inativo
-										  AND usuario.perfil_id = :perfil_id                 
-									   ORDER BY usuario.nome ASC");	
-				$stmt->bindParam(":unidade_id", $unidade);
-				$stmt->bindParam(":inativo", $status);
-				$stmt->bindParam(":perfil_id", $perfil);
-				$stmt->execute();
+				$type 	 = "perfil";
+	    		$p_array = array(':unidade_id'=>$unidade,':inativo'=>$status,':perfil_id'=>$perfil);
+	    		$p_where = "AND unidade_id 			= :unidade_id
+            	            AND usuario.inativo 	= :inativo
+							AND usuario.perfil_id 	= :perfil_id";	
 							
 			} elseif (!empty($nome) && !empty($usuario) && empty($perfil) ) {			
 			
-				$type = "nome&usuario"; 
-	    		$stmt = $pdo->prepare("SELECT usuario.id,usuario.nome,usuario.login,usuario.email,perfil.tipo,unidade.nomefantasia
-            	                         FROM usuario, perfil, unidade
-            	                        WHERE usuario.perfil_id = perfil.id 
-            	                          AND usuario.unidade_id = unidade.id 
-            	                          AND unidade_id = :unidade_id
-            	                          AND usuario.inativo = :inativo
-            	                          AND usuario.nome LIKE :nome
-            	                          AND usuario.login LIKE :usuario       
-									   ORDER BY usuario.nome ASC");
-				$stmt->execute(array(':unidade_id'=>$unidade,':inativo'=>$status,':nome'=>"%$nome%",':usuario'=>"%$usuario%"));	
+				$type 	 = "nome&usuario";
+	    		$p_array = array(':unidade_id'=>$unidade,':inativo'=>$status,':nome'=>"%$nome%",':usuario'=>"%$usuario%");
+	    		$p_where = "AND unidade_id 			= :unidade_id
+	    					AND usuario.inativo 	= :inativo
+            	            AND usuario.nome 	 LIKE :nome
+            	            AND usuario.login 	 LIKE :usuario";				 
 			
 			} elseif (!empty($nome) && empty($usuario) && !empty($perfil) ) {	
 			
-				$type = "nome&perfil"; 
-	    		$stmt = $pdo->prepare("SELECT usuario.id,usuario.nome,usuario.login,usuario.email,perfil.tipo,unidade.nomefantasia
-            	                         FROM usuario, perfil, unidade
-            	                        WHERE usuario.perfil_id = perfil.id 
-            	                          AND usuario.unidade_id = unidade.id 
-            	                          AND unidade_id = :unidade_id
-            	                          AND usuario.inativo = :inativo
-            	                          AND usuario.nome LIKE :nome
-            	                          AND usuario.perfil_id = :perfil_id
-									   ORDER BY usuario.nome ASC");
-				$stmt->execute(array(':unidade_id'=>$unidade,':inativo'=>$status,':nome'=>"%$nome%",':perfil_id'=>$perfil));	
-							
+				$type 	 = "nome&perfil";
+	    		$p_array = array(':unidade_id'=>$unidade,':inativo'=>$status,':nome'=>"%$nome%",':perfil_id'=>$perfil);
+	    		$p_where = "AND unidade_id 			= :unidade_id
+	    					AND usuario.inativo 	= :inativo
+            	            AND usuario.nome 	 LIKE :nome
+            	            AND usuario.perfil_id 	= :perfil_id";					 
+	    		
 			} elseif (empty($nome) && !empty($usuario) && !empty($perfil) ) {			
 			
-				$type = "usuario&perfil"; 
-	    		$stmt = $pdo->prepare("SELECT usuario.id,usuario.nome,usuario.login,usuario.email,perfil.tipo,unidade.nomefantasia
-            	                         FROM usuario, perfil, unidade
-            	                        WHERE usuario.perfil_id = perfil.id 
-            	                          AND usuario.unidade_id = unidade.id 
-            	                          AND unidade_id = :unidade_id
-            	                          AND usuario.inativo = :inativo
-            	                          AND usuario.login LIKE :usuario 
-            	                          AND usuario.perfil_id = :perfil_id 
-									   ORDER BY usuario.nome ASC");
-				$stmt->execute(array(':unidade_id'=>$unidade,':inativo'=>$status,':usuario'=>"%$usuario%",':perfil_id'=>$perfil));	
+				$type 	 = "usuario&perfil";
+				$p_array = array(':unidade_id'=>$unidade,':inativo'=>$status,':usuario'=>"%$usuario%",':perfil_id'=>$perfil);
+	    		$p_where = "AND unidade_id 			= :unidade_id
+	    					AND usuario.inativo 	= :inativo
+            	            AND usuario.login 	 LIKE :usuario 
+            	            AND usuario.perfil_id 	= :perfil_id"; 
 							
 			} elseif (!empty($nome) && !empty($usuario) && !empty($perfil) ) {			
 			
-				$type = "nome&usuario&perfil"; 
-	    		$stmt = $pdo->prepare("SELECT usuario.id,usuario.nome,usuario.login,usuario.email,perfil.tipo,unidade.nomefantasia
-            	                         FROM usuario, perfil, unidade
-            	                        WHERE usuario.perfil_id = perfil.id 
-            	                          AND usuario.unidade_id = unidade.id 
-            	                          AND unidade_id = :unidade_id
-            	                          AND usuario.inativo = :inativo
-            	                          AND usuario.nome LIKE :nome            	                          
-            	                          AND usuario.login LIKE :usuario                        
-            	                          AND usuario.perfil_id = :perfil_id 
-									   ORDER BY usuario.nome ASC");
-				$stmt->execute(array(':unidade_id'=>$unidade,':inativo'=>$status,':nome'=>"%$nome%",':usuario'=>"%$usuario%",':perfil_id'=>$perfil));	
-							
-			}			
-			
+				$type 	 = "nome&usuario&perfil";
+				$p_array = array(':unidade_id'=>$unidade,':inativo'=>$status,':nome'=>"%$nome%",':usuario'=>"%$usuario%",':perfil_id'=>$perfil);
+	    		$p_where = "AND unidade_id 			= :unidade_id
+	    					AND usuario.inativo 	= :inativo
+	    					AND usuario.nome 	 LIKE :nome
+            	            AND usuario.login 	 LIKE :usuario 
+            	            AND usuario.perfil_id 	= :perfil_id"; 
+
+			}
+
+			$sql = "SELECT usuario.id,usuario.nome,usuario.login,usuario.email,perfil.tipo,unidade.nomefantasia".
+            	   "  FROM usuario, perfil, unidade ".
+            	   " WHERE usuario.perfil_id  = perfil.id ". 
+            	   "   AND usuario.unidade_id = unidade.id ". 
+            	   	   $p_where.
+				   " ORDER BY usuario.nome ASC";
+
+			$stmt = $pdo->prepare($sql);		
+			$stmt->execute($p_array);			
 			$results = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
             if ($stmt->rowCount() > 0) {
@@ -253,19 +219,16 @@ if ( isset($_REQUEST['act']) && !empty($_REQUEST['act']) ) {
             						  $result['tipo'],
             						  $result['nomefantasia'],
             						  $result['id']);
-                }	                            
+                }
+
+                echo json_encode($return);	                            
 
             }
-			else {
-            		$return[] = array($result[''],
-            						  $result[''],
-            						  $result[''],
-            						  $result[''],
-            						  $result[''],
-            						  $result['']);
-			}
+			else { 
             	
-			echo json_encode($return);
+            	echo json_encode(null);
+				  
+			}
 			
 			break;
 	}
