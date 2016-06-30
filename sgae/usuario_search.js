@@ -42,8 +42,29 @@ $(document).ready(function() {
 												s[i][2],
 												s[i][3],
 												s[i][4],
-												s[i][5]									
-	                                      	 ]);										
+												"<a class='btn default btn-xs green-stripe' style='width:60px' href=usuario_view.php?idusu="+s[i][5]+">Ver</a>"+
+												"<a class='btn default btn-xs yellow-stripe' style='width:60px' href=usuario_edit.php?idusu="+s[i][5]+">Alterar</a>"+
+												"<a class='btn default btn-xs red-stripe' style='width:60px' href=# data-toggle='modal' data-target=#delete_confirm_"+s[i][5]+" data-id="+s[i][5]+">Excluir</a>"+
+												"<div class='modal fade' id='delete_confirm_"+s[i][5]+"' tabindex='-1' role='dialog' aria-labelledby='user_delete_confirm_title' aria-hidden='true'>"+
+					                            "    <div class='modal-dialog'>"+
+					                            "        <div class='modal-content'>"+
+					                            "            <div class='modal-header'>"+
+					                            "                <button type='button' class='close' data-dismiss='modal' aria-hidden='true'>×</button>"+
+					                            "                <h4 class='modal-title' id='user_delete_confirm_title'>"+
+					                            "                    Excluir"+
+					                            "                </h4>"+
+					                            "            </div>"+
+					                            "            <div class='modal-body'>"+
+					                            "               Você deseja excluir o usuário <strong>"+s[i][1]+"</strong>? Esta operação não poderá ser desfeita."+
+					                            "            </div>"+
+					                            "            <div class='modal-footer'>"+
+					                            "                <button type='button' class='btn btn-warning' data-dismiss='modal'>Cancelar</button>"+
+					                            "                <a href=usuario_exec.php?act=delete&idusu="+s[i][5]+" id='modalDelete' type='button' class='btn btn-danger'>Excluir</a>"+
+					                            "            </div>"+
+					                            "        </div>"+
+					                            "    </div>"+
+					                            "</div>"                                	
+											 ]);										
 						} 
 					}
 					showDiv();							

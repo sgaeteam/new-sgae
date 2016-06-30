@@ -140,12 +140,12 @@ header('Content-Type: text/html; charset=utf-8');
                                         <table class="table table-bordered " id="ajax_table">
                                             <thead>
                                                 <tr class="filters">
-                                                    <th style="width:200px">Nome</th>
-                                                    <th style="width:50px">Usu&aacute;rio</th>
-                                                    <th style="width:70px">E-mail</th>
-                                                    <th style="width:40px">Perfil</th>
-                                                    <th style="width:150px">Unidade</th>
-                                                    <th style="width:30px">Ações</th>
+                                                    <th style="width:160px">Nome</th>
+                                                    <th style="width:40px">Usu&aacute;rio</th>
+                                                    <th style="width:50px">E-mail</th>
+                                                    <th style="width:35px">Perfil</th>
+                                                    <th style="width:120px">Unidade</th>
+                                                    <th style="width:117px">Ações</th>
                                                 </tr>
                                             </thead> 
                                         </table>
@@ -159,7 +159,6 @@ header('Content-Type: text/html; charset=utf-8');
         </aside>  
     </div>
 <!-- Include scripts here-->
-<script src="js/jquery.min.js"></script>
 <script type="text/javascript" src="usuario_search.js"></script>
 <!-- Include footer here-->   
 <?php include 'footer.php';?>
