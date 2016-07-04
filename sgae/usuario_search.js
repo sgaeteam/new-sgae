@@ -70,13 +70,22 @@ $(document).ready(function() {
 					showDiv();							
 				},
 				beforeSend: function(){
-					$('.loader').css({display:"block"});
+					$.blockUI({ message: $('#preloader'), 
+						            css: { border: 'none',
+						                   padding: '15px',
+						                   backgroundColor: '#fff',        
+						                   '-webkit-border-radius': '10px',
+						                   '-moz-border-radius': '10px',
+                     					   opacity: .9, color: '#fff'
+                     					 } 
+                     		 });
 				},
 				complete: function(){
-				    $('.loader').css({display:"none"});
+				    $.unblockUI();
 				},
 				error: function(e) {
 				   console.log(e.responseText);
+				   $.unblockUI();
 				   showDiv();							
 				}
 			});

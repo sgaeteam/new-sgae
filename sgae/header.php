@@ -60,6 +60,7 @@
     <script src="vendors/jvectormap/jquery-jvectormap-world-mill-en.js"></script>
     <script src="vendors/jscharts/Chart.js"></script>
     <script src="js/dashboard.js" type="text/javascript"></script>
+    <script src="js/jquery.blockUI-2.7.0.min.js" type="text/javascript"></script>
     <script type="text/javascript" src="vendors/datatables/js/jquery.dataTables.min.js"></script>
     <script type="text/javascript" src="vendors/datatables/extensions/bootstrap/dataTables.bootstrap.js"></script>
     <script src="js/josh.js" type="text/javascript"></script>

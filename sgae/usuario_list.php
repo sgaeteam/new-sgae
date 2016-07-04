@@ -127,7 +127,9 @@ header('Content-Type: text/html; charset=utf-8');
                                     </div>
                                 </div>  
                                 </br></br></br>
-                                <img src="img/loader.gif" class="loader" alt="buscando" style="display:none;" />  
+                                <div id="preloader" style="display:none;">
+                                 <h1 style="color: black;"><img src="img/loader.gif"/> Aguarde...</h1> 
+                                </div>
                                 <div id="tabela" class="panel panel-primary" style="display:none;">
                                     <div class="panel-heading">
                                         <h4 class="panel-title">
