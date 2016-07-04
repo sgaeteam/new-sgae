@@ -15,7 +15,8 @@ if ( isset($_POST['sub']) && !empty($_POST['cnpj']) && !empty($_POST['user2']) &
 	if ($pos1 === false) {
 			$acesso_ok = 1;
 
-	} else {
+	} 
+	else {
 				$acesso_ok = 0;
 				$msg = utf8_encode("Você está utilizando caracteres inválidos. Retire as aspas simples ( ' ) do login e tente novamente.");
 				$piqp = $_SERVER["REMOTE_ADDR"];
@@ -34,21 +35,23 @@ if ( isset($_POST['sub']) && !empty($_POST['cnpj']) && !empty($_POST['user2']) &
 	}
 	include_once("sgae/inc/config.php");
     $pdo = $registry->get('sgaedb');
-	$stmt = $pdo->prepare("select * from usuario 
-							where login = :userb 
+	$stmt = $pdo->prepare("SELECT * FROM usuario 
+							WHERE login = :userb 
 							   && senha = :senha 
-							   && unidade_id = (select id from unidade where cnpj = :cnpj)
-							  and inativo = 0");
+							   && unidade_id = (SELECT id FROM unidade WHERE cnpj = :cnpj)
+							  AND inativo = 0");
 	$stmt->bindParam(':userb', $userb);
 	$stmt->bindParam(':senha', $senha);
 	$stmt->bindParam(':cnpj', $cnpj);
 	$stmt->execute();
 	$result = $stmt->fetch(PDO::FETCH_ASSOC);
 	
-if ($stmt->rowCount()) {
+	include_once('sgae/inc/logger/logInit.php');
+	
+	if ($stmt->rowCount()) {
 		
 		$user2 = $result;
-		$stmt = $pdo->prepare("select nomefantasia from unidade where cnpj = :cnpj");
+		$stmt = $pdo->prepare("SELECT nomefantasia FROM unidade WHERE cnpj = :cnpj");
 		$stmt->bindParam(':cnpj', $cnpj);
 		$stmt->execute();
 		$unidadeLogada = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -56,7 +59,6 @@ if ($stmt->rowCount()) {
 		session_start(); //função que possibilita usar a session
 		
 		$_SESSION['login'] 		    = 'ok';
-		$_SESSION['tipo'] 	        = 'admin';
 		$_SESSION['UsuarioID']	    = $user2['id'];		
 		$_SESSION['UsuarioLogin']   = $user2['login'];
 		$_SESSION['UsuarioNome']    = $user2['nome'];		
@@ -65,10 +67,13 @@ if ($stmt->rowCount()) {
 		$_SESSION['UnidadeNome']	= $unidadeLogada['nomefantasia'];
 
 		$destino = 'sgae/index.php';
+		$log->logg($user2['login'],'Acesso concedido: '.$_SERVER['PHP_SELF'],'low','blue');
 
-	} else {
+	} 
+	else {
 		$msg = md5(001);
 		$destino = "index.php?msg=$msg";
+		$log->logg($userb,'Acesso negado: '.$_SERVER['PHP_SELF'],'high','red'); 
 	}
 	
 }

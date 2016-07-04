@@ -32,7 +32,7 @@ $(document).ready(function() {
 				},        		
 				success: function(s) {
 					console.log(s);
-					oTable.fnClearTable();
+					//oTable.fnClearTable();
 					if (s !== null) {
 					 	for(var i = 0; i < s.length; i++) {
 	                         // Alterar para definir a quantidade de colunas da tabela

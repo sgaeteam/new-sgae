@@ -28,7 +28,7 @@
     <link href="css/pages/tables.css" rel="stylesheet" type="text/css" />
     <link href="css/pages/advbuttons.css" rel="stylesheet" type="text/css" />
     <!--end of page level css-->
-        <!-- global js -->
+    <!-- global js -->
     <script src="js/jquery-1.11.3.min.js" type="text/javascript"></script>
     <script src="vendors/fullcalendar/jquery-ui.min.js" type="text/javascript"></script>
     <script src="js/bootstrap.min.js" type="text/javascript"></script>
@@ -86,10 +86,12 @@
                         <li class="dropdown-submenu">
                             <a tabindex="-1" href="">Cadastro</a>
                             <ul class="dropdown-menu">
-                              <li><a href="exemplo_list.php">Exemplo</a></li>
+                              
+                              <li><a href="usuario_list.php">Usu&aacute;rio</a></li>
                               <li><a href="#">Unidade</a></li>
                               <li role="separator" class="divider"></li>
-                              <li><a href="usuario_list.php">Usu&aacute;rio</a></li>
+                              <li><a href="log_list.php">Auditoria</a></li>
+     
                              </ul>
                         </li>
                         <li><a href="#">Pagamentos</a></li>
