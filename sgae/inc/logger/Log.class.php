@@ -42,14 +42,16 @@ class Logs
 			//
 			if($priority == 'notSet'){ //If priority was left blank
 				//Now perform the check to see if page is important:
+				// The classes that can be used are: 
+				//.active (grey), .success (green), .info (blue), .warning (yellow), and .danger (red).
 				if(in_array($page,$high)){
-					$priority = 'High';
+					$priority = 'alta';
 					$color = 'red';
 				}else if(in_array($page,$medium)){
-					$priority = 'Medium';
+					$priority = 'media';
 					$color = 'yellow';
 				}else{
-					$priority = 'Low';
+					$priority = 'baixa';
 				}
 			}
 			if($msg == 1){ //This are the default messages to use when no arguments are given.
@@ -60,15 +62,17 @@ class Logs
 		if($mail=='yes'){
 			$this->newLog($msg,$_SESSION['UsuarioLogin']);
 		}
-		return $this->addLog($msg,$_SESSION['UsuarioLogin'],time(),ip(),$priority,$color);
+		return $this->addLog($page,$msg,$_SESSION['UsuarioLogin'],$_SESSION['UsuarioUnidade'],time(),ip(),$priority,$color);
 	}
 	
-	function addLog($msg,$user,$timestamp,$ip,$priority,$class){
+	function addLog($url,$msg,$login,$unidade_id,$timestamp,$ip,$priority,$class){
 
-    	$stmt = $this->pdo->prepare("INSERT INTO log (msg,user,timestamp,ip,priority,class)
-										  VALUES	 (:msg,:user,:timestamp,:ip,:priority,:class)"); 
+    	$stmt = $this->pdo->prepare("INSERT INTO log (url,msg,login,unidade_id,timestamp,ip,priority,class)
+										  VALUES	 (:url,:msg,:login,:unidade_id,:timestamp,:ip,:priority,:class)"); 
+		$stmt->bindParam(":url",$url);
 		$stmt->bindParam(":msg",$msg);
-		$stmt->bindParam(":user",$user);
+		$stmt->bindParam(":login",$login);
+		$stmt->bindParam(":unidade_id",$unidade_id);
 		$stmt->bindParam(":timestamp",$timestamp);
 		$stmt->bindParam(":ip",$ip);
 		$stmt->bindParam(":priority",$priority);
@@ -119,11 +123,12 @@ class Logs
 		$stmt = $this->pdo->prepare("SELECT *
 									   FROM log 
 									  WHERE timestamp >= DATE_SUB(CURDATE(), INTERVAL 1 MONTH)
+									    AND unidade_id = :unidade_id
 								   ORDER BY timestamp DESC, priority ASC");
+		$stmt->bindParam(":unidade_id",$_SESSION['UsuarioUnidade']);
 		$stmt->execute();
    		$results = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-	//	if(!$results || ($stmt->rowCount() < 0)){
 		if($stmt->rowCount() < 0){	
 		   $this->error('Erro ao exibir a informação!');
 		   return;
@@ -137,14 +142,16 @@ class Logs
         foreach ($results as $result) {	
     		$time = date("g:ia - j/m/Y",$result['timestamp']);
 			$icon = $this->genIcon($result['class']);
-			$user = $result['user'];
+			$login = $result['login'];
+			$unidade_id = $result['unidade_id'];
 			$ip = $result['ip'];
 			
 			//loop is set up:
 			echo '<tr class="'.$result['class'].'">';
 			echo '<td width="16">'.$icon.'</td>'; //icon
 			echo '<td>'.$result['msg'].'</td>'; //msg
-			echo '<td>'.$user.'</td>'; //user
+			echo '<td>'.$login.'</td>'; //login
+			echo '<td>'.$unidade_id.'</td>'; //unidade_id
 			echo '<td>'.$time.'</td>'; //timestamp
 			echo '<td>'.$ip.'</td>'; //ip
 			echo '<td>'.$result['priority'].'</td>'; //priority
@@ -155,7 +162,7 @@ class Logs
 	//This function displays messages:
 	function displayMsg($name){
 		if(isset($_SESSION[$name.'_msg'])){ //there is a message stored:
-			echo '<p class="alertMsg">'.$_SESSION[$name.'_msg'].'. Go see the <a href="log.php">log page</a> to see the changes there.</p>';
+			echo '<p class="alertMsg">'.$_SESSION[$name.'_msg'].'</p>';
 			unset($_SESSION[$name.'_msg']);
 		}
 	}

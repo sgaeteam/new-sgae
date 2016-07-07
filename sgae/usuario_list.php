@@ -18,7 +18,7 @@ header('Content-Type: text/html; charset=utf-8');
         <aside class="right-side">
             <!-- Main content -->
             <section class="content-header">
-                <h1>Unidade: <?php echo utf8_encode($unidadeNome);?></h1>
+                <h1>Unidade: <?php echo $unidadeNome;?></h1>
                 <ol class="breadcrumb">
                     <li><a href="index.php"><i class="livicon" data-name="home" data-size="14" data-loop="true"></i>Painel de Controle</a></li>
                     <li><a href="#">Administra&ccedil;&atilde;o</a></li>

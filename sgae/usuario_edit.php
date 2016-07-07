@@ -44,7 +44,7 @@ if (isset($_GET['idusu']) && is_numeric($_GET['idusu'])) {
         <aside class="right-side">
             <!-- Main content -->
             <section class="content-header">
-                <h1>Unidade: <?php echo utf8_encode($unidadeNome);?></h1>
+                <h1>Unidade: <?php echo $unidadeNome;?></h1>
                 <ol class="breadcrumb">
                     <li><a href="index.php"><i class="livicon" data-name="home" data-size="14" data-loop="true"></i>Painel de Controle</a></li>
                     <li><a href="#">Administra&ccedil;&atilde;o</a></li>
@@ -176,7 +176,7 @@ if (isset($_GET['idusu']) && is_numeric($_GET['idusu'])) {
                                                             <input type="hidden" name="unidade" value="<?php echo $unidade; ?>" />
                                                             <input type="hidden" name="act" value="update" />
                                                             <button type="submit" class="btn btn-labeled btn-success btn-responsive"><span class="btn-label"><i class="livicon" data-name="save" data-size="17" data-loop="true" data-c="#fff" data-hc="#fff" title="Alterar"></i></span>&nbsp;Alterar</button>
-                                                            <button type="button" onclick="location.href='usuario_list.php'" class="btn btn-labeled btn-warning btn-responsive"><span class="btn-label"><i class="livicon" data-name="remove-circle" data-size="17" data-loop="true" data-c="#fff" data-hc="#fff" title="Cancelar"></i></span>Cancelar</button>
+                                                            <button type="button" onclick="location.href='usuario_list.php'" class="btn btn-labeled btn-warning btn-responsive"><span class="btn-label"><i class="livicon" data-name="remove-circle" data-size="17" data-loop="true" data-c="#fff" data-hc="#fff" title="Voltar"></i></span>Cancelar</button>
                                                         </div>
                                                     </div>                                                    
                                         </div>

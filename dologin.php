@@ -67,13 +67,12 @@ if ( isset($_POST['sub']) && !empty($_POST['cnpj']) && !empty($_POST['user2']) &
 		$_SESSION['UnidadeNome']	= $unidadeLogada['nomefantasia'];
 
 		$destino = 'sgae/index.php';
-		$log->logg($user2['login'],'Acesso concedido: '.$_SERVER['PHP_SELF'],'low','blue');
+		$log->logg($_SERVER['PHP_SELF'],'Login concedido: '.$user2['login'],'baixa','active');
 
 	} 
 	else {
 		$msg = md5(001);
-		$destino = "index.php?msg=$msg";
-		$log->logg($userb,'Acesso negado: '.$_SERVER['PHP_SELF'],'high','red'); 
+		$destino = "index.php?msg=$msg"; 
 	}
 	
 }

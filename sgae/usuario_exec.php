@@ -1,5 +1,6 @@
 <?php
 include_once("inc/verificasession.php");
+include_once("inc/logger/logInit.php");
 
 if ( isset($_REQUEST['act']) && !empty($_REQUEST['act']) ) {
 	
@@ -33,10 +34,15 @@ if ( isset($_REQUEST['act']) && !empty($_REQUEST['act']) ) {
 			$stmt->bindParam(":unidade", $unidade);
 			$stmt->bindParam(":inativo", $inativo);
         	$stmt->execute();
+        	$lastId = $pdo->lastInsertId();
         	
 			$msg = md5(104);
 			
 			$destino = "usuario_insert.php?msg=".$msg;
+			$log->logg($_SERVER['PHP_SELF'].'?act=insert&id='.$lastId,
+					   'Inclusão do Usuário: '.$login,
+					   'baixa','success'); 
+
 
 			break;
 		
@@ -75,6 +81,10 @@ if ( isset($_REQUEST['act']) && !empty($_REQUEST['act']) ) {
 			$msg = md5(101);
 			
 			$destino = "usuario_edit.php?idusu=".$idusu."&msg=".$msg;
+			$log->logg($_SERVER['PHP_SELF'].'?act=update&id='.$idusu,
+					   'Alteração do Usuário: '.$login,
+					   'media','warning'); 
+
 
 			break;
 		
@@ -83,11 +93,19 @@ if ( isset($_REQUEST['act']) && !empty($_REQUEST['act']) ) {
 
 			$idusu = $_REQUEST['idusu'];
 			
+			# Se usuário for ADMINISTRADOR, impedir a exclusão!
 			if ($idusu == 1) {
 				$msg = md5(100);
 			}
 			else {
 				$pdo  = $registry->get('sgaedb');
+        		$stmt = $pdo->prepare("SELECT login
+        								 FROM usuario 
+										WHERE id=:id");	
+				$stmt->bindParam(":id", $idusu);
+		     	$stmt->execute();
+				$result = $stmt->fetchColumn();
+				
         		$stmt = $pdo->prepare("UPDATE usuario 
         								  SET inativo=1
 										WHERE id=:id");	
@@ -97,6 +115,9 @@ if ( isset($_REQUEST['act']) && !empty($_REQUEST['act']) ) {
 			}
 			
 			$destino = "usuario_list.php?msg=".$msg;
+			$log->logg($_SERVER['PHP_SELF'].'?act=delete&id='.$idusu,
+					   'Exclusão do Usuário: '.$result,
+					   'alta','danger'); 
 	
 			break;
 		
@@ -105,6 +126,13 @@ if ( isset($_REQUEST['act']) && !empty($_REQUEST['act']) ) {
 
 			$idusu = $_REQUEST['idusu'];
 			$pdo  = $registry->get('sgaedb');
+    		$stmt = $pdo->prepare("SELECT login
+    								 FROM usuario 
+									WHERE id=:id");	
+			$stmt->bindParam(":id", $idusu);
+	     	$stmt->execute();
+			$result = $stmt->fetchColumn();			
+			
     		$stmt = $pdo->prepare("UPDATE usuario 
     								  SET inativo=:inativo
 									WHERE id=:id");	
@@ -114,6 +142,9 @@ if ( isset($_REQUEST['act']) && !empty($_REQUEST['act']) ) {
 			$msg = md5(103);
 
 			$destino = "usuario_list.php?msg=".$msg;
+			$log->logg($login,$_SERVER['PHP_SELF'].'?act=react&id='.$idusu,
+					   'Reativação do Usuário: '.$result,
+					   'media','warning'); 
 
 			break;
 			

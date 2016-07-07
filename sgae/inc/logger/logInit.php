@@ -41,6 +41,10 @@ class Session
 	   if(!isset($_SESSION['UsuarioLogin'])){
          $_SESSION['UsuarioLogin'] = 'Guest';
       }
+      
+      if(!isset($_SESSION['UsuarioUnidade'])){
+         $_SESSION['UsuarioUnidade'] = 0;
+      }
 
       /* Set referrer page */
       if(isset($_SESSION['url'])){
