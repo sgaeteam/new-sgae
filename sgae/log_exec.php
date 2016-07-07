@@ -70,7 +70,7 @@ if ( isset($_REQUEST['act']) && !empty($_REQUEST['act']) ) {
             	
                 foreach ($results as $result) {	
 					
-					$time = date("g:ia - j/m/Y",$result['timestamp']);
+					$time = date("j/m/Y - g:ia",$result['timestamp']);
 					
             		$return[] = array($result['url'],
             						  $result['msg'],

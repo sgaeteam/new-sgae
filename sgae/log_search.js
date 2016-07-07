@@ -7,12 +7,12 @@ $(document).ready(function() {
 
 
 	// Inicializar o datatable
-   // var oTable = $('#ajax_table').dataTable();
-   var oTable = $('#ajax_table').DataTable();  
+    var oTable = $('#ajax_table').dataTable();
+   //var oTable = $('#ajax_table').DataTable();  
 
-					var tr = $(this).closest('tr');
-        			var row = oTable.row( tr );
-        			tr.addClass( 'danger' );
+				//	var tr = $(this).closest('tr');
+        		//	var row = oTable.row( tr );
+        		//	tr.addClass( 'danger' );
 
  //   $('#ajax_table tbody')
    //     .on( 'load', 'td', function () {
@@ -58,11 +58,11 @@ $(document).ready(function() {
 					console.log(s);
 					//oTable.fnClearTable();
 
-            var row = "";
-            $.each(s, function(index, item){
-                row+="<tr class='danger'><td></td></tr>";
-            });
-            $("#tbody").html(row);    
+         //   var row = "";
+        //    $.each(s, function(index, item){
+      //          row+="<tr class='danger'><td></td></tr>";
+       //     });
+         //   $("#tbody").html(row);    
 
 
 
