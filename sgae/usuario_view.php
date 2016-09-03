@@ -172,7 +172,7 @@ if (isset($_GET['idusu']) && is_numeric($_GET['idusu'])) {
                                                     </br></br>
                                                     <div class="form-group form-actions">
                                                                 <div class="col-md-9 col-md-offset-5">
-                                                                    <button type="button" onclick="location.href='usuario_list.php'" class="btn btn-labeled btn-success btn-responsive"><span class="btn-label"><i class="livicon" data-name="arrow-left" data-size="17" data-loop="true" data-c="#fff" data-hc="#fff" title="Voltar"></i></span>&nbsp;Voltar</button>
+                                                                    <button type="button" onclick="location.href='usuario_list.php?loadCriteria=true'" class="btn btn-labeled btn-success btn-responsive"><span class="btn-label"><i class="livicon" data-name="arrow-left" data-size="17" data-loop="true" data-c="#fff" data-hc="#fff" title="Voltar"></i></span>&nbsp;Voltar</button>
                                                                 </div>
                                                     </div>                                                        
                                         </div>

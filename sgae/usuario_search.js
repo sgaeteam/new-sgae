@@ -1,11 +1,9 @@
 $(document).ready(function() {
-
-	// Inicializar o datatable
-    var oTable = $('#ajax_table').dataTable();  
-
-	$('#buscar').on('click',function(){
-		var user = $(this).attr('id');
-
+	
+	var loadDataTable = function(){
+	   
+	    var user = $(this).attr('id');
+	
 		// Resgatando os campos do formulario
 		var nomeFiltro = $('#nomeFiltro').val();
 		var usuarioFiltro = $('#usuarioFiltro').val();
@@ -16,7 +14,7 @@ $(document).ready(function() {
 		else {	
 			var statusFiltro = $('#statusInativoFiltro').val();
 		}
-
+		
 		if(user != '') { 
 			$.ajax({
 				// Alterar a chamada do exec a utilizar conforme a entidade com parametros
@@ -28,23 +26,15 @@ $(document).ready(function() {
 				        nomeFiltro: nomeFiltro, 
 				        usuarioFiltro: usuarioFiltro, 
 				        perfilFiltro: perfilFiltro,
-				        statusFiltro: statusFiltro 
+				        statusFiltro: statusFiltro
 				},        		
 				success: function(s) {
 					console.log(s);
-					//oTable.fnClearTable();
 					if (s !== null) {
 					 	for(var i = 0; i < s.length; i++) {
-	                         // Alterar para definir a quantidade de colunas da tabela
-	                         oTable.fnAddData([
-			                                    s[i][0],
-												s[i][1],
-												s[i][2],
-												s[i][3],
-												s[i][4],
-												"<a class='btn default btn-xs green-stripe' style='width:60px' href=usuario_view.php?idusu="+s[i][5]+">Ver</a>"+
-												"<a class='btn default btn-xs yellow-stripe' style='width:60px' href=usuario_edit.php?idusu="+s[i][5]+">Alterar</a>"+
-												"<a class='btn default btn-xs red-stripe' style='width:60px' href=# data-toggle='modal' data-target=#delete_confirm_"+s[i][5]+" data-id="+s[i][5]+">Excluir</a>"+
+					 		oTable.row.add([s[i][0],s[i][1],s[i][2],s[i][3],s[i][4],"<a class='btn default btn-xs green-stripe' style='padding: 1px 5px; display: inline;' href=usuario_view.php?idusu="+s[i][5]+"><span class='glyphicon glyphicon-eye-open'></span> Exibir</a>"+
+												"<a class='btn default btn-xs yellow-stripe' style='padding: 1px 5px; display: inline;' href=usuario_edit.php?idusu="+s[i][5]+"><span class='glyphicon glyphicon-pencil'></span> Alterar</a>"+
+												"<a class='btn default btn-xs red-stripe' style='padding: 1px 5px; display: inline;' href=# data-toggle='modal' data-target=#delete_confirm_"+s[i][5]+" data-id="+s[i][5]+"><span class='glyphicon glyphicon-trash'></span> Excluir</a>"+
 												"<div class='modal fade' id='delete_confirm_"+s[i][5]+"' tabindex='-1' role='dialog' aria-labelledby='user_delete_confirm_title' aria-hidden='true'>"+
 					                            "    <div class='modal-dialog'>"+
 					                            "        <div class='modal-content'>"+
@@ -63,9 +53,8 @@ $(document).ready(function() {
 					                            "            </div>"+
 					                            "        </div>"+
 					                            "    </div>"+
-					                            "</div>"                                	
-											 ]);										
-						} 
+					                            "</div>"]).draw(false);
+					   }
 					}
 					showDiv();							
 				},
@@ -81,6 +70,7 @@ $(document).ready(function() {
                      		 });
 				},
 				complete: function(){
+					oTable.page(parseInt(localStorage.getItem('usuario_search_ajax_table_page'),10)).draw( 'page' );
 				    $.unblockUI();
 				},
 				error: function(e) {
@@ -90,5 +80,35 @@ $(document).ready(function() {
 				}
 			});
 		}
+	}
+	
+	//Criação do DataTable
+	var oTable = $('#ajax_table').DataTable({ "sPaginationType":"full_numbers", stateSave: true });
+	
+	//Evento para capturar a mudança de página do DataTable e armazenar a última visitada.
+	oTable.on('page.dt', function() { 
+		localStorage.setItem('usuario_search_ajax_table_page', oTable.page.info().page);
 	});
+	
+	//Condição criada para realizar a busca automática
+	var loadCriteria = $('#loadCriteria').val();
+	if (loadCriteria == 1) {
+		loadDataTable();
+	} else {
+		//Reinicia o DataTable
+		oTable.search("").draw();
+		oTable.page.len( 10 ).draw();
+		localStorage.setItem('usuario_search_ajax_table_page', 0);
+	}
+	
+	//Evento configurado para realizar a busca quando o botão for clicado
+	$('#buscar').on('click',function(){
+		//Reinicia o DataTable
+		oTable.search("").draw('page');
+		oTable.page.len( 10 ).draw();
+		localStorage.setItem('usuario_search_ajax_table_page', 0);
+		//Faz nova busca
+		loadDataTable();
+	});
+	
 });

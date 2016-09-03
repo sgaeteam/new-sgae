@@ -30,7 +30,7 @@ if (isset($_GET['idusu']) && is_numeric($_GET['idusu'])) {
                 $status = $result['inativo'];
     }
     else {
-        header('location: usuario_list.php');
+        header('location: usuario_list.php?loadCriteria=true');
         exit;
     }
 
@@ -176,7 +176,7 @@ if (isset($_GET['idusu']) && is_numeric($_GET['idusu'])) {
                                                             <input type="hidden" name="unidade" value="<?php echo $unidade; ?>" />
                                                             <input type="hidden" name="act" value="update" />
                                                             <button type="submit" class="btn btn-labeled btn-success btn-responsive"><span class="btn-label"><i class="livicon" data-name="save" data-size="17" data-loop="true" data-c="#fff" data-hc="#fff" title="Alterar"></i></span>&nbsp;Alterar</button>
-                                                            <button type="button" onclick="location.href='usuario_list.php'" class="btn btn-labeled btn-warning btn-responsive"><span class="btn-label"><i class="livicon" data-name="remove-circle" data-size="17" data-loop="true" data-c="#fff" data-hc="#fff" title="Voltar"></i></span>Cancelar</button>
+                                                            <button type="button" onclick="location.href='usuario_list.php?loadCriteria=true'" class="btn btn-labeled btn-warning btn-responsive"><span class="btn-label"><i class="livicon" data-name="remove-circle" data-size="17" data-loop="true" data-c="#fff" data-hc="#fff" title="Voltar"></i></span>Voltar</button>
                                                         </div>
                                                     </div>                                                    
                                         </div>

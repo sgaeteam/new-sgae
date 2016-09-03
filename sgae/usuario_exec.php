@@ -8,7 +8,7 @@ if ( isset($_REQUEST['act']) && !empty($_REQUEST['act']) ) {
 	$act = $_REQUEST['act'];
 	
 	# Redirecionamento default:
-	$destino = "usuario_list.php";
+	$destino = "usuario_list.php?loadCriteria=true";
 	
 	switch ($act) { 
 
@@ -114,7 +114,7 @@ if ( isset($_REQUEST['act']) && !empty($_REQUEST['act']) ) {
 				$msg = md5(102);
 			}
 			
-			$destino = "usuario_list.php?msg=".$msg;
+			$destino = "usuario_list.php?loadCriteria=true&msg=".$msg;
 			$log->logg($_SERVER['PHP_SELF'].'?act=delete&id='.$idusu,
 					   'Exclusão do Usuário: '.$result,
 					   'alta','danger'); 
@@ -156,7 +156,10 @@ if ( isset($_REQUEST['act']) && !empty($_REQUEST['act']) ) {
 			$perfil  = $_GET['perfilFiltro'];
 			$status  = $_GET['statusFiltro'];
 			$unidade = $_SESSION['UsuarioUnidade'];
-
+		    $form_param = array($nome,$usuario,$perfil,$status);
+			session_start();
+			$_SESSION['form_param']	 = $form_param;
+	        
 			$pdo  = $registry->get('sgaedb');
 			
 			if (empty($nome) && empty($usuario) && empty($perfil)) {

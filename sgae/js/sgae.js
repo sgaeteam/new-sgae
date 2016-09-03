@@ -11,14 +11,16 @@ function showDiv() {
 }
 
 function prepareDiv() {
-    $('#ajax_table').dataTable().fnClearTable();
+    $("#ajax_table").DataTable().search("").draw();
+    $("#ajax_table").DataTable().page.len( 10 ).draw();
     $('.loader').css({display:"none"});
     document.getElementById('tabela').style.display='none';
 }
 
 function hideDiv() {
     document.getElementById('ajax_form').reset();
-    $('#ajax_table').dataTable().fnClearTable();
+    $("#ajax_table").DataTable().search("").draw();
+    $("#ajax_table").DataTable().page.len( 10 ).draw();
     $('.loader').css({display:"none"});
     document.getElementById('tabela').style.display='none';
 }
