@@ -1,6 +1,6 @@
 <?php
 
-if ( isset($_POST['sub']) && !empty($_POST['cnpj']) && !empty($_POST['user2']) && !empty($_POST['senha']) ) {
+if (!empty($_POST['cnpj']) && !empty($_POST['user2']) && !empty($_POST['senha']) ) {
 	$userb = $_POST['user2'];
 	$senha = md5($_POST['senha']);
 	$cnpj = str_replace(array(".","/","-"), "", $_POST['cnpj']);
@@ -65,22 +65,21 @@ if ( isset($_POST['sub']) && !empty($_POST['cnpj']) && !empty($_POST['user2']) &
 		$_SESSION['UsuarioPerfil']  = $user2['perfil_id'];
 		$_SESSION['UsuarioUnidade'] = $user2['unidade_id'];
 		$_SESSION['UnidadeNome']	= $unidadeLogada['nomefantasia'];
-
-		$destino = 'sgae/index.php';
+		echo utf8_encode("ok");
+		//$destino = 'sgae/index.php';
 		$log->logg($_SERVER['PHP_SELF'],'Login concedido: '.$user2['login'],'baixa','active');
-
 	} 
 	else {
-		$msg = md5(001);
-		$destino = "index.php?msg=$msg"; 
+		$msg = utf8_encode('Usu&aacute;rio ou senha inv&aacute;lida');
+		//$destino = "index.php?msg=$msg"; 
 	}
 	
 }
 else {
-	$msg = md5(002);
-	$destino = "index.php?msg=$msg";
+	$msg = utf8_encode('Preencha os dados do formul&aacute;rio corretamente');
+	//$destino = "index.php?msg=$msg";
 }
-
+echo $msg;
 # Direcionamento
-header("location: $destino");
+//header("location: $destino");
 ?>

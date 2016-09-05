@@ -3,7 +3,7 @@ $(document).ready(function() {
     $("#btn-login").click( function() {
     
      $("div#ack").empty();
-      //Altera o rótulo e bloqueia o botão de login
+
      $('#btn-login').attr('disabled', 'disabled');
      $('#btn-login').attr('value', 'Autenticando...');
                      
@@ -19,9 +19,8 @@ $(document).ready(function() {
 	            $("#myForm :input").serializeArray(),
     			function(data) {
     			     if (data == "ok") {
-    			       setTimeout(' window.location.href = "sgae/index.php"; ',500);
-    			       $('#btn-login').attr('value', 'Acessar o sistema');
-    			       $('#btn-login').removeAttr('disabled');
+    			       $('#btn-login').attr('value', 'Redirecionando...');
+    			       setTimeout(' window.location.href = "sgae/index.php"; ',1000);
     			     } else {
     			        $("div#ack").fadeIn(1000, function(){      
                            $("div#ack").html('<div class="alert alert-danger"> <span class="glyphicon glyphicon-info-sign"></span> &nbsp; '+data+'!</div>');
@@ -29,9 +28,9 @@ $(document).ready(function() {
                              $('div#ack').fadeOut();
                            }, 3000);
     			        });
+    			        $('#btn-login').attr('value', 'Acessar o sistema');
+    			        $('#btn-login').removeAttr('disabled');
     			     }
-    			     $('#btn-login').attr('value', 'Acessar o sistema');
-    			     $('#btn-login').removeAttr('disabled');
 			    });
       }    
 	  

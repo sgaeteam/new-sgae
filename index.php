@@ -20,6 +20,7 @@
 
 <link rel="stylesheet" href="css/flexslider.css" />
 <script src="js/jquery-1.9.0.min.js"></script>
+<script src="js/sgae.auth.js"></script>
 <script src="js/jquery.maskedinput-1.3.js"></script>
 <script src="js/jquery.flexslider.js"></script>
 <script type="text/javascript">
@@ -611,19 +612,19 @@
         <h3 class="modal-title">SGAE - Login</h3>
       </div>
       <div class="modal-body">
-        <form method="post" action="dologin.php">
+        <div id="ack"></div>
+        <form method="post" action="dologin.php" id="myForm">
           <div class="form-group">
             <input class="form-control input-lg" type="text" name="cnpj" id="cnpj" size="15" placeholder="CNPJ"/>
           </div>			
           <div class="form-group">
-            <input class="form-control input-lg" type="text" name="user2" size="50" placeholder="Usu&aacute;rio"/>
+            <input class="form-control input-lg" type="text" name="user2" id="user2" size="50" placeholder="Usu&aacute;rio"/>
           </div>
           <div class="form-group">
-            <input class="form-control input-lg" type="password" name="senha" size="20" placeholder="Senha"/>
+            <input class="form-control input-lg" type="password" name="senha" id="senha" size="20" placeholder="Senha"/>
           </div>
           <div class="form-group">
-            <input type="submit" name="sub" value="Acessar o sistema" class="btn btn-success btn-lg"/>
-            <?php include_once('sgae/inc/mensagens.php'); ?>  
+            <input type="submit" id="btn-login" name="sub" value="Acessar o sistema" class="btn btn-success btn-lg"/>
           </div>
         </form>
       </div>
