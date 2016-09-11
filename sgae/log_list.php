@@ -73,6 +73,12 @@ header('Content-Type: text/html; charset=utf-8');
                                                     <input type="text" class="form-control" id="dataIniFiltro" placeholder="Digite a data">
                                                 </div>
                                             </div>
+                                            
+                    <div class="form-row">
+                    <samp>Date Picker</samp>
+                    <input type="text" class="input-text small a" id="datepicker_1" placeholder="Date Picker" /> <input type="text" class="input-text small" id="alternate" />
+                    </div>
+                    <br />
                                              
                                         </div>
                                         <div class="col-md-6">

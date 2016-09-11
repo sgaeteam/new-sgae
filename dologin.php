@@ -67,7 +67,7 @@ if (!empty($_POST['cnpj']) && !empty($_POST['user2']) && !empty($_POST['senha'])
 		$_SESSION['UnidadeNome']	= $unidadeLogada['nomefantasia'];
 		echo utf8_encode("ok");
 		//$destino = 'sgae/index.php';
-		$log->logg($_SERVER['PHP_SELF'],'Login concedido: '.$user2['login'],'baixa','active');
+		$log->logg($_SERVER['PHP_SELF'],'Login concedido: '.$user2['login'],'baixa','info');
 	} 
 	else {
 		$msg = utf8_encode('Usu&aacute;rio ou senha inv&aacute;lida');
