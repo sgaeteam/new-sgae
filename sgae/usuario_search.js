@@ -29,7 +29,7 @@ $(document).ready(function() {
 				        statusFiltro: statusFiltro
 				},        		
 				success: function(s) {
-					console.log(s);
+					//console.log(s);
 					if (s !== null) {
 					 	for(var i = 0; i < s.length; i++) {
 					 		oTable.row.add([s[i][0],s[i][1],s[i][2],s[i][3],s[i][4],"<a class='btn default btn-xs green-stripe' style='padding: 1px 5px; display: inline;' href=usuario_view.php?idusu="+s[i][5]+"><span class='glyphicon glyphicon-eye-open'></span> Exibir</a>"+
@@ -74,7 +74,7 @@ $(document).ready(function() {
 				    $.unblockUI();
 				},
 				error: function(e) {
-				   console.log(e.responseText);
+				   //console.log(e.responseText);
 				   $.unblockUI();
 				   showDiv();							
 				}
