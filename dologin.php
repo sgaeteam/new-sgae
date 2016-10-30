@@ -51,7 +51,7 @@ if (!empty($_POST['cnpj']) && !empty($_POST['user2']) && !empty($_POST['senha'])
 	if ($stmt->rowCount()) {
 		
 		$user2 = $result;
-		$stmt = $pdo->prepare("SELECT nomefantasia FROM unidade WHERE cnpj = :cnpj");
+		$stmt = $pdo->prepare("SELECT nomefantasia, plano_id FROM unidade WHERE cnpj = :cnpj");
 		$stmt->bindParam(':cnpj', $cnpj);
 		$stmt->execute();
 		$unidadeLogada = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -65,6 +65,8 @@ if (!empty($_POST['cnpj']) && !empty($_POST['user2']) && !empty($_POST['senha'])
 		$_SESSION['UsuarioPerfil']  = $user2['perfil_id'];
 		$_SESSION['UsuarioUnidade'] = $user2['unidade_id'];
 		$_SESSION['UnidadeNome']	= $unidadeLogada['nomefantasia'];
+		$_SESSION['UnidadePlano']	= $unidadeLogada['plano_id'];
+
 		echo utf8_encode("ok");
 		//$destino = 'sgae/index.php';
 		$log->logg($_SERVER['PHP_SELF'],'Login concedido: '.$user2['login'],'baixa','info');

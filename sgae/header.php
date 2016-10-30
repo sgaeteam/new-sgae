@@ -87,13 +87,11 @@
                         <li class="dropdown-submenu">
                             <a tabindex="-1" href="">Cadastro</a>
                             <ul class="dropdown-menu">
-                              
                               <li><a href="usuario_list.php?loadCriteria=false">Usu&aacute;rio</a></li>
                               <li><a href="#">Unidade</a></li>
                               <li role="separator" class="divider"></li>
                               <li><a href="log_list.php">Auditoria</a></li>
-     
-                             </ul>
+                            </ul>
                         </li>
                         <li><a href="#">Pagamentos</a></li>
                     </ul>

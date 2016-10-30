@@ -12,7 +12,7 @@ $unidadeNome    = $_SESSION['UnidadeNome'];
 header('Content-Type: text/html; charset=utf-8');
 ?>
 <!-- Include header here-->
-<?php include 'header.php';?>
+<?php include 'header.php'; ?>
     
     <div class="wrapper row-offcanvas row-offcanvas-left">
         <aside class="right-side">
@@ -36,7 +36,7 @@ header('Content-Type: text/html; charset=utf-8');
 				            <div class="alert alert-success alert-dismissable margin5">
 				                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
 				                <strong>
-                                    <?php
+                                    <?php 
                                             $msg = $_GET['msg'];
                                             include('inc/mensagens.php');
                                     ?>
