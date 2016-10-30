@@ -13,6 +13,7 @@ if ( !isset($_SESSION['login']) ) {
 // Verifica o Controle de acesso e Inautoriza acesso se ainda nao tiver permissão
 
 if ( isset($_SESSION['UsuarioPerfil']) && isset($_SESSION['UnidadePlano']) ) {
+	include('inc/config.php');
 	$pdo = $registry->get('sgaedb');
 	$stmt = $pdo->prepare("SELECT * 
 						     FROM acesso_pagina, pagina
