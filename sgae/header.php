@@ -88,7 +88,8 @@
                             <a tabindex="-1" href="">Cadastro</a>
                             <ul class="dropdown-menu">
                               <li><a href="usuario_list.php?loadCriteria=false">Usu&aacute;rio</a></li>
-                              <li><a href="#">Unidade</a></li>
+                              <li><a href="unidade_list.php?loadCriteria=false">Unidade</a></li>
+                              <li><a href="pagina_list.php?loadCriteria=false">P&aacute;gina</a></li>
                               <li role="separator" class="divider"></li>
                               <li><a href="log_list.php">Auditoria</a></li>
                             </ul>

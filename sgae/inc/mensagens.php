@@ -36,7 +36,23 @@ if (isset($_REQUEST['msg'])) {
 		case md5(104):
                         echo utf8_encode('Usu&aacute;rio inserido com sucesso');
 			break;
-					
+
+		case md5(201):
+                        echo utf8_encode('P&aacute;gina alterada com sucesso');
+			break;
+				
+		case md5(202):
+                        echo utf8_encode('P&aacute;gina exclu&iacute;da com sucesso');
+			break;
+			
+		case md5(203):
+                        echo utf8_encode('P&aacute;gina reativada com sucesso');
+			break;
+
+		case md5(204):
+                        echo utf8_encode('P&aacute;gina inserida com sucesso');
+			break;
+
                 case md5(313):
                         echo utf8_encode('A extensao da foto precisa ser JPG, GIF ou PNG');
 			break;

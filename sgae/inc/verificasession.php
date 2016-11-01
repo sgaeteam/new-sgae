@@ -34,12 +34,13 @@ if ( isset($_SESSION['UsuarioPerfil']) && isset($_SESSION['UnidadePlano']) ) {
 	$stmt->bindParam(':pagina', $page); 
 	$stmt->execute();
 	$result = $stmt->fetch(PDO::FETCH_ASSOC);
-
+/*
 	if ($stmt->rowCount() == 0) {
-		header('Window-target: _parent');
+		header('Window-target: _self');
 		header("location: ./planos.php");
 		exit;
 	}
+*/	
 }
 
 ?>
