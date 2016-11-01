@@ -28,6 +28,7 @@ $(document).ready(function() {
 				success: function(s) {
 					//console.log(s);
 					if (s !== null) {
+						oTable.clear().draw();
 					 	for(var i = 0; i < s.length; i++) {
 					 		oTable.row.add([s[i][0],s[i][1],"<a class='btn default btn-xs green-stripe' style='padding: 1px 5px; display: inline;' href=pagina_view.php?idusu="+s[i][2]+"><span class='glyphicon glyphicon-eye-open'></span> Exibir</a>"+
 												"<a class='btn default btn-xs yellow-stripe' style='padding: 1px 5px; display: inline;' href=pagina_edit.php?idusu="+s[i][2]+"><span class='glyphicon glyphicon-pencil'></span> Alterar</a>"+
