@@ -242,7 +242,7 @@
   </div>
   <div class="row">
     <div class="col-sm-6 col-md-3 PlanPricing Danger">
-      <div class="planName"> <span class="price">R$ 100</span>
+      <div class="planName"> <span class="price">R$ 150</span>
         <h3>B&aacute;sico</h3>
         <p>Plano Mensal</p>
       </div>
@@ -259,7 +259,7 @@
       <p> <a href="#" role="button" class="btn btn-danger btn-lg">Solicitar </a> </p>
     </div>
     <div class="col-sm-6 col-md-3 PlanPricing Alert">
-      <div class="planName"> <span class="price">R$ 150</span>
+      <div class="planName"> <span class="price">R$ 200</span>
         <h3>Intermedi&aacute;rio I</h3>
         <p>Plano Mensal</p>
       </div>
@@ -276,7 +276,7 @@
       <p> <a href="#" role="button" class="btn btn-alert btn-lg">Solicitar </a> </p>
     </div>
     <div class="col-sm-6 col-md-3 PlanPricing Alert">
-      <div class="planName"> <span class="price">R$ 200</span>
+      <div class="planName"> <span class="price">R$ 250</span>
         <h3>Intermedi&aacute;rio II</h3>
         <p>Plano Mensal</p>
       </div>
@@ -293,7 +293,7 @@
       <p> <a href="#" role="button" class="btn btn-alert btn-lg">Solicitar </a> </p>
     </div>
     <div class="col-sm-6 col-md-3 PlanPricing">
-      <div class="planName"> <span class="price">R$ 250</span>
+      <div class="planName"> <span class="price">R$ 300</span>
         <h3>Completo</h3>
         <p>Plano Mensal</p>
       </div>
