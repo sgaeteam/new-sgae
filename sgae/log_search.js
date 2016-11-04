@@ -1,48 +1,15 @@
 $(document).ready(function() {
-
-//$(document).ready(function() {
-   // var table = $('#example').DataTable();
-     
-
-
-
-	// Inicializar o datatable
-    var oTable = $('#ajax_table').dataTable();
-   //var oTable = $('#ajax_table').DataTable();  
-
-				//	var tr = $(this).closest('tr');
-        		//	var row = oTable.row( tr );
-        		//	tr.addClass( 'danger' );
-
- //   $('#ajax_table tbody')
-   //     .on( 'load', 'td', function () {
-     //       var colIdx = oTable.cell(this).index().column;
- //
-   //         $( oTable.cells().nodes() ).removeClass( 'highlight' );
-     //       $( oTable.column( colIdx ).nodes() ).addClass( 'danger' );
-    //});
-    
-  //  "fnRowCallback": function (nRow, aData, iDisplayIndex, iDisplayIndexFull) {
-//	$('td', nRow).closest('tr').css('background', aData[6] === true ? '#eef' : '#fff');
-//	return nRow;
-//	}
-//
-//"createdRow": function ( row, data, index ) {
-//            if ( data[5].replace(/[\$,]/g, '') * 1 > 150000 ) {
- //               $('td', row).eq(5).addClass('highlight');
-   //         }
-     //   }
-//
-//
-
-
-	$('#buscar').on('click',function(){
-		var user = $(this).attr('id');
-
+	
+	var loadDataTable = function(){
+	   
+	    var user = $(this).attr('id');
+	
 		// Resgatando os campos do formulario
+		var usuarioFiltro = $('#usuarioFiltro').val();
+		var prioridadeFiltro = $('#prioridadeFiltro').val();
 		var dataIniFiltro = $('#dataIniFiltro').val();
 		var dataFimFiltro = $('#dataFimFiltro').val();
-
+		
 		if(user != '') { 
 			$.ajax({
 				// Alterar a chamada do exec a utilizar conforme a entidade com parametros
@@ -51,34 +18,27 @@ $(document).ready(function() {
 				dataType: 'json',
 				type: 'GET',
 				data: { 
+				        usuarioFiltro: usuarioFiltro, 
+				        prioridadeFiltro: prioridadeFiltro,
 				        dataIniFiltro: dataIniFiltro, 
 				        dataFimFiltro: dataFimFiltro
 				},        		
 				success: function(s) {
-					console.log(s);
-					//oTable.fnClearTable();
-
-         //   var row = "";
-        //    $.each(s, function(index, item){
-      //          row+="<tr class='danger'><td></td></tr>";
-       //     });
-         //   $("#tbody").html(row);    
-
-
-
+					//console.log(s);
 					if (s !== null) {
+						oTable.clear().draw();
 					 	for(var i = 0; i < s.length; i++) {
-					 		 
-	                         // Alterar para definir a quantidade de colunas da tabela
-	                         oTable.fnAddData([
-			                                    s[i][0],
-												s[i][1],
-												s[i][2],
-												s[i][3],
-												s[i][4],
-												s[i][5]
-											 ]);		
-						} 
+					 		oTable.row.add([ s[i][0], s[i][1], s[i][2], s[i][3], s[i][4], s[i][5] ]).draw(false);
+					   	/*	if (s[i][5] == 'baixa') {
+								$('#ajax_table td').css('background-color', 'Green');
+							} else {
+								if (s[i][5] == 'média') {
+								 $('#ajax_table td').css('background-color', 'Yellow');	
+								} else {
+								  $('#ajax_table td').css('background-color', 'Red');	
+								}
+							}*/
+					 	}
 					}
 					showDiv();							
 				},
@@ -94,14 +54,72 @@ $(document).ready(function() {
                      		 });
 				},
 				complete: function(){
+					oTable.page(parseInt(localStorage.getItem('log_search_ajax_table_page'),10)).draw( 'page' );
 				    $.unblockUI();
 				},
 				error: function(e) {
-				   console.log(e.responseText);
+				   //console.log(e.responseText);
 				   $.unblockUI();
 				   showDiv();							
 				}
 			});
 		}
+	}
+	
+	//Criação do DataTable
+	var oTable = $('#ajax_table').DataTable({ "sPaginationType":"full_numbers", stateSave: true	});
+	
+	//Evento para capturar a mudança de página do DataTable e armazenar a última visitada.
+	oTable.on('page.dt', function() { 
+		localStorage.setItem('log_search_ajax_table_page', oTable.page.info().page);
 	});
+	
+	//Condição criada para realizar a busca automática
+	var loadCriteria = $('#loadCriteria').val();
+	if (loadCriteria == 1) {
+		loadDataTable();
+	} else {
+		//Reinicia o DataTable
+		oTable.search("").draw();
+		oTable.page.len( 10 ).draw();
+		localStorage.setItem('log_search_ajax_table_page', 0);
+	}
+	
+	//Evento configurado para realizar a busca quando o botão for clicado
+	$('#buscar').on('click',function(){
+		//Reinicia o DataTable
+		oTable.search("").draw('page');
+		oTable.page.len( 10 ).draw();
+		localStorage.setItem('log_search_ajax_table_page', 0);
+		//Faz nova busca
+		loadDataTable();
+	});
+	
+	//Configuração do calendário
+	var nowTemp = new Date();
+	var now = new Date(nowTemp.getFullYear(), nowTemp.getMonth(), nowTemp.getDate(), 0, 0, 0, 0);
+	var checkin = $('#dataIniFiltro').fdatepicker({
+		    language: 'pt_br',
+			onRender: function (date) {
+			//return date.valueOf() < now.valueOf() ? 'disabled' : '';
+			return date.valueOf();
+		}
+	}).on('changeDate', function (ev) {
+		if (ev.date.valueOf() > checkout.date.valueOf()) {
+			var newDate = new Date(ev.date)
+			newDate.setDate(newDate.getDate() + 1);
+			checkout.update(newDate);
+		}
+		checkin.hide();
+		$('#dataFimFiltro')[0].focus();
+	}).data('datepicker');
+	var checkout = $('#dataFimFiltro').fdatepicker({
+		language: 'pt_br',
+		onRender: function (date) {
+			return date.valueOf() <= checkin.date.valueOf() ? 'disabled' : '';
+		}
+	}).on('changeDate', function (ev) {
+		checkout.hide();
+	}).data('datepicker');
+	
 });

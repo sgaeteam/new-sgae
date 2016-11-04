@@ -1,5 +1,4 @@
 <?php
-include('inc/config.php');
 include('inc/verificasession.php');
 
 $usuarioID      = $_SESSION['UsuarioID'];
@@ -12,7 +11,7 @@ $unidadeNome    = $_SESSION['UnidadeNome'];
 header('Content-Type: text/html; charset=utf-8');
 ?>
 <!-- Include header here-->
-<?php include 'header.php';?>
+<?php include 'header.php'; ?>
     
     <div class="wrapper row-offcanvas row-offcanvas-left">
         <aside class="right-side">
@@ -23,7 +22,8 @@ header('Content-Type: text/html; charset=utf-8');
                     <li><a href="index.php"><i class="livicon" data-name="home" data-size="14" data-loop="true"></i>Painel de Controle</a></li>
                     <li><a href="#">Administra&ccedil;&atilde;o</a></li>
                     <li><a href="#">Cadastro</a></li>
-                    <li class="active">Auditoria</li>
+                    <li><a href="#">Auditoria</a></li>                    
+                    <li class="active">Buscar</li>
                 </ol>
             </section>
             <section class="content">
@@ -35,7 +35,7 @@ header('Content-Type: text/html; charset=utf-8');
 				            <div class="alert alert-success alert-dismissable margin5">
 				                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
 				                <strong>
-                                    <?php
+                                    <?php 
                                             $msg = $_GET['msg'];
                                             include('inc/mensagens.php');
                                     ?>
@@ -62,56 +62,112 @@ header('Content-Type: text/html; charset=utf-8');
                                     <i class="fa fa-fw fa-times removepanel clickable"></i>
                                 </span> -->
                             </div>
+                            <?php
+                                if ($_GET['loadCriteria'] === 'true' && isset($_SESSION['form_param'])) { 
+                                    $usuarioFiltro = $_SESSION['form_param'][0];
+                                    $prioridadeFiltro = $_SESSION['form_param'][1];
+                                    $dataIniFiltro = $_SESSION['form_param'][2];
+                                    $dataFimFiltro = $_SESSION['form_param'][3];
+                                    $loadCriteria = 1;
+                                    // print_r(var_dump($_SESSION)); // Para debugar a Session
+                                } else {
+                                    unset($_SESSION['form_param']);
+                                    $usuarioFiltro = "";
+                                    $prioridadeFiltro = "";
+                                    $dataIniFiltro = "";
+                                    $dataFimFiltro = "";
+                                    $loadCriteria = 0;
+                                }
+                            ?>
                             <div class="panel-body">
                                 <!--<form class="form-horizontal">-->
                                 <form class="form-horizontal" method="post" action="" id="ajax_form">
+                                    <input type="hidden" id="loadCriteria" value="<?php echo $loadCriteria; ?>"/>
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label class="control-label col-md-3" for="dataIniFiltro">Data inicial</label>
+                                                <label class="control-label col-md-3" for="usuarioFiltro">Usu&aacute;rio</label>
                                                 <div class="col-md-9">
-                                                    <input type="text" class="form-control" id="dataIniFiltro" placeholder="Digite a data">
+                                                    <input type="text" class="form-control" id="usuarioFiltro" placeholder="Digite o login" value="<?php echo $usuarioFiltro; ?>">
                                                 </div>
                                             </div>
-                                            
-                    <div class="form-row">
-                    <samp>Date Picker</samp>
-                    <input type="text" class="input-text small a" id="datepicker_1" placeholder="Date Picker" /> <input type="text" class="input-text small" id="alternate" />
-                    </div>
-                    <br />
-                                             
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label class="control-label col-md-3" for="dataFimFiltro">Data final</label>
+                                                <label class="control-label col-md-3" for="prioridadeFiltro">Prioridade</label>
                                                 <div class="col-md-9">
-                                                    <input type="text" class="form-control" id="dataFimFiltro" placeholder="Digite a data">
+                                                    <select id="prioridadeFiltro" class="form-control">
+                                                        <option value="">Selecione a prioridade</option>
+                                                        <?php
+                                                            if ($_GET['loadCriteria'] === 'true' && isset($_SESSION['form_param'])) { 
+                                                        
+                                                                $pdo  = $registry->get('sgaedb');
+                                                            	$stmt = $pdo->prepare("SELECT * FROM perfil ORDER BY tipo ASC"); 
+                                                            	$stmt->execute();
+                                                            	$perfilItem = $stmt->fetchAll();
+                                                                foreach ($perfilItem as $item) {
+                                                                    if ($perfilFiltro === $item['id'] ) {
+                                                                        echo "<option value=".$item['id']." selected>".$item['tipo']."</option>";
+                                                                    }
+                                                                    echo "<option value=".$item['id'].">".$item['tipo']."</option>";
+                                                                }
+                                                            } else { 
+                                                                echo "<option value='1'>Baixa</option>";
+                                                                echo "<option value='2'>M&eacute;dia</option>";
+                                                                echo "<option value='3'>Alta</option>";
+                                                            }
+                                                        ?>
+                                                    </select>
                                                 </div>
                                             </div>   
                                         </div>
                                     </div>
+                                    <div class="row">
+                                        <div div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="control-label col-md-3" for="dataIniFiltro">Data Inicial</label>
+                                                <div class="col-md-9">
+                                                    <input type="text" class="form-control" id="dataIniFiltro" data-date-format="dd/mm/yyyy" placeholder="Digite a data inicial" value="<?php echo $dataIniFiltro; ?>">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="control-label col-md-3" for="dataFimFiltro">Data Final</label>
+                                                <div class="col-md-9">
+                                                    <input type="text" class="form-control" id="dataFimFiltro" data-date-format="dd/mm/yyyy" placeholder="Digite a data final" value="<?php echo $dataFimFiltro; ?>">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                                 </form>
                                 </br></br>
                                 <div class="form-group form-actions">
                                     <div class="col-md-9 col-md-offset-4">
                                         <button type="button" onclick="prepareDiv()" id="buscar" class="btn btn-labeled btn-success btn-responsive"><span class="btn-label"><i class="livicon" data-name="search" data-size="17" data-loop="true" data-c="#fff" data-hc="#fff" title="Buscar"></i></span>&nbsp;Buscar</button>
                                         <button type="button" onclick="hideDiv()" class="btn btn-labeled btn-danger btn-responsive"><span class="btn-label"><i class="livicon" data-name="remove-circle" data-size="17" data-loop="true" data-c="#fff" data-hc="#fff" title="Limpar"></i></span>Limpar</button>
+                                        <button disabled type="button" onclick="location.href='log_insert.php'" class="btn btn-labeled btn-warning btn-responsive"><span class="btn-label"><i class="livicon" data-name="plus-alt" data-size="17" data-loop="true" data-c="#fff" data-hc="#fff" title="Buscar"></i></span>&nbsp;&nbsp;Novo</button>
                                     </div>
                                 </div>  
                                 </br></br></br>
                                 <div id="preloader" style="display:none;">
                                  <h1 style="color: black;"><img src="img/loader.gif"/> Aguarde...</h1> 
                                 </div>
-                                <div id="tabela" class="panel panel-primary" style="display:none;">
-                                    <div class="panel-heading">
-                                        <h4 class="panel-title">
-                                            <i class="livicon" data-name="pencil" data-size="16" data-loop="true" data-c="#fff" data-hc="white"></i>
-                                            Resultado da busca
-                                        </h4>
+                                <div id="tabela" class="panel panel-primary filterable" style="display:none;">
+                                    <div class="panel-heading clearfix ">
+                                        <div class="panel-title pull-left">
+                                            <div class="caption">
+                                                <i class="livicon" data-name="pencil" data-size="16" data-loop="true" data-c="#fff" data-hc="white"></i>
+                                                Resultado da busca
+                                            </div>
+                                        </div>
+                                        <div id="tools" class="tools pull-right">
+                                        </div>
                                     </div>
                                     <br/>
-                                    <div class="panel-body">
-                                        <table class="table table-bordered " id="ajax_table" align="center">
+                                    <div class="panel-body table-responsive">
+                                        <table class="table table-bordered " id="ajax_table">
                                             <thead>
                                                 <tr class="filters">
                                                     <th style="width:150px">URL</th>
