@@ -173,9 +173,9 @@ header('Content-Type: text/html; charset=utf-8');
                                                     <th style="width:150px">URL</th>
                                                     <th style="width:150px">A&ccedil;&atilde;o</th>
                                                     <th style="width:50px">Usu&aacute;rio</th>
-                                                    <th style="width:65px">Data</th>                                                    
-                                                    <th style="width:35px">IP</th>
-                                                    <th style="width:50px">Prioridade</th>
+                                                    <th style="width:80px">Data</th>                                                    
+                                                    <th style="width:25px">IP</th>
+                                                    <th style="width:45px">Prioridade</th>
                                                 </tr>
                                             </thead> 
                                         </table>

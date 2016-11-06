@@ -29,15 +29,6 @@ $(document).ready(function() {
 						oTable.clear().draw();
 					 	for(var i = 0; i < s.length; i++) {
 					 		oTable.row.add([ s[i][0], s[i][1], s[i][2], s[i][3], s[i][4], s[i][5] ]).draw(false);
-					   	/*	if (s[i][5] == 'baixa') {
-								$('#ajax_table td').css('background-color', 'Green');
-							} else {
-								if (s[i][5] == 'média') {
-								 $('#ajax_table td').css('background-color', 'Yellow');	
-								} else {
-								  $('#ajax_table td').css('background-color', 'Red');	
-								}
-							}*/
 					 	}
 					}
 					showDiv();							
@@ -67,7 +58,20 @@ $(document).ready(function() {
 	}
 	
 	//Criação do DataTable
-	var oTable = $('#ajax_table').DataTable({ "sPaginationType":"full_numbers", stateSave: true	});
+	var oTable = $('#ajax_table').DataTable({ "sPaginationType":"full_numbers", stateSave: true,
+											  fnRowCallback: function(nRow, aData, iDisplayIndex, iDisplayIndexFull) 
+															{
+														       if (aData[5] == "baixa") {
+														           $(nRow).css('background-color', '#1bc398');
+														       } else {
+														       	  if (aData[5] == "alta") {
+														             $(nRow).css('background-color', '#EF6F61');
+														    	  } else {
+														    	  	 $(nRow).css('background-color', '#ec971f');
+														    	  }
+														       }
+														     }
+	});
 	
 	//Evento para capturar a mudança de página do DataTable e armazenar a última visitada.
 	oTable.on('page.dt', function() { 
@@ -96,12 +100,9 @@ $(document).ready(function() {
 	});
 	
 	//Configuração do calendário
-	var nowTemp = new Date();
-	var now = new Date(nowTemp.getFullYear(), nowTemp.getMonth(), nowTemp.getDate(), 0, 0, 0, 0);
 	var checkin = $('#dataIniFiltro').fdatepicker({
 		    language: 'pt_br',
 			onRender: function (date) {
-			//return date.valueOf() < now.valueOf() ? 'disabled' : '';
 			return date.valueOf();
 		}
 	}).on('changeDate', function (ev) {
