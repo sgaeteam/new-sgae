@@ -53,6 +53,38 @@ if (isset($_REQUEST['msg'])) {
                         echo utf8_encode('P&aacute;gina inserida com sucesso');
 			break;
 
+		case md5(211):
+                        echo utf8_encode('Plano alterado com sucesso');
+			break;
+				
+		case md5(212):
+                        echo utf8_encode('Plano exclu&iacute;do com sucesso');
+			break;
+			
+		case md5(213):
+                        echo utf8_encode('Plano reativado com sucesso');
+			break;
+
+		case md5(214):
+                        echo utf8_encode('Plano inserido com sucesso');
+			break;
+
+		case md5(221):
+                        echo utf8_encode('Perfil alterado com sucesso');
+			break;
+				
+		case md5(222):
+                        echo utf8_encode('Perfil exclu&iacute;do com sucesso');
+			break;
+			
+		case md5(223):
+                        echo utf8_encode('Perfil reativado com sucesso');
+			break;
+
+		case md5(224):
+                        echo utf8_encode('Perfil inserido com sucesso');
+			break;
+
                 case md5(313):
                         echo utf8_encode('A extensao da foto precisa ser JPG, GIF ou PNG');
 			break;
