@@ -42,7 +42,7 @@ body {
 	position:relative;
 }
 a {
-	color:#2cc76a;
+	color:#ffff;
 }
 a:hover, a:focus {
 	color:#1eb45a;
@@ -152,12 +152,12 @@ p {
 	color:#FFF!important;
 }
 .btn-alert {
-	background-color: #ffff00;
+	background-color: #F5E61F;
 	background-image:none;
 	border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
 }
 .btn-alert:hover, .btn-alert:focus, .btn-alert:active {
-	background-color: #eb534e!important;
+	background-color: #F5E61F!important;
 	color:#FFF!important;
 }
 .navbar .nav > .active > a.btn {
@@ -339,7 +339,7 @@ p {
 }
 }
 .PlanPricing .planName {
-	background:#202b34;
+	background:#9AA5AA;
 	padding-top:50px;
 	padding-bottom:10px;
 	text-align:center;
@@ -366,7 +366,7 @@ p {
 	background:#f45c57;
 }
 .PlanPricing.Alert .price {
-	background:#ffff00;
+	background:#F5E61F;
 }
 .PlanPricing .planName h3 {
 	color:#FFF;
@@ -376,7 +376,7 @@ p {
 	text-transform:uppercase;
 }
 .PlanPricing .planName p {
-	color:#999;
+	color:#ffff;
 	text-align:center;
 }
 .PlanPricing .planFeatures {
@@ -441,7 +441,7 @@ p {
 }
 .ComparePlans .planHead4 {
 	height:60px;
-	background:#ffff00;
+	background:#F5E61F;
 }
 .ComparePlans .planHead2 h3, .ComparePlans .planHead3 h3, .ComparePlans .planHead4 h3 {
 	color:#FFF;
@@ -461,8 +461,8 @@ p {
 	border-left:solid 1px #f45c57;
 }
 .ComparePlans .pricing3 .planFeatures {
-	border-right:solid 1px #ffff00;
-	border-left:solid 1px #ffff00;
+	border-right:solid 1px #F5E61F;
+	border-left:solid 1px #F5E61F;
 }
 .ComparePlans .btn {
 	width:100%;

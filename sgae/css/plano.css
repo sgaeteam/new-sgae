@@ -1,0 +1,182 @@
+/*==========6. PLANS AND PRICING==============*/
+
+.PageHead {
+	margin-top:50px;
+}
+.PageHead h1, .PageHead h3 {
+	text-align:center;
+}
+.PageHead h3 {
+	color: #9AA5AA;
+	font-weight: normal;
+	margin-bottom: 20px;
+	margin-top: 10px;
+}
+/* Animation */
+
+.PlanPricing {
+	margin-top:100px;
+	-moz-transition:all 0.6s ease;
+	-webkit-transition:all 0.6s ease;
+	-ms-transition:all 0.6s ease;
+	-o-transition:all 0.6s ease;
+	transition:all 0.6s ease;
+}
+@media (min-width:767px) {
+.PlanPricing:hover {
+ -moz-transform:scale(1.1);
+ -webkit-transform:scale(1.1);
+ -o-transform:scale(1.1);
+ -ms-transform:scale(1.1);
+ transform:scale(1.1);
+ z-index:2;
+}
+}
+.PlanPricing .planName {
+	background:#202b34;
+	padding-top:50px;
+	padding-bottom:10px;
+	text-align:center;
+}
+.PlanPricing .price {
+	background:#2cc76a;
+	padding:5px;
+	color:#FFF;
+	font-size:42px;
+	-webkit-border-radius:100%;
+	-moz-border-radius:100%;
+	border-radius:100%;
+	display:block;
+	/*width:100px;*/
+	height:100px;
+	line-height:100px;
+	margin:0 auto;
+	position:relative;
+	margin-top:-107px;
+	margin-bottom:10px;
+	line-height: 2.2;
+}
+.PlanPricing.Danger .price {
+	background:#f45c57;
+}
+.PlanPricing.Alert .price {
+	background:#F5E61F;
+}
+.PlanPricing .planName h3 {
+	color:#FFF;
+	text-align:center;
+	padding:0;
+	margin:0;
+	text-transform:uppercase;
+}
+.PlanPricing .planName p {
+	color:#ffff;
+	text-align:center;
+}
+.PlanPricing .planFeatures {
+	background:	#9AA5AA;
+	text-align:center;
+	padding:10px;
+}
+.PlanPricing .planFeatures ul {
+	margin:0;
+	padding:0;
+	list-style:none;
+}
+.PlanPricing .planFeatures ul li {
+	padding:13px 0;
+	list-style:none;
+}
+.PlanPricing p {
+	margin:0;
+}
+.PlanPricing .btn {
+	width:100%;
+	-webkit-border-radius:0;
+	-moz-border-radius:0;
+	border-radius:0;
+	margin:0;
+	-webkit-box-sizing:border-box;
+	-moz-box-sizing:border-box;
+	box-sizing:border-box;
+}
+/*==========7. COMPARE PLANS ==============*/
+
+.ComparePlans {
+	margin-top:20px;
+}
+.ComparePlans .planFeatures {
+	text-align:center;
+	padding:10px;
+}
+.ComparePlans .CompareList .planFeatures {
+	text-align:right;
+}
+.ComparePlans .planFeatures ul {
+	margin:0;
+	padding:0;
+	list-style:none;
+}
+.ComparePlans .planFeatures ul li {
+	padding:13px 0;
+	list-style:none;
+}
+.ComparePlans .planHead1 {
+	height:60px;
+	background:#ebebeb;
+}
+.ComparePlans .planHead2 {
+	height:60px;
+	background:#2cc76a;
+}
+.ComparePlans .planHead3 {
+	height:60px;
+	background:#f45c57;
+}
+.ComparePlans .planHead4 {
+	height:60px;
+	background:#F5E61F;
+}
+.ComparePlans .planHead2 h3, .ComparePlans .planHead3 h3, .ComparePlans .planHead4 h3 {
+	color:#FFF;
+	text-align:center;
+	padding:0;
+	margin:0;
+	text-transform:uppercase;
+	padding-top:10px;
+	line-height: 1.8;
+}
+.ComparePlans .pricing1 .planFeatures {
+	border-right:solid 1px #2cc76a;
+	border-left:solid 1px #2cc76a;
+}
+.ComparePlans .pricing2 .planFeatures {
+	border-right:solid 1px #f45c57;
+	border-left:solid 1px #f45c57;
+}
+.ComparePlans .pricing3 .planFeatures {
+	border-right:solid 1px #F5E61F;
+	border-left:solid 1px #F5E61F;
+}
+.ComparePlans .btn {
+	width:100%;
+	-webkit-border-radius:0;
+	-moz-border-radius:0;
+	border-radius:0;
+	margin:0;
+	-webkit-box-sizing:border-box;
+	-moz-box-sizing:border-box;
+	box-sizing:border-box;
+}
+.btn-alert {
+	background-color: #F5E61F;
+	background-image:none;
+	border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+}
+.btn-alert:hover, .btn-alert:focus, .btn-alert:active {
+	background-color: #F5E61F!important;
+	color:#FFF!important;
+}
+a {
+	color:#ffff;
+}
