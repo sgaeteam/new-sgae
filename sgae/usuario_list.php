@@ -69,7 +69,7 @@ header('Content-Type: text/html; charset=utf-8');
                                     $perfilFiltro = $_SESSION['form_param'][2];
                                     $statusFiltro = $_SESSION['form_param'][3];
                                     $loadCriteria = 1;
-                                    // print_r(var_dump($_SESSION)); // Para debugar a Session
+                                    
                                 } else {
                                     unset($_SESSION['form_param']);
                                     $nomeFiltro = "";
@@ -78,7 +78,9 @@ header('Content-Type: text/html; charset=utf-8');
                                     $statusFiltro = 0;
                                     $loadCriteria = 0;
                                 }
+                                //print_r(var_dump($_SESSION)); // Para debugar a Session
                             ?>
+                           
                             <div class="panel-body">
                                 <!--<form class="form-horizontal">-->
                                 <form class="form-horizontal" method="post" action="" id="ajax_form">

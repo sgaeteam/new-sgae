@@ -29,7 +29,7 @@ $(document).ready(function() {
 				        statusFiltro: statusFiltro
 				},        		
 				success: function(s) {
-					//console.log(s);
+					console.log(s);
 					if (s !== null) {
 						oTable.clear().draw();
 					 	for(var i = 0; i < s.length; i++) {

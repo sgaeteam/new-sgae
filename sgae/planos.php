@@ -1,6 +1,6 @@
 <?php
-include('inc/config.php');
-include('inc/verificasession.php');
+
+session_start();
 
 $usuarioID      = $_SESSION['UsuarioID'];
 $usuarioLogin   = $_SESSION['UsuarioLogin'];
@@ -18,7 +18,7 @@ $unidadeNome    = $_SESSION['UnidadeNome'];
         <aside class="right-side">
             <!-- Main content -->
             <section class="content-header">
-                <h1>Seja Bem vindo(a) ao SGAE, <?php echo utf8_encode($usuarioNome);?> </h1>
+                <h1>Seja Bem vindo(a) ao SGAE, <?php echo $usuarioNome;?> </h1>
                 <ol class="breadcrumb">
                     <li class="active">
                         <a href="index.php">
