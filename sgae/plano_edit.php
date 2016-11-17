@@ -13,23 +13,20 @@ header('Content-Type: text/html; charset=utf-8');
 if (isset($_GET['idusu']) && is_numeric($_GET['idusu'])) {
     $idusu = $_GET['idusu'];
     $pdo  = $registry->get('sgaedb');
-	$stmt = $pdo->prepare("select * from pagina where id = :id");
+	$stmt = $pdo->prepare("select * from plano where id = :id");
 	$stmt->bindParam(":id", $idusu);	
 	$stmt->execute();
     $result = $stmt->fetch(PDO::FETCH_ASSOC);
     	
     if ($stmt->rowCount() > 0) {
 
-                $login = $result['login'];
                 $nome = $result['nome'];
-                $senha = $result['senha'];
-                $email = $result['email'];
-                $perfil = $result['perfil_id'];
-                $unidade = $result['unidade_id'];
+                $descricao = $result['descricao'];
+                $valor = $result['valor'];
                 $status = $result['inativo'];
     }
     else {
-        header('location: pagina_list.php?loadCriteria=true');
+        header('location: plano_list.php?loadCriteria=true');
         exit;
     }
 
@@ -48,7 +45,7 @@ if (isset($_GET['idusu']) && is_numeric($_GET['idusu'])) {
                     <li><a href="index.php"><i class="livicon" data-name="home" data-size="14" data-loop="true"></i>Painel de Controle</a></li>
                     <li><a href="#">Administra&ccedil;&atilde;o</a></li>
                     <li><a href="#">Cadastro</a></li>
-                    <li><a href="#">P&aacute;gina</a></li>
+                    <li><a href="#">Plano</a></li>
                     <li class="active">Alterar</li>
                 </ol>
             </section>
@@ -89,18 +86,37 @@ if (isset($_GET['idusu']) && is_numeric($_GET['idusu'])) {
                                                 </span> -->
                              </div>
                             <div class="panel-body">
-                                    <form class="form-horizontal" action="pagina_exec.php" method="post">
+                                    <form class="form-horizontal" action="plano_exec.php" method="post">
                                         <div class="row">                                        
                                                     <div class="col-md-6">
                                                             <div class="form-group">
-                                                                <label class="control-label col-md-3" for="nome">P&aacute;gina*</label>
+                                                                <label class="control-label col-md-3" for="nome">Plano*</label>
                                                                 <div class="col-md-9">
-                                                                    <input type="text" class="form-control" id="nome" name="nome" placeholder="Digite o nome da p&aacute;gina" value="<?php echo $nome; ?>" required>
+                                                                    <input type="text" style="width:150px" class="form-control" id="nome" name="nome" placeholder="Digite o nome" value="<?php echo $nome; ?>" required>
                                                                 </div>
                                                             </div>   
                                                     </div>
-                                                    
-                                        </div>                                                    
+                                        </div> 
+                                        <div class="row">                                        
+                                                    <div class="col-md-6">
+                                                            <div class="form-group">
+                                                                <label class="control-label col-md-3" for="descricao">Descri&ccedil;&atilde;o*</label>
+                                                                <div class="col-md-9">
+                                                                    <input type="text" style="width:300px" class="form-control" id="descricao" name="descricao" placeholder="Digite a descrição do plano" value="<?php echo $descricao; ?>" required>
+                                                                </div>
+                                                            </div>   
+                                                    </div>
+                                        </div>   
+                                        <div class="row">                                        
+                                                    <div class="col-md-6">
+                                                            <div class="form-group">
+                                                                <label class="control-label col-md-3" for="valor">Valor (R$)*</label>
+                                                                <div class="col-md-9">
+                                                                    <input type="text" style="width:70px" class="form-control" id="valor" name="valor" placeholder="Valor?" value="<?php echo $valor; ?>" required>
+                                                                </div>
+                                                            </div>   
+                                                    </div>
+                                        </div>   
                                         <div class="row">
                                                     <div div class="col-md-6">
                                                          <div class="form-group">
@@ -131,11 +147,9 @@ if (isset($_GET['idusu']) && is_numeric($_GET['idusu'])) {
                                                     <div class="form-group form-actions">
                                                         <div class="col-md-9 col-md-offset-5"> 
                                                             <input type="hidden" name="idusu" value="<?php echo $idusu; ?>" />
-                                                            <input type="hidden" name="senha" value="<?php echo $senha; ?>" />
-                                                            <input type="hidden" name="unidade" value="<?php echo $unidade; ?>" />
                                                             <input type="hidden" name="act" value="update" />
                                                             <button type="submit" class="btn btn-labeled btn-success btn-responsive"><span class="btn-label"><i class="livicon" data-name="save" data-size="17" data-loop="true" data-c="#fff" data-hc="#fff" title="Alterar"></i></span>&nbsp;Alterar</button>
-                                                            <button type="button" onclick="location.href='pagina_list.php?loadCriteria=true'" class="btn btn-labeled btn-warning btn-responsive"><span class="btn-label"><i class="livicon" data-name="remove-circle" data-size="17" data-loop="true" data-c="#fff" data-hc="#fff" title="Voltar"></i></span>Voltar</button>
+                                                            <button type="button" onclick="location.href='plano_list.php?loadCriteria=true'" class="btn btn-labeled btn-warning btn-responsive"><span class="btn-label"><i class="livicon" data-name="remove-circle" data-size="17" data-loop="true" data-c="#fff" data-hc="#fff" title="Voltar"></i></span>Voltar</button>
                                                         </div>
                                                     </div>                                                    
                                         </div>

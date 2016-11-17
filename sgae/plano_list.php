@@ -138,7 +138,6 @@ header('Content-Type: text/html; charset=utf-8');
                                                     <th style="width:50px">Plano</th>
                                                     <th style="width:100px">Descrição</th>
                                                     <th style="width:10px">Valor</th>
-                                                    <th style="width:10px">Valor Promocional</th>
                                                     <th style="width:30px">Status</th>
                                                     <th style="width:70px">Ações</th>
                                                 </tr>

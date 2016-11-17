@@ -26,14 +26,14 @@ $(document).ready(function() {
 				        statusFiltro: statusFiltro
 				},        		
 				success: function(s) {
-					console.log(s);
+					//console.log(s);
 					if (s !== null) {
 						oTable.clear().draw();
 					 	for(var i = 0; i < s.length; i++) {
-					 		oTable.row.add([s[i][0],s[i][1],s[i][2],s[i][3],s[i][4],"<a class='btn default btn-xs green-stripe' style='padding: 1px 5px; display: inline;' href=plano_view.php?idusu="+s[i][5]+"><span class='glyphicon glyphicon-eye-open'></span> Exibir</a>"+
-												"<a class='btn default btn-xs yellow-stripe' style='padding: 1px 5px; display: inline;' href=plano_edit.php?idusu="+s[i][5]+"><span class='glyphicon glyphicon-pencil'></span> Alterar</a>"+
-												"<a class='btn default btn-xs red-stripe' style='padding: 1px 5px; display: inline;' href=# data-toggle='modal' data-target=#delete_confirm_"+s[i][5]+" data-id="+s[i][5]+"><span class='glyphicon glyphicon-trash'></span> Excluir</a>"+
-												"<div class='modal fade' id='delete_confirm_"+s[i][5]+"' tabindex='-1' role='dialog' aria-labelledby='user_delete_confirm_title' aria-hidden='true'>"+
+					 		oTable.row.add([s[i][0],s[i][1],"R$ "+s[i][2],s[i][3],"<a class='btn default btn-xs green-stripe' style='padding: 1px 5px; display: inline;' href=plano_view.php?idusu="+s[i][4]+"><span class='glyphicon glyphicon-eye-open'></span> Exibir</a>"+
+												"<a class='btn default btn-xs yellow-stripe' style='padding: 1px 5px; display: inline;' href=plano_edit.php?idusu="+s[i][4]+"><span class='glyphicon glyphicon-pencil'></span> Alterar</a>"+
+												"<a class='btn default btn-xs red-stripe' style='padding: 1px 5px; display: inline;' href=# data-toggle='modal' data-target=#delete_confirm_"+s[i][4]+" data-id="+s[i][4]+"><span class='glyphicon glyphicon-trash'></span> Excluir</a>"+
+												"<div class='modal fade' id='delete_confirm_"+s[i][4]+"' tabindex='-1' role='dialog' aria-labelledby='user_delete_confirm_title' aria-hidden='true'>"+
 					                            "    <div class='modal-dialog'>"+
 					                            "        <div class='modal-content'>"+
 					                            "            <div class='modal-header'>"+
@@ -47,7 +47,7 @@ $(document).ready(function() {
 					                            "            </div>"+
 					                            "            <div class='modal-footer'>"+
 					                            "                <button type='button' class='btn btn-warning' data-dismiss='modal'>Cancelar</button>"+
-					                            "                <a href=plano_exec.php?act=delete&idusu="+s[i][2]+" id='modalDelete' type='button' class='btn btn-danger'>Excluir</a>"+
+					                            "                <a href=plano_exec.php?act=delete&idusu="+s[i][4]+" id='modalDelete' type='button' class='btn btn-danger'>Excluir</a>"+
 					                            "            </div>"+
 					                            "        </div>"+
 					                            "    </div>"+

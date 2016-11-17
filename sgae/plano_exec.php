@@ -16,16 +16,14 @@ if ( isset($_REQUEST['act']) && !empty($_REQUEST['act']) ) {
 			$nome  				= $_POST['nome'];	
 			$descricao			= $_POST['descricao'];	
 			$valor  			= $_POST['valor'];	
-			$valor_promocional  = $_POST['valor_promocional'];				
 			$inativo			= $_POST['status'];			
 			
             $pdo  = $registry->get('sgaedb');
-        	$stmt = $pdo->prepare("INSERT INTO plano (nome,descricao,valor,valor_promocional,inativo)
-								   VALUES (:nome,:descricao,:valor,:valor_promocional,:inativo)"); 
+        	$stmt = $pdo->prepare("INSERT INTO plano (nome,descricao,valor,inativo)
+								   VALUES (:nome,:descricao,:valor,:inativo)"); 
 			$stmt->bindParam(":nome", $nome);
 			$stmt->bindParam(":descricao", $descricao);
 			$stmt->bindParam(":valor", $valor);
-			$stmt->bindParam(":valor_promocional", $valor_promocional);				
 			$stmt->bindParam(":inativo", $inativo);
         	$stmt->execute();
         	$lastId = $pdo->lastInsertId();
@@ -34,7 +32,7 @@ if ( isset($_REQUEST['act']) && !empty($_REQUEST['act']) ) {
 			
 			$destino = "plano_insert.php?msg=".$msg;
 			$log->logg($_SERVER['PHP_SELF'].'?act=insert&id='.$lastId,
-					   'Inclusão da Página: '.$nome,
+					   'Inclusão do Plano: '.$nome,
 					   'baixa','success'); 
 
 
@@ -47,7 +45,6 @@ if ( isset($_REQUEST['act']) && !empty($_REQUEST['act']) ) {
 			$nome  				= $_POST['nome'];	
 			$descricao			= $_POST['descricao'];	
 			$valor  			= $_POST['valor'];	
-			$valor_promocional  = $_POST['valor_promocional'];				
 			$inativo			= $_POST['status'];
 			
 			$pdo  = $registry->get('sgaedb');
@@ -55,13 +52,11 @@ if ( isset($_REQUEST['act']) && !empty($_REQUEST['act']) ) {
         							  SET nome=:nome,
         								  descricao=:descricao,
         								  valor=:valor,
-        								  valor_promocional=:valor_promocional,
 										  inativo=:inativo
 									WHERE id=:id");	
 			$stmt->bindParam(":nome", $nome);
 			$stmt->bindParam(":descricao", $descricao);
 			$stmt->bindParam(":valor", $valor);
-			$stmt->bindParam(":valor_promocional", $valor_promocional);	
 			$stmt->bindParam(":inativo", $inativo);
 			$stmt->bindParam(":id", $idusu);
         	$stmt->execute();
@@ -70,7 +65,7 @@ if ( isset($_REQUEST['act']) && !empty($_REQUEST['act']) ) {
 			
 			$destino = "plano_edit.php?idusu=".$idusu."&msg=".$msg;
 			$log->logg($_SERVER['PHP_SELF'].'?act=update&id='.$idusu,
-					   'Alteração da Página: '.$nome,
+					   'Alteração do Plano: '.$nome,
 					   'media','warning'); 
 
 
@@ -98,7 +93,7 @@ if ( isset($_REQUEST['act']) && !empty($_REQUEST['act']) ) {
 			
 			$destino = "plano_list.php?loadCriteria=true&msg=".$msg;
 			$log->logg($_SERVER['PHP_SELF'].'?act=delete&id='.$idusu,
-					   'Exclusão da Página: '.$result,
+					   'Exclusão do Plano: '.$result,
 					   'alta','danger'); 
 	
 			break;
@@ -125,7 +120,7 @@ if ( isset($_REQUEST['act']) && !empty($_REQUEST['act']) ) {
 
 			$destino = "plano_list.php?msg=".$msg;
 			$log->logg($login,$_SERVER['PHP_SELF'].'?act=react&id='.$idusu,
-					   'Reativação da Página: '.$result,
+					   'Reativação do Plano: '.$result,
 					   'media','warning'); 
 
 			break;
@@ -163,7 +158,6 @@ if ( isset($_REQUEST['act']) && !empty($_REQUEST['act']) ) {
 						   end as inativo,
 						   plano.descricao,
 						   plano.valor,
-						   plano.valor_promocional,
 						   plano.id".
             	   "  FROM plano ".
             	   " WHERE ". 
@@ -181,7 +175,6 @@ if ( isset($_REQUEST['act']) && !empty($_REQUEST['act']) ) {
             		$return[] = array($result['nome'],
 					            	  $result['descricao'],
 					            	  $result['valor'],
-					            	  $result['valor_promocional'],
             						  $result['inativo'],
             						  $result['id']);
                 }

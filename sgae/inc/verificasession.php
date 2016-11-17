@@ -40,7 +40,7 @@ if ( isset($_SESSION['UsuarioPerfil']) && isset($_SESSION['UnidadePlano']) ) {
 		header("location: ./planos.php");
 		exit;
 	}
-	
+
 }
 
 ?>

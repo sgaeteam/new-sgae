@@ -22,7 +22,7 @@ header('Content-Type: text/html; charset=utf-8');
                     <li><a href="index.php"><i class="livicon" data-name="home" data-size="14" data-loop="true"></i>Painel de Controle</a></li>
                     <li><a href="#">Administra&ccedil;&atilde;o</a></li>
                     <li><a href="#">Cadastro</a></li>
-                    <li><a href="#">P&aacute;gina</a></li>
+                    <li><a href="#">Plano</a></li>
                     <li class="active">Cadastrar</li>
                 </ol>
             </section>
@@ -63,18 +63,39 @@ header('Content-Type: text/html; charset=utf-8');
                                                 </span> -->
                              </div>
                             <div class="panel-body">
-                                    <form class="form-horizontal" action="pagina_exec.php" method="post">
+                                    <form class="form-horizontal" action="plano_exec.php" method="post">
                                         <div class="row">
                                                     <div class="col-md-6">
                                                             <div class="form-group">
-                                                                <label class="control-label col-md-3" for="nome">P&aacute;gina*</label>
+                                                                <label class="control-label col-md-3" for="nome">Plano*</label>
                                                                 <div class="col-md-9">
-                                                                    <input type="text" class="form-control" name="nome" id="nome" placeholder="Digite o nome da p&aacute;gina" required>
+                                                                    <input type="text" style="width:150px" class="form-control" name="nome" id="nome" placeholder="Digite o nome" required>
                                                                 </div>
                                                             </div>
                                                          
                                                     </div>                                            
-                                                   
+                                        </div>    
+                                        <div class="row">                                        
+                                                    <div class="col-md-6">
+                                                            <div class="form-group">
+                                                                <label class="control-label col-md-3" for="descricao">Descri&ccedil;&atilde;o*</label>
+                                                                <div class="col-md-9">
+                                                                    <input type="text" style="width:300px" class="form-control" id="descricao" name="descricao" placeholder="Digite a descrição do plano" value="<?php echo $descricao; ?>" required>
+                                                                </div>
+                                                            </div>   
+                                                    </div>
+                                        </div>   
+                                        <div class="row">                                        
+                                                    <div class="col-md-6">
+                                                            <div class="form-group">
+                                                                <label class="control-label col-md-3" for="valor">Valor (R$)*</label>
+                                                                <div class="col-md-9">
+                                                                    <input type="text" style="width:70px" class="form-control" id="valor" name="valor" placeholder="Valor?" value="<?php echo $valor; ?>" required>
+                                                                </div>
+                                                            </div>   
+                                                    </div>
+                                        </div>   
+                                        <div class="row">                                        
                                                     <div div class="col-md-6">
                                                          <div class="form-group">
                                                              <label class="control-label col-md-3">Status</label>
@@ -91,7 +112,7 @@ header('Content-Type: text/html; charset=utf-8');
                                                         <div class="col-md-9 col-md-offset-5">
                                                             <input type="hidden" name="act" value="insert" />
                                                             <button type="submit" class="btn btn-labeled btn-success btn-responsive"><span class="btn-label"><i class="livicon" data-name="save" data-size="17" data-loop="true" data-c="#fff" data-hc="#fff" title="Salvar"></i></span>&nbsp;Salvar</button>
-                                                            <button type="button" onclick="location.href='pagina_list.php?loadCriteria=true'" class="btn btn-labeled btn-warning btn-responsive"><span class="btn-label"><i class="livicon" data-name="remove-circle" data-size="17" data-loop="true" data-c="#fff" data-hc="#fff" title="Voltar"></i></span>Voltar</button>
+                                                            <button type="button" onclick="location.href='plano_list.php?loadCriteria=true'" class="btn btn-labeled btn-warning btn-responsive"><span class="btn-label"><i class="livicon" data-name="remove-circle" data-size="17" data-loop="true" data-c="#fff" data-hc="#fff" title="Voltar"></i></span>Voltar</button>
                                                         </div>
                                                     </div>                                                      
                                         </div>
