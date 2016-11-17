@@ -80,8 +80,7 @@ header('Content-Type: text/html; charset=utf-8');
                                 }
                             ?>
                             <div class="panel-body">
-                                <!--<form class="form-horizontal">-->
-                                <form class="form-horizontal" method="post" action="" id="ajax_form">
+                                <form class="form-horizontal" method="post" action="javascript:prepareDiv();" id="ajax_form">
                                     <input type="hidden" id="loadCriteria" value="<?php echo $loadCriteria; ?>"/>
                                     <div class="row">
                                         <div class="col-md-6">
@@ -89,6 +88,7 @@ header('Content-Type: text/html; charset=utf-8');
                                                 <label class="control-label col-md-3" for="usuarioFiltro">Usu&aacute;rio</label>
                                                 <div class="col-md-9">
                                                     <input type="text" class="form-control" id="usuarioFiltro" placeholder="Digite o login" value="<?php echo $usuarioFiltro; ?>">
+                                                    <small class="help-block" data-bv-validator="notEmpty" data-bv-for="usuarioFiltro" data-bv-result="NOT_VALIDATED" style="display: none;">The first name is required and cannot be empty</small>
                                                 </div>
                                             </div>
                                         </div>
@@ -112,9 +112,9 @@ header('Content-Type: text/html; charset=utf-8');
                                                                     echo "<option value=".$item['id'].">".$item['tipo']."</option>";
                                                                 }
                                                             } else { 
-                                                                echo "<option value='1'>Baixa</option>";
-                                                                echo "<option value='2'>M&eacute;dia</option>";
-                                                                echo "<option value='3'>Alta</option>";
+                                                                echo "<option value='baixa'>Baixa</option>";
+                                                                echo "<option value='media'>M&eacute;dia</option>";
+                                                                echo "<option value='alta'>Alta</option>";
                                                             }
                                                         ?>
                                                     </select>
@@ -125,17 +125,17 @@ header('Content-Type: text/html; charset=utf-8');
                                     <div class="row">
                                         <div div class="col-md-6">
                                             <div class="form-group">
-                                                <label class="control-label col-md-3" for="dataIniFiltro">Data Inicial</label>
+                                                <label class="control-label col-md-3" for="dataIniFiltro">Data Inicial*</label>
                                                 <div class="col-md-9">
-                                                    <input type="text" class="form-control" id="dataIniFiltro" data-date-format="dd/mm/yyyy" placeholder="Digite a data inicial" value="<?php echo $dataIniFiltro; ?>">
+                                                    <input type="text" class="form-control" id="dataIniFiltro" name="dataIniFiltro" data-date-format="dd/mm/yyyy" placeholder="Digite a data inicial" value="<?php echo $dataIniFiltro; ?>">
                                                 </div>
                                             </div>
                                         </div>
                                         <div div class="col-md-6">
                                             <div class="form-group">
-                                                <label class="control-label col-md-3" for="dataFimFiltro">Data Final</label>
+                                                <label class="control-label col-md-3" for="dataFimFiltro">Data Final*</label>
                                                 <div class="col-md-9">
-                                                    <input type="text" class="form-control" id="dataFimFiltro" data-date-format="dd/mm/yyyy" placeholder="Digite a data final" value="<?php echo $dataFimFiltro; ?>">
+                                                    <input type="text" class="form-control" id="dataFimFiltro" name="dataFimFiltro" data-date-format="dd/mm/yyyy" placeholder="Digite a data final" value="<?php echo $dataFimFiltro; ?>">
                                                 </div>
                                             </div>
                                         </div>
@@ -145,7 +145,7 @@ header('Content-Type: text/html; charset=utf-8');
                                 </br></br>
                                 <div class="form-group form-actions">
                                     <div class="col-md-9 col-md-offset-4">
-                                        <button type="button" onclick="prepareDiv()" id="buscar" class="btn btn-labeled btn-success btn-responsive"><span class="btn-label"><i class="livicon" data-name="search" data-size="17" data-loop="true" data-c="#fff" data-hc="#fff" title="Buscar"></i></span>&nbsp;Buscar</button>
+                                        <button type="submit" id="buscar" class="btn btn-labeled btn-success btn-responsive"><span class="btn-label"><i class="livicon" data-name="search" data-size="17" data-loop="true" data-c="#fff" data-hc="#fff" title="Buscar"></i></span>&nbsp;Buscar</button>
                                         <button type="button" onclick="hideDiv()" class="btn btn-labeled btn-danger btn-responsive"><span class="btn-label"><i class="livicon" data-name="remove-circle" data-size="17" data-loop="true" data-c="#fff" data-hc="#fff" title="Limpar"></i></span>Limpar</button>
                                         <button disabled type="button" onclick="location.href='log_insert.php'" class="btn btn-labeled btn-warning btn-responsive"><span class="btn-label"><i class="livicon" data-name="plus-alt" data-size="17" data-loop="true" data-c="#fff" data-hc="#fff" title="Buscar"></i></span>&nbsp;&nbsp;Novo</button>
                                     </div>
@@ -172,10 +172,11 @@ header('Content-Type: text/html; charset=utf-8');
                                                 <tr class="filters">
                                                     <th style="width:150px">URL</th>
                                                     <th style="width:150px">A&ccedil;&atilde;o</th>
-                                                    <th style="width:50px">Usu&aacute;rio</th>
+                                                    <th style="width:48px">Usu&aacute;rio</th>
                                                     <th style="width:80px">Data</th>                                                    
-                                                    <th style="width:25px">IP</th>
+                                                    <th style="width:23px">IP</th>
                                                     <th style="width:45px">Prioridade</th>
+                                                    <th style="width:4px">Ação</th>
                                                 </tr>
                                             </thead> 
                                         </table>

@@ -12,55 +12,59 @@ if ( isset($_REQUEST['act']) && !empty($_REQUEST['act']) ) {
 	
 	switch ($act) { 
 
-
 		case 'select':	
 			
 			$dtInicio   = $_GET['dataIniFiltro'];
 			$dtFim		= $_GET['dataFimFiltro'];
+			$usuario    = $_GET['usuarioFiltro'];
+			$prioridade = $_GET['prioridadeFiltro'];
 			$unidade	= $_SESSION['UsuarioUnidade'];
 
 			$pdo  = $registry->get('sgaedb');
 			
-			if (empty($dtInicio) && empty($dtFim)) {
+			if (!empty($dtInicio) && !empty($dtFim) && empty($usuario) && empty($prioridade)) {
 			
-				$type 	 = "all"; 
-				$p_array = array(':unidade_id'=>$unidade);
-	    		$p_where = "timestamp >= DATE_SUB(CURDATE(), INTERVAL 1 MONTH)
-            	            AND unidade_id = :unidade_id";	
+				$type 	 = "dtInicio&dtFim"; 
+				$p_array = array(':unidade_id'=>$unidade,':dtInicio'=>$dtInicio,':dtFim'=>$dtFim);
+	    		$p_where = " log.unidade_id = :unidade_id
+	    					 AND DATE_FORMAT(FROM_UNIXTIME(timestamp), '%d/%m/%Y') BETWEEN :dtInicio AND :dtFim ";	
 
-			} elseif (!empty($dtInicio) && empty($dtFim)) {
-#---> continuar			
-				$type 	 = "dtInicio";
-				$p_array = array(':unidade_id'=>$unidade,':inativo'=>$status,':nome'=>"%$nome%");
-	    		$p_where = "AND usuario.unidade_id 	= :unidade_id
-            	            AND usuario.inativo 	= :inativo
-            	            AND usuario.nome 	 LIKE :nome";
+			} elseif (!empty($dtInicio) && !empty($dtFim) && !empty($usuario) && empty($prioridade)) {
+		
+				$type 	 = "nome";
+				$p_array = array(':unidade_id'=>$unidade,':dtInicio'=>$dtInicio,':dtFim'=>$dtFim,':usuario'=>"%$usuario%");
+	    		$p_where = " log.unidade_id = :unidade_id
+	    					 AND DATE_FORMAT(FROM_UNIXTIME(timestamp), '%d/%m/%Y') BETWEEN :dtInicio AND :dtFim
+            	             AND log.login LIKE :usuario";
 	    		
-			} elseif (empty($dtInicio) && !empty($dtFim)) {
+			} elseif (!empty($dtInicio) && !empty($dtFim) && empty($usuario) && !empty($prioridade)) {
 			
-				$type 	 = "dtFim"; 
-	    		$p_array = array(':unidade_id'=>$unidade,':inativo'=>$status,':usuario'=>"%$usuario%");
-	    		$p_where = "AND usuario.unidade_id 	= :unidade_id
-            	            AND usuario.inativo 	= :inativo
-            	            AND usuario.login 	 LIKE :usuario";
+				$type 	 = "prioridade";
+				$p_array = array(':unidade_id'=>$unidade,':dtInicio'=>$dtInicio,':dtFim'=>$dtFim,':prioridade'=>"%$prioridade%");
+	    		$p_where = " log.unidade_id = :unidade_id
+	    					 AND DATE_FORMAT(FROM_UNIXTIME(timestamp), '%d/%m/%Y') BETWEEN :dtInicio AND :dtFim
+            	             AND log.priority LIKE :prioridade";
 							
-			} elseif (!empty($dtInicio) && !empty($dtFim)) {			
+			} elseif (!empty($dtInicio) && !empty($dtFim) && !empty($usuario) && !empty($prioridade)) {			
 			
-				$type 	 = "dtInicio&dtFim";
-				$p_array = array(':unidade_id'=>$unidade,':inativo'=>$status,':nome'=>"%$nome%",':usuario'=>"%$usuario%",':perfil_id'=>$perfil);
-	    		$p_where = "AND unidade_id 			= :unidade_id
-	    					AND usuario.inativo 	= :inativo
-	    					AND usuario.nome 	 LIKE :nome
-            	            AND usuario.login 	 LIKE :usuario 
-            	            AND usuario.perfil_id 	= :perfil_id"; 
+				$type 	 = "all";
+				$p_array = array(':unidade_id'=>$unidade,':dtInicio'=>$dtInicio,':dtFim'=>$dtFim,':usuario'=>"%usuario%",':prioridade'=>"%$prioridade%");
+	    		$p_where = " log.unidade_id = :unidade_id
+	    					 AND DATE_FORMAT(FROM_UNIXTIME(timestamp), '%d/%m/%Y') BETWEEN :dtInicio AND :dtFim
+	    					 AND log.login LIKE :usuario
+            	             AND log.prioridade LIKE :prioridade"; 
 
+			} else {
+				$type 	 = "blank"; 
+				$p_array = array(':unidade_id'=>$unidade);
+	    		$p_where = "timestamp >= DATE_SUB(CURDATE(), INTERVAL 1 MONTH) AND unidade_id = :unidade_id";	
 			}
 
 			$sql = "SELECT * ".
             	   "  FROM log ".
             	   " WHERE ". 
             	   	   $p_where.
-				   " ORDER BY  timestamp DESC, priority ASC ";
+				   " ORDER BY  timestamp DESC ";
 
 			$stmt = $pdo->prepare($sql);		
 			$stmt->execute($p_array);			
@@ -78,7 +82,7 @@ if ( isset($_REQUEST['act']) && !empty($_REQUEST['act']) ) {
             						  $time,
             						  $result['ip'],
             						  $result['priority'],
-            						  $result['class']);
+            						  $result['login']);
                 }
 
                 echo json_encode($return);	                            
