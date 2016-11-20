@@ -22,7 +22,7 @@ header('Content-Type: text/html; charset=utf-8');
                     <li><a href="index.php"><i class="livicon" data-name="home" data-size="14" data-loop="true"></i>Painel de Controle</a></li>
                     <li><a href="#">Administra&ccedil;&atilde;o</a></li>
                     <li><a href="#">Cadastro</a></li>
-                    <li><a href="#">Usu&aacute;rio</a></li>                    
+                    <li><a href="#">Acesso</a></li>                    
                     <li class="active">Buscar</li>
                 </ol>
             </section>
@@ -88,24 +88,38 @@ header('Content-Type: text/html; charset=utf-8');
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label class="control-label col-md-3" for="nomeFiltro">Nome</label>
+                                                <label class="control-label col-md-3" for="planoFiltro">Plano</label>
                                                 <div class="col-md-9">
-                                                    <input type="text" class="form-control" id="nomeFiltro" placeholder="Digite o nome" value="<?php echo $nomeFiltro; ?>">
+                                                    <select id="planoFiltro" class="form-control">
+                                                        <option value="">Selecione o plano</option>
+                                                        <?php
+                                                            if ($_GET['loadCriteria'] === 'true' && isset($_SESSION['form_param'])) { 
+                                                        
+                                                                $pdo  = $registry->get('sgaedb');
+                                                            	$stmt = $pdo->prepare("SELECT * FROM plano WHERE inativo = 0 ORDER BY nome ASC"); 
+                                                            	$stmt->execute();
+                                                            	$planoItem = $stmt->fetchAll();
+                                                                foreach ($planoItem as $plano) {
+                                                                    if ($planoFiltro === $plano['id'] ) {
+                                                                        echo "<option value=".$plano['id']." selected>".$plano['nome']."</option>";
+                                                                    }
+                                                                    echo "<option value=".$plano['id'].">".$plano['nome']."</option>";
+                                                                }
+                                                            } else { 
+                                                                $pdo  = $registry->get('sgaedb');
+                                                            	$stmt = $pdo->prepare("SELECT * FROM plano WHERE inativo = 0 ORDER BY nome ASC"); 
+                                                            	$stmt->execute();
+                                                            	$planoItem = $stmt->fetchAll();
+                                                                foreach ($planoItem as $plano) {
+                                                                    echo "<option value=".$plano['id'].">".$plano['nome']."</option>";
+                                                                }
+                                                            }
+                                                        ?>
+                                                    </select>
                                                 </div>
                                             </div>
-                                             
                                         </div>
                                         <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label class="control-label col-md-3" for="usuarioFiltro">Usu&aacute;rio</label>
-                                                <div class="col-md-9">
-                                                    <input type="text" class="form-control" id="usuarioFiltro" placeholder="Digite o login" value="<?php echo $usuarioFiltro; ?>">
-                                                </div>
-                                            </div>   
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div div class="col-md-6">
                                             <div class="form-group">
                                                 <label class="control-label col-md-3" for="perfilFiltro">Perfil</label>
                                                 <div class="col-md-9">
@@ -118,19 +132,19 @@ header('Content-Type: text/html; charset=utf-8');
                                                             	$stmt = $pdo->prepare("SELECT * FROM perfil WHERE inativo = 0 ORDER BY tipo ASC"); 
                                                             	$stmt->execute();
                                                             	$perfilItem = $stmt->fetchAll();
-                                                                foreach ($perfilItem as $item) {
-                                                                    if ($perfilFiltro === $item['id'] ) {
-                                                                        echo "<option value=".$item['id']." selected>".$item['tipo']."</option>";
+                                                                foreach ($perfilItem as $perfil) {
+                                                                    if ($perfilFiltro === $perfil['id'] ) {
+                                                                        echo "<option value=".$perfil['id']." selected>".$perfil['tipo']."</option>";
                                                                     }
-                                                                    echo "<option value=".$item['id'].">".$item['tipo']."</option>";
+                                                                    echo "<option value=".$perfil['id'].">".$perfil['tipo']."</option>";
                                                                 }
                                                             } else { 
                                                                 $pdo  = $registry->get('sgaedb');
-                                                            	$stmt = $pdo->prepare("SELECT * FROM perfil ORDER BY tipo ASC"); 
+                                                            	$stmt = $pdo->prepare("SELECT * FROM perfil WHERE inativo = 0  ORDER BY tipo ASC"); 
                                                             	$stmt->execute();
                                                             	$perfilItem = $stmt->fetchAll();
-                                                                foreach ($perfilItem as $item) {
-                                                                    echo "<option value=".$item['id'].">".$item['tipo']."</option>";
+                                                                foreach ($perfilItem as $perfil) {
+                                                                    echo "<option value=".$perfil['id'].">".$perfil['tipo']."</option>";
                                                                 }
                                                             }
                                                         ?>
@@ -164,7 +178,7 @@ header('Content-Type: text/html; charset=utf-8');
                                     <div class="col-md-9 col-md-offset-4">
                                         <button type="button" onclick="prepareDiv()" id="buscar" class="btn btn-labeled btn-success btn-responsive"><span class="btn-label"><i class="livicon" data-name="search" data-size="17" data-loop="true" data-c="#fff" data-hc="#fff" title="Buscar"></i></span>&nbsp;Buscar</button>
                                         <button type="button" onclick="hideDiv()" class="btn btn-labeled btn-danger btn-responsive"><span class="btn-label"><i class="livicon" data-name="remove-circle" data-size="17" data-loop="true" data-c="#fff" data-hc="#fff" title="Limpar"></i></span>Limpar</button>
-                                        <button type="button" onclick="location.href='usuario_insert.php'" class="btn btn-labeled btn-warning btn-responsive"><span class="btn-label"><i class="livicon" data-name="plus-alt" data-size="17" data-loop="true" data-c="#fff" data-hc="#fff" title="Buscar"></i></span>&nbsp;&nbsp;Novo</button>
+                                        <button type="button" onclick="location.href='acesso_insert.php'" class="btn btn-labeled btn-warning btn-responsive"><span class="btn-label"><i class="livicon" data-name="plus-alt" data-size="17" data-loop="true" data-c="#fff" data-hc="#fff" title="Buscar"></i></span>&nbsp;&nbsp;Novo</button>
                                     </div>
                                 </div>  
                                 </br></br></br>
@@ -206,6 +220,6 @@ header('Content-Type: text/html; charset=utf-8');
         </aside>  
     </div>
 <!-- Include scripts here-->
-<script type="text/javascript" src="usuario_search.js"></script>
+<script type="text/javascript" src="acesso_search.js"></script>
 <!-- Include footer here-->   
 <?php include 'footer.php';?>

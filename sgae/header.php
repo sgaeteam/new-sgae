@@ -91,15 +91,17 @@
                             <a tabindex="-1" href="">Cadastro</a>
                             <ul class="dropdown-menu">
                               <li><a href="usuario_list.php?loadCriteria=false">Usu&aacute;rio</a></li>
-                              <li><a href="unidade_list.php?loadCriteria=false">Unidade</a></li>
-                              <li><a href="pagina_list.php?loadCriteria=false">P&aacute;gina</a></li>
-                              <li><a href="plano_list.php?loadCriteria=false">Plano</a></li>
-                              <li><a href="perfil_list.php?loadCriteria=false">Perfil</a></li>
                               <li role="separator" class="divider"></li>
-                              <li><a href="log_list.php">Auditoria</a></li>
+                              <li><a href="acesso_list.php?loadCriteria=false">Acesso</a></li>
+                              <li><a href="pagina_list.php?loadCriteria=false">P&aacute;gina</a></li>
+                              <li><a href="perfil_list.php?loadCriteria=false">Perfil</a></li>                              
+                              <li><a href="plano_list.php?loadCriteria=false">Plano</a></li>
+                              <li><a href="unidade_list.php?loadCriteria=false">Unidade</a></li>
                             </ul>
                         </li>
-                        <li><a href="#">Pagamentos</a></li>
+                        <li><a href="#">Pagamento</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a href="log_list.php">Auditoria</a></li>
                     </ul>
                 </li>
                 </ul>
