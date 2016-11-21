@@ -19,6 +19,11 @@ if ( isset($_REQUEST['act']) && !empty($_REQUEST['act']) ) {
 			$usuario    = $_GET['usuarioFiltro'];
 			$prioridade = $_GET['prioridadeFiltro'];
 			$unidade	= $_SESSION['UsuarioUnidade'];
+			$form_param = array($usuario,$prioridade,$dtInicio,$dtFim);
+			
+			session_start();
+			$_SESSION['form_param'] = $form_param;			
+			$unidade = $_SESSION['UsuarioUnidade'];			
 
 			$pdo  = $registry->get('sgaedb');
 			
