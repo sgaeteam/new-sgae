@@ -28,7 +28,9 @@ $(document).ready(function() {
 					if (s !== null) {
 						oTable.clear().draw();
 					 	for(var i = 0; i < s.length; i++) {
-					 		oTable.row.add([ s[i][0], s[i][1], s[i][2], s[i][3], s[i][4], s[i][5],"<a class='btn default btn-xs green-stripe' style='padding: 1px 5px; display: inline;' href=log_view.php?login="+s[i][6]+"><span class='glyphicon glyphicon-eye-open'></span> Exibir</a>"]).draw(false);
+					 		oTable.row.add([ s[i][0], s[i][1], s[i][2], s[i][3], s[i][4], s[i][5],"<a class='btn default btn-xs green-stripe' style='padding: 1px 5px; display: inline;' href=log_view.php?login="+s[i][6]+"><span class='glyphicon glyphicon-eye-open'></span> Exibir</a>"+
+												"<a class='btn default btn-xs yellow-stripe' disabled style='padding: 1px 5px; display: inline;'><span class='glyphicon glyphicon-pencil'></span> Alterar</a>"+
+												"<a class='btn default btn-xs red-stripe' disabled style='padding: 1px 5px; display: inline;'><span class='glyphicon glyphicon-trash'></span> Excluir</a>"]).draw(false);
 					 	}
 					}
 					showDiv();							

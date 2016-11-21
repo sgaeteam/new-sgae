@@ -170,13 +170,13 @@ header('Content-Type: text/html; charset=utf-8');
                                         <table class="table table-bordered " id="ajax_table">
                                             <thead>
                                                 <tr class="filters">
-                                                    <th style="width:150px">URL</th>
-                                                    <th style="width:150px">A&ccedil;&atilde;o</th>
-                                                    <th style="width:48px">Usu&aacute;rio</th>
-                                                    <th style="width:80px">Data</th>                                                    
-                                                    <th style="width:23px">IP</th>
-                                                    <th style="width:45px">Prioridade</th>
-                                                    <th style="width:4px">Ação</th>
+                                                    <th style="width:250px">URL</th>
+                                                    <th style="width:170px">A&ccedil;&atilde;o</th>
+                                                    <th style="width:30px">Usu&aacute;rio</th>
+                                                    <th style="width:110px">Data</th>                                                    
+                                                    <th style="width:10px">IP</th>
+                                                    <th style="width:20px">Prioridade</th>
+                                                    <th style="width:30px">Ação</th>
                                                 </tr>
                                             </thead> 
                                         </table>
