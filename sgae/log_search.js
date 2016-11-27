@@ -27,7 +27,7 @@ $(document).ready(function() {
 			  toastr['warning']('Por favor, preencha o campo.', 'Data Final');	
 			}
 			if(dataIniFiltro == '') {
-			  toastr['warning']('Por favor, preencha o campo.', 'Data Inicial');	
+			  toastr['error']('Por favor, preencha o campo.', 'Data Inicial');	
 			}
 			
 			return false;
