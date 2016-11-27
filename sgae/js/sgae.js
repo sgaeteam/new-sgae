@@ -6,6 +6,15 @@ $("div.alert").on("click", "button.close", function() {
     $(this).parent().animate({opacity: 0}, 500).hide('slow');
 });
 
+$('#check_all_none').click(function () {
+    if ( $(this).is(':checked') ){
+        $('.flat-red').prop("checked", true);
+    }
+    else{
+        $('.flat-red').removeAttr("checked");
+    }
+});
+
 function showDiv() {
     document.getElementById('tabela').style.display='block';
 }

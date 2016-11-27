@@ -66,55 +66,78 @@ header('Content-Type: text/html; charset=utf-8');
                                     <form class="form-horizontal" action="acesso_exec.php" method="post">
                                         <div class="row">
                                                     <div class="col-md-6">
-                                                            <div class="form-group">
-                                                                <label class="control-label col-md-3" for="nome">Plano*</label>
-                                                                <div class="col-md-9">
-                                                                    <input type="text" style="width:150px" class="form-control" name="nome" id="nome" placeholder="Digite o nome" required>
-                                                                </div>
+                                                        <div class="form-group">
+                                                            <label class="control-label col-md-3" for="planoFiltro">Plano</label>
+                                                            <div class="col-md-9">
+                                                                <select id="planoFiltro" name="plano" class="form-control">
+                                                                    <option value="">Selecione o plano</option>
+                                                                    <?php
+                                                                        $pdo  = $registry->get('sgaedb');
+                                                                    	$stmt = $pdo->prepare("SELECT * FROM plano WHERE inativo = 0 ORDER BY nome ASC"); 
+                                                                    	$stmt->execute();
+                                                                    	$planoItem = $stmt->fetchAll();
+                                                                        foreach ($planoItem as $plano) {
+                                                                            echo "<option value=".$plano['id'].">".$plano['nome']."</option>";
+                                                                        }
+                                                                    ?>
+                                                                </select>
                                                             </div>
-                                                         
+                                                        </div>
                                                     </div>                                            
                                         </div>    
-                                        <div class="row">                                        
+                                        <div class="row">
                                                     <div class="col-md-6">
-                                                            <div class="form-group">
-                                                                <label class="control-label col-md-3" for="descricao">Descri&ccedil;&atilde;o*</label>
-                                                                <div class="col-md-9">
-                                                                    <input type="text" style="width:300px" class="form-control" id="descricao" name="descricao" placeholder="Digite a descrição do plano" value="<?php echo $descricao; ?>" required>
-                                                                </div>
-                                                            </div>   
-                                                    </div>
-                                        </div>   
-                                        <div class="row">                                        
-                                                    <div class="col-md-6">
-                                                            <div class="form-group">
-                                                                <label class="control-label col-md-3" for="valor">Valor (R$)*</label>
-                                                                <div class="col-md-9">
-                                                                    <input type="text" style="width:70px" class="form-control" id="valor" name="valor" placeholder="Valor?" value="<?php echo $valor; ?>" required>
-                                                                </div>
-                                                            </div>   
-                                                    </div>
-                                        </div>   
-                                        <div class="row">                                        
-                                                    <div div class="col-md-6">
-                                                         <div class="form-group">
-                                                             <label class="control-label col-md-3">Status</label>
-                                                             <div class="col-md-9">
-                                                                 <label class="radio-inline">
-                                                                    <input name="status" id="optionsRadiosInline1" type="radio" checked="" value="0">Ativo</label>
-                                                                 <label class="radio-inline">
-                                                                    <input name="status" id="optionsRadiosInline2" type="radio" value="1">Inativo</label>
-                                                             </div>   
-                                                         </div>
-                                                    </div>
-                                                    </br></br>
-                                                    <div class="form-group form-actions">
-                                                        <div class="col-md-9 col-md-offset-5">
-                                                            <input type="hidden" name="act" value="insert" />
-                                                            <button type="submit" class="btn btn-labeled btn-success btn-responsive"><span class="btn-label"><i class="livicon" data-name="save" data-size="17" data-loop="true" data-c="#fff" data-hc="#fff" title="Salvar"></i></span>&nbsp;Salvar</button>
-                                                            <button type="button" onclick="location.href='acesso_list.php?loadCriteria=true'" class="btn btn-labeled btn-warning btn-responsive"><span class="btn-label"><i class="livicon" data-name="remove-circle" data-size="17" data-loop="true" data-c="#fff" data-hc="#fff" title="Voltar"></i></span>Voltar</button>
+                                                        <div class="form-group">
+                                                            <label class="control-label col-md-3" for="perfilFiltro">Perfil</label>
+                                                            <div class="col-md-9">
+                                                                <select id="perfilFiltro" name="perfil" class="form-control">
+                                                                    <option value="">Selecione o perfil</option>
+                                                                    <?php
+                                                                        $pdo  = $registry->get('sgaedb');
+                                                                    	$stmt = $pdo->prepare("SELECT * FROM perfil WHERE inativo = 0  ORDER BY tipo ASC"); 
+                                                                    	$stmt->execute();
+                                                                    	$perfilItem = $stmt->fetchAll();
+                                                                        foreach ($perfilItem as $perfil) {
+                                                                            echo "<option value=".$perfil['id'].">".$perfil['tipo']."</option>";
+                                                                        }
+                                                                    ?>
+                                                                </select>
+                                                            </div>
                                                         </div>
-                                                    </div>                                                      
+                                                    </div>                                            
+                                        </div>
+                                        <div class="row">                                  
+                                            </br></br>
+                                            <div class="form-group form-actions">
+                                                <div class="col-md-9 col-md-offset-5">
+                                                    <input type="hidden" name="act" value="insert" />
+                                                    <button type="submit" class="btn btn-labeled btn-success btn-responsive"><span class="btn-label"><i class="livicon" data-name="save" data-size="17" data-loop="true" data-c="#fff" data-hc="#fff" title="Salvar"></i></span>&nbsp;Salvar</button>
+                                                    <button type="button" onclick="location.href='acesso_list.php?loadCriteria=true'" class="btn btn-labeled btn-warning btn-responsive"><span class="btn-label"><i class="livicon" data-name="remove-circle" data-size="17" data-loop="true" data-c="#fff" data-hc="#fff" title="Voltar"></i></span>Voltar</button>
+                                                </div>
+                                            </div>                                                      
+                                        </div>
+                                        <div class="row"> 
+                                            <div class="panel-body table-responsive">
+                                                <table class="table table-bordered " id="ajax_table">
+                                                    <thead>
+                                                        <tr class="filters" bgcolor="#418bca">
+                                                            <th style="width:10px"><input type="checkbox" id="check_all_none" checked></input></th>
+                                                            <th style="width:1000px"><font color="#fff">P&aacute;gina</font></th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <?php
+                                                           $pdo = $registry->get('sgaedb');
+                                                           $stmt = $pdo->prepare("SELECT * FROM pagina WHERE inativo = 0 ORDER BY nome ASC"); 
+                                                           $stmt->execute();
+                                                           $paginaItem = $stmt->fetchAll();
+                                                           foreach ($paginaItem as $pagina) {
+                                                               echo "<tr align=\"center\"><td><input type=\"checkbox\" class=\"flat-red\" name=\"paginas[]\" value=".$pagina['id']." checked/></td><td>".$pagina['nome']."</td></tr>";
+                                                           }
+                                                        ?>
+                                                    </tbody>
+                                                </table>
+                                            </div>
                                         </div>
                                     </form>
                                 </div>   
