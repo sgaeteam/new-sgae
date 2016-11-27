@@ -11,7 +11,7 @@ $(document).ready(function() {
 		var dataFimFiltro = $('#dataFimFiltro').val();
 		
 		if (dataIniFiltro == '' || dataFimFiltro == '') {
-			
+			toastr.remove();
 			toastr.options = {"closeButton": true,
 							  "positionClass": "toast-top-right",
 							  "showDuration": "1000",

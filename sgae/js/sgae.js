@@ -24,6 +24,7 @@ function hideDiv() {
     $("#ajax_table").DataTable().search("").draw();
     $("#ajax_table").DataTable().page.len( 10 ).draw();
     $('.loader').css({display:"none"});
+    toastr.remove();
     document.getElementById('tabela').style.display='none';
 }
 

@@ -42,8 +42,6 @@
     <script src="vendors/holder/holder.js" type="text/javascript"></script>
     <!-- end of global js -->
     <!-- begining of page level js -->
-    <!-- todolist -->
-    <script src="js/todolist.js"></script>
     <!-- EASY PIE CHART JS -->
     <script src="vendors/charts/easypiechart.min.js"></script>
     <script src="vendors/charts/jquery.easypiechart.min.js"></script>
