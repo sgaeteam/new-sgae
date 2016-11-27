@@ -80,7 +80,7 @@ header('Content-Type: text/html; charset=utf-8');
                                 }
                             ?>
                             <div class="panel-body">
-                                <form class="form-horizontal" method="post" action="javascript:prepareDiv();" id="ajax_form">
+                                <form class="form-horizontal" method="post" action="" id="ajax_form">
                                     <input type="hidden" id="loadCriteria" value="<?php echo $loadCriteria; ?>"/>
                                     <div class="row">
                                         <div class="col-md-6">
@@ -145,7 +145,7 @@ header('Content-Type: text/html; charset=utf-8');
                                 </br></br>
                                 <div class="form-group form-actions">
                                     <div class="col-md-9 col-md-offset-4">
-                                        <button type="submit" id="buscar" class="btn btn-labeled btn-success btn-responsive"><span class="btn-label"><i class="livicon" data-name="search" data-size="17" data-loop="true" data-c="#fff" data-hc="#fff" title="Buscar"></i></span>&nbsp;Buscar</button>
+                                        <button type="button" onclick="prepareDiv()" id="buscar" class="btn btn-labeled btn-success btn-responsive"><span class="btn-label"><i class="livicon" data-name="search" data-size="17" data-loop="true" data-c="#fff" data-hc="#fff" title="Buscar"></i></span>&nbsp;Buscar</button>
                                         <button type="button" onclick="hideDiv()" class="btn btn-labeled btn-danger btn-responsive"><span class="btn-label"><i class="livicon" data-name="remove-circle" data-size="17" data-loop="true" data-c="#fff" data-hc="#fff" title="Limpar"></i></span>Limpar</button>
                                         <button disabled type="button" onclick="location.href='log_insert.php'" class="btn btn-labeled btn-warning btn-responsive"><span class="btn-label"><i class="livicon" data-name="plus-alt" data-size="17" data-loop="true" data-c="#fff" data-hc="#fff" title="Buscar"></i></span>&nbsp;&nbsp;Novo</button>
                                     </div>
@@ -170,13 +170,13 @@ header('Content-Type: text/html; charset=utf-8');
                                         <table class="table table-bordered " id="ajax_table">
                                             <thead>
                                                 <tr class="filters">
-                                                    <th style="width:150px">URL</th>
-                                                    <th style="width:150px">A&ccedil;&atilde;o</th>
-                                                    <th style="width:48px">Usu&aacute;rio</th>
-                                                    <th style="width:80px">Data</th>                                                    
-                                                    <th style="width:23px">IP</th>
-                                                    <th style="width:45px">Prioridade</th>
-                                                    <th style="width:4px">Ação</th>
+                                                    <th style="width:260px">URL</th>
+                                                    <th style="width:200px">A&ccedil;&atilde;o</th>
+                                                    <th style="width:100px">Usu&aacute;rio</th>
+                                                    <th style="width:125px">Data</th>                                                    
+                                                    <th style="width:10px">IP</th>
+                                                    <th style="width:20px">Prioridade</th>
+                                                    <th style="width:10px">Ação</th>
                                                 </tr>
                                             </thead> 
                                         </table>

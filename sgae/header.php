@@ -29,6 +29,7 @@
     <link href="css/pages/advbuttons.css" rel="stylesheet" type="text/css" />
     <link href="css/plano.css" rel="stylesheet" type="text/css" />
     <link href="css/foundation-datepicker.css" rel="stylesheet" type="text/css" />
+    <link href="vendors/toastr/toastr.css" rel="stylesheet" type="text/css"/>
     <!--end of page level css-->
     <!-- global js -->
     <script src="js/jquery-1.11.3.min.js" type="text/javascript"></script>
@@ -67,6 +68,7 @@
     <script type="text/javascript" src="vendors/datatables/extensions/bootstrap/dataTables.bootstrap.js"></script>
     <script src="js/josh.js" type="text/javascript"></script>
     <script src="js/foundation-datepicker.js"></script>
+    <script src="vendors/toastr/toastr.min.js"></script>
 
 </head>
 <body class="skin-josh">
