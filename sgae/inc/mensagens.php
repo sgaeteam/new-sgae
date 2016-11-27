@@ -7,12 +7,15 @@ if (isset($_REQUEST['msg'])) {
 		case md5(001):
 			echo utf8_encode('Usu&aacute;rio ou senha inv&aacute;lida');
 			break;
+			
 		case md5(002):
 			echo utf8_encode('Preencha os dados do formul&aacute;rio corretamente');
 			break;
+			
 		case md5(003):
 			echo utf8_encode('Fa&ccedil;a o login primeiro');
 			break;
+			
 		case md5(004):
 			echo utf8_encode('Voc&ecirc; n&atilde;o tem permiss&atilde;o para acessar esta p&aacute;gina!');
 			break;
@@ -52,6 +55,14 @@ if (isset($_REQUEST['msg'])) {
 		case md5(204):
                         echo utf8_encode('P&aacute;gina inserida com sucesso');
 			break;
+			
+		case md5(205):
+                        echo utf8_encode('Acesso exclu&iacute;do com sucesso');
+			break;			
+			
+		case md5(206):
+                        echo utf8_encode('Acesso(s) inserido(s) com sucesso');
+			break;			
 
 		case md5(211):
                         echo utf8_encode('Plano alterado com sucesso');

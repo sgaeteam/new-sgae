@@ -1,6 +1,6 @@
 <?php
 
-// Verifica o acesso e Inautoriza acesso se ainda nao tiver feito o login (se nao passou pelo dologin)
+// Verifica o acesso e inautoriza acesso se ainda nao tiver feito o login (se nao passou pelo dologin)
 
 session_start();
 if ( !isset($_SESSION['login']) ) {
@@ -10,7 +10,7 @@ if ( !isset($_SESSION['login']) ) {
 	exit;
 }
 
-// Verifica o Controle de acesso e Inautoriza acesso se ainda nao tiver permissão
+// Verifica o Controle de acesso e inautoriza acesso se ainda nao tiver permissão
 
 if ( isset($_SESSION['UsuarioPerfil']) && isset($_SESSION['UnidadePlano']) ) {
 	include('inc/config.php');
@@ -34,13 +34,13 @@ if ( isset($_SESSION['UsuarioPerfil']) && isset($_SESSION['UnidadePlano']) ) {
 	$stmt->bindParam(':pagina', $page); 
 	$stmt->execute();
 	$result = $stmt->fetch(PDO::FETCH_ASSOC);
-/*
+
 	if ($stmt->rowCount() == 0) {
 		header('Window-target: _self');
 		header("location: ./planos.php");
 		exit;
 	}
-*/
+
 }
 
 ?>

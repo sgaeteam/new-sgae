@@ -46,7 +46,7 @@ $(document).ready(function() {
 					                            "                </h4>"+
 					                            "            </div>"+
 					                            "            <div class='modal-body'>"+
-					                            "               Você deseja excluir o acesso <strong>"+s[i][3]+" x "+s[i][5]+" x "+s[i][7]+"</strong>?"+
+					                            "               Você deseja excluir o acesso <strong>"+s[i][2]+" | "+s[i][3]+" | "+s[i][4]+"</strong>?"+
 					                            "            </div>"+
 					                            "            <div class='modal-footer'>"+
 					                            "                <button type='button' class='btn btn-warning' data-dismiss='modal'>Cancelar</button>"+

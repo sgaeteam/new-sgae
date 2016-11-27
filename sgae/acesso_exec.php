@@ -13,52 +13,103 @@ if ( isset($_REQUEST['act']) && !empty($_REQUEST['act']) ) {
 
 		case 'insert':
 
-			$nome  	 = $_POST['nome'];	
-			$inativo = $_POST['status'];			
+			$plano   = $_POST['plano'];	
+			$perfil  = $_POST['perfil'];	
+			$paginas = $_POST['paginas'];
 			
-            $pdo  = $registry->get('sgaedb');
-        	$stmt = $pdo->prepare("INSERT INTO pagina (nome,inativo)
-								   VALUES (:nome,:inativo)"); 
-			$stmt->bindParam(":nome", $nome);
-			$stmt->bindParam(":inativo", $inativo);
-        	$stmt->execute();
-        	$lastId = $pdo->lastInsertId();
-        	
-			$msg = md5(204);
+		    if (empty($plano) || empty($perfil) || empty($paginas)) {
+		    	
+		    	$msg = md5(002);
+				$destino = "acesso_insert.php?msg=".$msg;
+				
+			} 
+			else {
+				
+			    $N = count($paginas);
+			    $pdo  = $registry->get('sgaedb');
+
+			    for($i=0; $i < $N; $i++) {
+			    
+					$pagina = $paginas[$i];
+					
+					// Evitando inserção em duplicidade:
+		        	$stmt = $pdo->prepare("SELECT acesso_pagina.id, acesso_pagina.inativo 
+		        							 FROM acesso_pagina 
+		        							WHERE acesso_pagina.plano_id = :plano_id
+											  AND acesso_pagina.perfil_id = :perfil_id 
+											  AND acesso_pagina.pagina_id = :pagina_id"); 
+					$stmt->bindParam(":plano_id", $plano);
+					$stmt->bindParam(":perfil_id", $perfil);					
+					$stmt->bindParam(":pagina_id", $pagina);
+		        	$stmt->execute();
+		        	$result = $stmt->fetch(PDO::FETCH_ASSOC);
+		        	$idUpdate = $result['id'];
+		        	$inativo = $result['inativo'];
+					
+					if ($stmt->rowCount() == 0) { 
+						
+			        	$stmt = $pdo->prepare("INSERT INTO acesso_pagina (plano_id,perfil_id,pagina_id)
+											   VALUES (:plano_id,:perfil_id,:pagina_id)"); 
+						$stmt->bindParam(":plano_id", $plano);
+						$stmt->bindParam(":perfil_id", $perfil);					
+						$stmt->bindParam(":pagina_id", $pagina);
+			        	$stmt->execute();
+			        	$lastId = $pdo->lastInsertId();
+			        	
+    	        		$stmt = $pdo->prepare("SELECT plano.nome AS pl_nome,
+						            				  perfil.tipo AS pr_tipo,
+						            				  pagina.nome AS pag_nome
+										         FROM acesso_pagina,plano,perfil,pagina
+										        WHERE acesso_pagina.plano_id = plano.id
+											      AND acesso_pagina.perfil_id = perfil.id
+											      AND acesso_pagina.pagina_id = pagina.id
+											      AND acesso_pagina.id = :id");
+						$stmt->bindParam(":id", $lastId);
+				     	$stmt->execute();
+						$item = $stmt->fetch(PDO::FETCH_ASSOC);
+			        	
+						$log->logg($_SERVER['PHP_SELF'].'?act=insert&id='.$lastId,
+								   'Inclusão do Acesso: '.$item['pl_nome']." | ".$item['pr_tipo']." | ".$item['pag_nome'],
+								   'baixa','success'); 
+								   
+					}
+					else {
+						
+						if ($inativo == 1) {
+							
+				    		$stmt = $pdo->prepare("UPDATE acesso_pagina 
+				    								  SET inativo=0
+													WHERE acesso_pagina.plano_id = :plano_id
+													  AND acesso_pagina.perfil_id = :perfil_id 
+													  AND acesso_pagina.pagina_id = :pagina_id");	
+							$stmt->bindParam(":plano_id", $plano);
+							$stmt->bindParam(":perfil_id", $perfil);					
+							$stmt->bindParam(":pagina_id", $pagina);
+				        	$stmt->execute();	
+				        	
+	    	        		$stmt = $pdo->prepare("SELECT plano.nome AS pl_nome,
+							            				  perfil.tipo AS pr_tipo,
+							            				  pagina.nome AS pag_nome
+											         FROM acesso_pagina,plano,perfil,pagina
+											        WHERE acesso_pagina.plano_id = plano.id
+												      AND acesso_pagina.perfil_id = perfil.id
+												      AND acesso_pagina.pagina_id = pagina.id
+												      AND acesso_pagina.id = :id");
+							$stmt->bindParam(":id", $idUpdate);
+					     	$stmt->execute();
+							$item = $stmt->fetch(PDO::FETCH_ASSOC);
+				        	
+							$log->logg($_SERVER['PHP_SELF'].'?act=insert&id='.$idUpdate,
+									   'Inclusão do Acesso: '.$item['pl_nome']." | ".$item['pr_tipo']." | ".$item['pag_nome'],
+									   'baixa','success'); 			        	
+						}
+					}	
+				}
+										
+				$msg = md5(206);
+				$destino = "acesso_insert.php?msg=".$msg;
+			}
 			
-			$destino = "pagina_insert.php?msg=".$msg;
-			$log->logg($_SERVER['PHP_SELF'].'?act=insert&id='.$lastId,
-					   'Inclusão da Página: '.$nome,
-					   'baixa','success'); 
-
-
-			break;
-		
-	
-		case 'update':
-
-			$idusu 	 = $_POST['idusu'];
-			$nome  	 = $_POST['nome'];			
-			$inativo = $_POST['status'];
-			
-			$pdo  = $registry->get('sgaedb');
-        	$stmt = $pdo->prepare("UPDATE pagina 
-        							  SET nome=:nome,
-										  inativo=:inativo
-									WHERE id=:id");	
-			$stmt->bindParam(":nome", $nome);
-			$stmt->bindParam(":inativo", $inativo);
-			$stmt->bindParam(":id", $idusu);
-        	$stmt->execute();
-			
-			$msg = md5(201);
-			
-			$destino = "pagina_edit.php?idusu=".$idusu."&msg=".$msg;
-			$log->logg($_SERVER['PHP_SELF'].'?act=update&id='.$idusu,
-					   'Alteração da Página: '.$nome,
-					   'media','warning'); 
-
-
 			break;
 		
 
@@ -67,54 +118,33 @@ if ( isset($_REQUEST['act']) && !empty($_REQUEST['act']) ) {
 			$idusu = $_REQUEST['idusu'];
 			
 			$pdo  = $registry->get('sgaedb');
-    		$stmt = $pdo->prepare("SELECT nome
-    								 FROM pagina 
-									WHERE id=:id");	
-			$stmt->bindParam(":id", $idusu);
-	     	$stmt->execute();
-			$result = $stmt->fetchColumn();
-			
-    		$stmt = $pdo->prepare("UPDATE pagina 
+    		$stmt = $pdo->prepare("UPDATE acesso_pagina 
     								  SET inativo=1
 									WHERE id=:id");	
 			$stmt->bindParam(":id", $idusu);
 	     	$stmt->execute();
-			$msg = md5(202);
-			
-			$destino = "pagina_list.php?loadCriteria=true&msg=".$msg;
+	     	
+			$msg = md5(205);
+			$destino = "acesso_list.php?loadCriteria=true&msg=".$msg;
+
+    		$stmt = $pdo->prepare("SELECT plano.nome AS pl_nome,
+			            				  perfil.tipo AS pr_tipo,
+			            				  pagina.nome AS pag_nome
+							         FROM acesso_pagina,plano,perfil,pagina
+							        WHERE acesso_pagina.plano_id = plano.id
+								      AND acesso_pagina.perfil_id = perfil.id
+								      AND acesso_pagina.pagina_id = pagina.id
+								      AND acesso_pagina.id = :id");
+			$stmt->bindParam(":id", $idusu);
+	     	$stmt->execute();
+			$item = $stmt->fetch(PDO::FETCH_ASSOC);
+
 			$log->logg($_SERVER['PHP_SELF'].'?act=delete&id='.$idusu,
-					   'Exclusão da Página: '.$result,
+					   'Exclusão do Acesso: '.$item['pl_nome']." | ".$item['pr_tipo']." | ".$item['pag_nome'],
 					   'alta','danger'); 
 	
 			break;
 		
-	
-		case 'react':	
-
-			$idusu = $_REQUEST['idusu'];
-			$pdo  = $registry->get('sgaedb');
-    		$stmt = $pdo->prepare("SELECT nome
-    								 FROM pagina 
-									WHERE id=:id");	
-			$stmt->bindParam(":id", $idusu);
-	     	$stmt->execute();
-			$result = $stmt->fetchColumn();			
-			
-    		$stmt = $pdo->prepare("UPDATE pagina 
-    								  SET inativo=:inativo
-									WHERE id=:id");	
-			$stmt->bindParam(":id", $idusu);
-	     	$stmt->execute();
-	     	
-			$msg = md5(203);
-
-			$destino = "pagina_list.php?msg=".$msg;
-			$log->logg($login,$_SERVER['PHP_SELF'].'?act=react&id='.$idusu,
-					   'Reativação da Página: '.$result,
-					   'media','warning'); 
-
-			break;
-			
 			
 		case 'select':	
 			
