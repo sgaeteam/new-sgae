@@ -10,6 +10,29 @@ $(document).ready(function() {
 		var dataIniFiltro = $('#dataIniFiltro').val();
 		var dataFimFiltro = $('#dataFimFiltro').val();
 		
+		if (dataIniFiltro == '' || dataFimFiltro == '') {
+			
+			toastr.options = {"closeButton": true,
+							  "positionClass": "toast-top-right",
+							  "showDuration": "1000",
+							  "hideDuration": "1000",
+							  "timeOut": "5000",
+							  "extendedTimeOut": "1000",
+							  "showEasing": "swing",
+							  "hideEasing": "linear",
+							  "showMethod": "fadeIn",
+							  "hideMethod": "fadeOut"
+			};
+			if(dataFimFiltro == '') {
+			  toastr['warning']('Por favor, preencha o campo.', 'Data Final');	
+			}
+			if(dataIniFiltro == '') {
+			  toastr['warning']('Por favor, preencha o campo.', 'Data Inicial');	
+			}
+			
+			return false;
+		}
+		
 		if(user != '') { 
 			$.ajax({
 				// Alterar a chamada do exec a utilizar conforme a entidade com parametros
@@ -100,29 +123,5 @@ $(document).ready(function() {
 		//Faz nova busca
 		loadDataTable();
 	});
-	
-	//Configuração do calendário
-	var checkin = $('#dataIniFiltro').fdatepicker({
-		    language: 'pt_br',
-			onRender: function (date) {
-			return date.valueOf();
-		}
-	}).on('changeDate', function (ev) {
-		if (ev.date.valueOf() > checkout.date.valueOf()) {
-			var newDate = new Date(ev.date)
-			newDate.setDate(newDate.getDate() + 1);
-			checkout.update(newDate);
-		}
-		checkin.hide();
-		$('#dataFimFiltro')[0].focus();
-	}).data('datepicker');
-	var checkout = $('#dataFimFiltro').fdatepicker({
-		language: 'pt_br',
-		onRender: function (date) {
-			return date.valueOf() <= checkin.date.valueOf() ? 'disabled' : '';
-		}
-	}).on('changeDate', function (ev) {
-		checkout.hide();
-	}).data('datepicker');
 	
 });
