@@ -167,7 +167,7 @@ header('Content-Type: text/html; charset=utf-8');
                                             <thead>
                                                 <tr class="filters">
                                                     <th style="width:260px">URL</th>
-                                                    <th style="width:200px">A&ccedil;&atilde;o</th>
+                                                    <th style="width:200px">Opera&ccedil;&atilde;o</th>
                                                     <th style="width:100px">Usu&aacute;rio</th>
                                                     <th style="width:125px">Data</th>                                                    
                                                     <th style="width:10px">IP</th>
