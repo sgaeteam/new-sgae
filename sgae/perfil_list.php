@@ -87,6 +87,8 @@ header('Content-Type: text/html; charset=utf-8');
                                                     <input type="text" class="form-control" id="nomeFiltro" placeholder="Digite o nome do perfil" value="<?php echo $nomeFiltro; ?>">
                                                 </div>
                                             </div>
+                                        </div>
+                                        <div class="col-md-6">
                                             <div class="form-group">
                                                     <label class="control-label col-md-3">Status</label>
                                                     <div class="col-md-9">
@@ -135,11 +137,11 @@ header('Content-Type: text/html; charset=utf-8');
                                         <table class="table table-bordered " id="ajax_table">
                                             <thead>
                                                 <tr class="filters">
-                                                    <th style="width:50px">Perfil</th>
-                                                    <th style="width:100px">Descrição</th>
-                                                    <th style="width:10px">Sigla</th>
-                                                    <th style="width:30px">Status</th>
-                                                    <th style="width:70px">Ações</th>
+                                                    <th style="width:200px">Perfil</th>
+                                                    <th style="width:300px">Descrição</th>
+                                                    <th style="width:200px">Sigla</th>
+                                                    <th style="width:200px">Status</th>
+                                                    <th style="width:10px">Ações</th>
                                                 </tr>
                                             </thead> 
                                         </table>
