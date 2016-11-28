@@ -14,24 +14,39 @@ if ( isset($_REQUEST['act']) && !empty($_REQUEST['act']) ) {
 		case 'insert':
 
 			$nome  	 = $_POST['nome'];	
-			$inativo = $_POST['status'];			
+			$inativo = $_POST['status'];
 			
-            $pdo  = $registry->get('sgaedb');
-        	$stmt = $pdo->prepare("INSERT INTO pagina (nome,inativo)
-								   VALUES (:nome,:inativo)"); 
+			$pdo  = $registry->get('sgaedb');
+			$stmt = $pdo->prepare("SELECT pagina.nome
+			            	         FROM pagina 
+			            	        WHERE pagina.nome = :nome");
 			$stmt->bindParam(":nome", $nome);
-			$stmt->bindParam(":inativo", $inativo);
-        	$stmt->execute();
-        	$lastId = $pdo->lastInsertId();
-        	
-			$msg = md5(204);
+			$stmt->execute();			
+
+			if($stmt->rowCount() == 0) {
 			
-			$destino = "pagina_insert.php?msg=".$msg;
-			$log->logg($_SERVER['PHP_SELF'].'?act=insert&id='.$lastId,
-					   'Inclusão da Página: '.$nome,
-					   'baixa','success'); 
+	            $pdo  = $registry->get('sgaedb');
+	        	$stmt = $pdo->prepare("INSERT INTO pagina (nome,inativo)
+									   VALUES (:nome,:inativo)"); 
+				$stmt->bindParam(":nome", $nome);
+				$stmt->bindParam(":inativo", $inativo);
+	        	$stmt->execute();
+	        	$lastId = $pdo->lastInsertId();
+	        	
+				$msg = md5(204);
+				
+				$destino = "pagina_insert.php?msg=".$msg;
+				$log->logg($_SERVER['PHP_SELF'].'?act=insert&id='.$lastId,
+						   'Inclusão da Página: '.$nome,
+						   'baixa','success'); 
+			}
+			else {
 
-
+				$msg = md5(203);
+				$destino = "pagina_insert.php?msg=".$msg;
+				
+			}
+			
 			break;
 		
 	

@@ -6,6 +6,7 @@ $("div.alert").on("click", "button.close", function() {
     $(this).parent().animate({opacity: 0}, 500).hide('slow');
 });
 
+// Selecionar TODOS ou NENHUM Checkbox
 $('#check_all_none').click(function () {
     if ( $(this).is(':checked') ){
         $('.flat-red').prop("checked", true);
@@ -15,10 +16,12 @@ $('#check_all_none').click(function () {
     }
 });
 
+// Exibe a tabela nas telas de LISTAGEM
 function showDiv() {
     document.getElementById('tabela').style.display='block';
 }
 
+// Utilizado pelo botao BUSCAR
 function prepareDiv() {
     $("#ajax_table").DataTable().clear().draw();
     $("#ajax_table").DataTable().search("").draw();
@@ -27,6 +30,7 @@ function prepareDiv() {
     document.getElementById('tabela').style.display='none';
 }
 
+// Utilizado pelo botao LIMPAR
 function hideDiv() {
     document.getElementById('ajax_form').reset();
     $("#ajax_table").DataTable().clear().draw();    
@@ -37,7 +41,7 @@ function hideDiv() {
     document.getElementById('tabela').style.display='none';
 }
 
-//Configuração do calendário. Para utilizá-lo, basta incluir um fild com id igual a 'dataIniFiltro' e 'dataFimFiltro'
+// Configuração do calendário. Para utilizá-lo, basta incluir um fild com id igual a 'dataIniFiltro' e 'dataFimFiltro'
 var checkin = $('#dataIniFiltro').fdatepicker({
 		    language: 'pt_br',
 			onRender: function (date) { return date.valueOf(); }

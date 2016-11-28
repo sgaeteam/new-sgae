@@ -33,9 +33,9 @@ $(document).ready(function() {
 					if (s !== null) {
 						oTable.clear().draw();
 					 	for(var i = 0; i < s.length; i++) {
-					 		oTable.row.add([s[i][2],s[i][3],s[i][4],"<a class='btn default btn-xs green-stripe' style='padding: 1px 5px; display: inline;' href=acesso_view.php?idusu="+s[i][0]+"><span class='glyphicon glyphicon-eye-open'></span> Exibir</a>"+
-												"<a class='btn default btn-xs yellow-stripe' style='padding: 1px 5px; display: inline;' href=acesso_edit.php?idusu="+s[i][0]+"><span class='glyphicon glyphicon-pencil'></span> Alterar</a>"+
-												"<a class='btn default btn-xs red-stripe' style='padding: 1px 5px; display: inline;' href=# data-toggle='modal' data-target=#delete_confirm_"+s[i][0]+" data-id="+s[i][0]+"><span class='glyphicon glyphicon-trash'></span> Excluir</a>"+
+					 		oTable.row.add([s[i][2],s[i][3],s[i][4],"<a class='btn default btn-xs green-stripe' disabled style='padding: 1px 5px; display: inline;' href=acesso_view.php?idusu="+s[i][0]+"><span class='glyphicon glyphicon-eye-open'></span> Exibir</a>"+
+												"<a class='btn default btn-xs yellow-stripe' disabled style='padding: 1px 5px; display: inline;' href=acesso_edit.php?idusu="+s[i][0]+"><span class='glyphicon glyphicon-pencil'></span> Alterar</a>"+
+												"<a class='btn default btn-xs red-stripe'style='padding: 1px 5px; display: inline;' href=# data-toggle='modal' data-target=#delete_confirm_"+s[i][0]+" data-id="+s[i][0]+"><span class='glyphicon glyphicon-trash'></span> Excluir</a>"+
 												"<div class='modal fade' id='delete_confirm_"+s[i][0]+"' tabindex='-1' role='dialog' aria-labelledby='user_delete_confirm_title' aria-hidden='true'>"+
 					                            "    <div class='modal-dialog'>"+
 					                            "        <div class='modal-content'>"+

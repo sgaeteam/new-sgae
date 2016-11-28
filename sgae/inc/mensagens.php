@@ -49,7 +49,7 @@ if (isset($_REQUEST['msg'])) {
 			break;
 			
 		case md5(203):
-                        echo utf8_encode('P&aacute;gina reativada com sucesso');
+                        echo utf8_encode('P&aacute;gina j&aacute; cadastrada');
 			break;
 
 		case md5(204):
