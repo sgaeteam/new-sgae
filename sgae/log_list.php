@@ -80,7 +80,7 @@ header('Content-Type: text/html; charset=utf-8');
                                 }
                             ?>
                             <div class="panel-body">
-                                <form class="form-horizontal" method="post" action="" id="ajax_form">
+                                <form class="form-horizontal" method="post" action="" id="ajax_form" name="ajax_form">
                                     <input type="hidden" id="loadCriteria" value="<?php echo $loadCriteria; ?>"/>
                                     <div class="row">
                                         <div class="col-md-6">
@@ -100,16 +100,12 @@ header('Content-Type: text/html; charset=utf-8');
                                                         <option value="">Selecione a prioridade</option>
                                                         <?php
                                                             if ($_GET['loadCriteria'] === 'true' && isset($_SESSION['form_param'])) { 
-                                                        
-                                                                $pdo  = $registry->get('sgaedb');
-                                                            	$stmt = $pdo->prepare("SELECT * FROM perfil ORDER BY tipo ASC"); 
-                                                            	$stmt->execute();
-                                                            	$perfilItem = $stmt->fetchAll();
-                                                                foreach ($perfilItem as $item) {
-                                                                    if ($perfilFiltro === $item['id'] ) {
-                                                                        echo "<option value=".$item['id']." selected>".$item['tipo']."</option>";
-                                                                    }
-                                                                    echo "<option value=".$item['id'].">".$item['tipo']."</option>";
+                                                                if ($prioridadeFiltro=='baixa') {
+                                                                    echo "<option value='baixa' selected>Baixa</option>";
+                                                                } else if ($prioridadeFiltro=='media') {
+                                                                    echo "<option value='media' selected>M&eacute;dia</option>";
+                                                                } else {
+                                                                    echo "<option value='alta' selected>Alta</option>";
                                                                 }
                                                             } else { 
                                                                 echo "<option value='baixa'>Baixa</option>";
@@ -171,7 +167,7 @@ header('Content-Type: text/html; charset=utf-8');
                                             <thead>
                                                 <tr class="filters">
                                                     <th style="width:260px">URL</th>
-                                                    <th style="width:200px">A&ccedil;&atilde;o</th>
+                                                    <th style="width:200px">Opera&ccedil;&atilde;o</th>
                                                     <th style="width:100px">Usu&aacute;rio</th>
                                                     <th style="width:125px">Data</th>                                                    
                                                     <th style="width:10px">IP</th>

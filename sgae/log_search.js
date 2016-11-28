@@ -11,7 +11,7 @@ $(document).ready(function() {
 		var dataFimFiltro = $('#dataFimFiltro').val();
 		
 		if (dataIniFiltro == '' || dataFimFiltro == '') {
-			
+			toastr.remove();
 			toastr.options = {"closeButton": true,
 							  "positionClass": "toast-top-right",
 							  "showDuration": "1000",
@@ -27,7 +27,7 @@ $(document).ready(function() {
 			  toastr['warning']('Por favor, preencha o campo.', 'Data Final');	
 			}
 			if(dataIniFiltro == '') {
-			  toastr['warning']('Por favor, preencha o campo.', 'Data Inicial');	
+			  toastr['error']('Por favor, preencha o campo.', 'Data Inicial');	
 			}
 			
 			return false;
