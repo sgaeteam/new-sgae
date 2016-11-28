@@ -69,18 +69,16 @@ header('Content-Type: text/html; charset=utf-8');
                                                             <div class="form-group">
                                                                 <label class="control-label col-md-3" for="nome">Plano*</label>
                                                                 <div class="col-md-9">
-                                                                    <input type="text" style="width:150px" class="form-control" name="nome" id="nome" placeholder="Digite o nome" required>
+                                                                    <input type="text" class="form-control" name="nome" id="nome" placeholder="Digite o nome" required>
                                                                 </div>
                                                             </div>
                                                          
                                                     </div>                                            
-                                        </div>    
-                                        <div class="row">                                        
                                                     <div class="col-md-6">
                                                             <div class="form-group">
                                                                 <label class="control-label col-md-3" for="descricao">Descri&ccedil;&atilde;o*</label>
                                                                 <div class="col-md-9">
-                                                                    <input type="text" style="width:300px" class="form-control" id="descricao" name="descricao" placeholder="Digite a descrição do plano" value="<?php echo $descricao; ?>" required>
+                                                                    <input type="text" class="form-control" id="descricao" name="descricao" placeholder="Digite a descrição do plano" value="<?php echo $descricao; ?>" required>
                                                                 </div>
                                                             </div>   
                                                     </div>
@@ -90,12 +88,10 @@ header('Content-Type: text/html; charset=utf-8');
                                                             <div class="form-group">
                                                                 <label class="control-label col-md-3" for="valor">Valor (R$)*</label>
                                                                 <div class="col-md-9">
-                                                                    <input type="text" style="width:70px" class="form-control" id="valor" name="valor" placeholder="Valor?" value="<?php echo $valor; ?>" required>
+                                                                    <input type="text" class="form-control" id="valor" name="valor" placeholder="Digite um valor" value="<?php echo $valor; ?>" required>
                                                                 </div>
                                                             </div>   
                                                     </div>
-                                        </div>   
-                                        <div class="row">                                        
                                                     <div div class="col-md-6">
                                                          <div class="form-group">
                                                              <label class="control-label col-md-3">Status</label>
