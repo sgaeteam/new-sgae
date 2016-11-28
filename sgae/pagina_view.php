@@ -100,10 +100,7 @@ if (isset($_GET['idusu']) && is_numeric($_GET['idusu'])) {
                                                                 </div>
                                                             </div>   
                                                     </div>
-                                        </div>                                                    
-                                        <div class="row">
-                                                    
-                                                    <div div class="col-md-6">
+                                                    <div class="col-md-6">
                                                          <div class="form-group">
                                                              <label class="control-label col-md-3">Status</label>
                                                              <div class="col-md-9">

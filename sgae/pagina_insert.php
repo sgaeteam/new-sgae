@@ -75,7 +75,7 @@ header('Content-Type: text/html; charset=utf-8');
                                                          
                                                     </div>                                            
                                                    
-                                                    <div div class="col-md-6">
+                                                    <div class="col-md-6">
                                                          <div class="form-group">
                                                              <label class="control-label col-md-3">Status</label>
                                                              <div class="col-md-9">

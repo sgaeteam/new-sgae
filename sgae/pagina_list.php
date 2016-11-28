@@ -87,6 +87,8 @@ header('Content-Type: text/html; charset=utf-8');
                                                     <input type="text" class="form-control" id="nomeFiltro" placeholder="Digite o nome da p&aacute;gina" value="<?php echo $nomeFiltro; ?>">
                                                 </div>
                                             </div>
+                                        </div>
+                                        <div class="col-md-6">
                                             <div class="form-group">
                                                     <label class="control-label col-md-3">Status</label>
                                                     <div class="col-md-9">
@@ -135,9 +137,9 @@ header('Content-Type: text/html; charset=utf-8');
                                         <table class="table table-bordered " id="ajax_table">
                                             <thead>
                                                 <tr class="filters">
-                                                    <th style="width:100px">P&aacute;gina</th>
-                                                    <th style="width:45px">Status</th>
-                                                    <th style="width:100px">Ações</th>
+                                                    <th style="width:455px">P&aacute;gina</th>
+                                                    <th style="width:455px">Status</th>
+                                                    <th style="width:10px">Ações</th>
                                                 </tr>
                                             </thead> 
                                         </table>

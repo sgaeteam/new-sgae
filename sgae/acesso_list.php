@@ -201,10 +201,10 @@ header('Content-Type: text/html; charset=utf-8');
                                         <table class="table table-bordered " id="ajax_table">
                                             <thead>
                                                 <tr class="filters">
-                                                    <th style="width:50px">Plano</th>
-                                                    <th style="width:50px">Perfil</th>
-                                                    <th style="width:100px">P&aacute;gina</th>
-                                                    <th style="width:100px">Ações</th>
+                                                    <th style="width:320px">Plano</th>
+                                                    <th style="width:315px">Perfil</th>
+                                                    <th style="width:315px">P&aacute;gina</th>
+                                                    <th style="width:10px">Ações</th>
                                                 </tr>
                                             </thead> 
                                         </table>
