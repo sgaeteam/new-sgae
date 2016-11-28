@@ -24,7 +24,7 @@ $(document).ready(function() {
 							  "hideMethod": "fadeOut"
 			};
 			if(dataFimFiltro == '') {
-			  toastr['warning']('Por favor, preencha o campo.', 'Data Final');	
+			  toastr['error']('Por favor, preencha o campo.', 'Data Final');	
 			}
 			if(dataIniFiltro == '') {
 			  toastr['error']('Por favor, preencha o campo.', 'Data Inicial');	
