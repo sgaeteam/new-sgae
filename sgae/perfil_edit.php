@@ -92,7 +92,7 @@ if (isset($_GET['idusu']) && is_numeric($_GET['idusu'])) {
                                                             <div class="form-group">
                                                                 <label class="control-label col-md-3" for="tipo">Perfil*</label>
                                                                 <div class="col-md-9">
-                                                                    <input type="text" class="form-control" id="tipo" name="tipo" placeholder="Digite o nome do perfil" value="<?php echo $tipo; ?>" required>
+                                                                    <input type="text" class="form-control" id="tipo" name="tipo" placeholder="Digite o nome do perfil" value="<?php echo $tipo; ?>" >
                                                                 </div>
                                                             </div>   
                                                     </div>
@@ -100,7 +100,7 @@ if (isset($_GET['idusu']) && is_numeric($_GET['idusu'])) {
                                                             <div class="form-group">
                                                                 <label class="control-label col-md-3" for="descricao">Descri&ccedil;&atilde;o*</label>
                                                                 <div class="col-md-9">
-                                                                    <input type="text" class="form-control" id="descricao" name="descricao" placeholder="Digite a descrição do perfil" value="<?php echo $descricao; ?>" required>
+                                                                    <input type="text" class="form-control" id="descricao" name="descricao" placeholder="Digite a descrição do perfil" value="<?php echo $descricao; ?>" >
                                                                 </div>
                                                             </div>   
                                                     </div>
@@ -110,7 +110,7 @@ if (isset($_GET['idusu']) && is_numeric($_GET['idusu'])) {
                                                             <div class="form-group">
                                                                 <label class="control-label col-md-3" for="sigla">Sigla*</label>
                                                                 <div class="col-md-9">
-                                                                    <input type="text" class="form-control" id="sigla" name="sigla" placeholder="Sigla?" value="<?php echo $sigla; ?>" required>
+                                                                    <input type="text" class="form-control" id="sigla" name="sigla" placeholder="Sigla?" value="<?php echo $sigla; ?>" >
                                                                 </div>
                                                             </div>   
                                                     </div>
@@ -144,7 +144,7 @@ if (isset($_GET['idusu']) && is_numeric($_GET['idusu'])) {
                                                         <div class="col-md-9 col-md-offset-5"> 
                                                             <input type="hidden" name="idusu" value="<?php echo $idusu; ?>" />
                                                             <input type="hidden" name="act" value="update" />
-                                                            <button type="submit" class="btn btn-labeled btn-success btn-responsive"><span class="btn-label"><i class="livicon" data-name="save" data-size="17" data-loop="true" data-c="#fff" data-hc="#fff" title="Alterar"></i></span>&nbsp;Alterar</button>
+                                                            <button id="botao_perfil_form_submit" type="submit" class="btn btn-labeled btn-success btn-responsive"><span class="btn-label"><i class="livicon" data-name="save" data-size="17" data-loop="true" data-c="#fff" data-hc="#fff" title="Alterar"></i></span>&nbsp;Alterar</button>
                                                             <button type="button" onclick="location.href='perfil_list.php?loadCriteria=true'" class="btn btn-labeled btn-warning btn-responsive"><span class="btn-label"><i class="livicon" data-name="remove-circle" data-size="17" data-loop="true" data-c="#fff" data-hc="#fff" title="Voltar"></i></span>Voltar</button>
                                                         </div>
                                                     </div>                                                    
@@ -160,5 +160,6 @@ if (isset($_GET['idusu']) && is_numeric($_GET['idusu'])) {
         </aside>  
     </div>
 
-<!-- Include footer here-->   
+<!-- Include footer here-->
+<script src="js/sgae.validate.perfil.js" type="text/javascript"></script>
 <?php include 'footer.php';?>
