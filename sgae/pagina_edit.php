@@ -95,7 +95,7 @@ if (isset($_GET['idusu']) && is_numeric($_GET['idusu'])) {
                                                             <div class="form-group">
                                                                 <label class="control-label col-md-3" for="nome">P&aacute;gina*</label>
                                                                 <div class="col-md-9">
-                                                                    <input type="text" class="form-control" id="nome" name="nome" placeholder="Digite o nome da p&aacute;gina" value="<?php echo $nome; ?>" required>
+                                                                    <input type="text" class="form-control" id="nome" name="nome" placeholder="Digite o nome da p&aacute;gina" value="<?php echo $nome; ?>" >
                                                                 </div>
                                                             </div>   
                                                     </div>
@@ -131,7 +131,7 @@ if (isset($_GET['idusu']) && is_numeric($_GET['idusu'])) {
                                                             <input type="hidden" name="senha" value="<?php echo $senha; ?>" />
                                                             <input type="hidden" name="unidade" value="<?php echo $unidade; ?>" />
                                                             <input type="hidden" name="act" value="update" />
-                                                            <button type="submit" class="btn btn-labeled btn-success btn-responsive"><span class="btn-label"><i class="livicon" data-name="save" data-size="17" data-loop="true" data-c="#fff" data-hc="#fff" title="Alterar"></i></span>&nbsp;Alterar</button>
+                                                            <button id="botao_pagina_form_submit" type="submit" class="btn btn-labeled btn-success btn-responsive"><span class="btn-label"><i class="livicon" data-name="save" data-size="17" data-loop="true" data-c="#fff" data-hc="#fff" title="Alterar"></i></span>&nbsp;Alterar</button>
                                                             <button type="button" onclick="location.href='pagina_list.php?loadCriteria=true'" class="btn btn-labeled btn-warning btn-responsive"><span class="btn-label"><i class="livicon" data-name="remove-circle" data-size="17" data-loop="true" data-c="#fff" data-hc="#fff" title="Voltar"></i></span>Voltar</button>
                                                         </div>
                                                     </div>                                                    
@@ -147,5 +147,6 @@ if (isset($_GET['idusu']) && is_numeric($_GET['idusu'])) {
         </aside>  
     </div>
 
-<!-- Include footer here-->   
+<!-- Include footer here-->
+<script src="js/sgae.validate.pagina.js" type="text/javascript"></script>
 <?php include 'footer.php';?>
