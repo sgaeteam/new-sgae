@@ -69,7 +69,7 @@ header('Content-Type: text/html; charset=utf-8');
                                                             <div class="form-group">
                                                                 <label class="control-label col-md-3" for="nome">Plano*</label>
                                                                 <div class="col-md-9">
-                                                                    <input type="text" class="form-control" name="nome" id="nome" placeholder="Digite o nome" required>
+                                                                    <input type="text" class="form-control" name="nome" id="nome" placeholder="Digite o nome">
                                                                 </div>
                                                             </div>
                                                          
@@ -78,7 +78,7 @@ header('Content-Type: text/html; charset=utf-8');
                                                             <div class="form-group">
                                                                 <label class="control-label col-md-3" for="descricao">Descri&ccedil;&atilde;o*</label>
                                                                 <div class="col-md-9">
-                                                                    <input type="text" class="form-control" id="descricao" name="descricao" placeholder="Digite a descrição do plano" value="<?php echo $descricao; ?>" required>
+                                                                    <input type="text" class="form-control" id="descricao" name="descricao" placeholder="Digite a descrição do plano" value="<?php echo $descricao; ?>" >
                                                                 </div>
                                                             </div>   
                                                     </div>
@@ -88,7 +88,7 @@ header('Content-Type: text/html; charset=utf-8');
                                                             <div class="form-group">
                                                                 <label class="control-label col-md-3" for="valor">Valor (R$)*</label>
                                                                 <div class="col-md-9">
-                                                                    <input type="text" class="form-control" id="valor" name="valor" placeholder="Digite um valor" value="<?php echo $valor; ?>" required>
+                                                                    <input type="text" class="form-control" id="valor" name="valor" placeholder="Digite um valor" value="<?php echo $valor; ?>" >
                                                                 </div>
                                                             </div>   
                                                     </div>
@@ -107,7 +107,7 @@ header('Content-Type: text/html; charset=utf-8');
                                                     <div class="form-group form-actions">
                                                         <div class="col-md-9 col-md-offset-5">
                                                             <input type="hidden" name="act" value="insert" />
-                                                            <button type="submit" class="btn btn-labeled btn-success btn-responsive"><span class="btn-label"><i class="livicon" data-name="save" data-size="17" data-loop="true" data-c="#fff" data-hc="#fff" title="Salvar"></i></span>&nbsp;Salvar</button>
+                                                            <button id="botao_plano_form_submit" type="submit" class="btn btn-labeled btn-success btn-responsive"><span class="btn-label"><i class="livicon" data-name="save" data-size="17" data-loop="true" data-c="#fff" data-hc="#fff" title="Salvar"></i></span>&nbsp;Salvar</button>
                                                             <button type="button" onclick="location.href='plano_list.php?loadCriteria=true'" class="btn btn-labeled btn-warning btn-responsive"><span class="btn-label"><i class="livicon" data-name="remove-circle" data-size="17" data-loop="true" data-c="#fff" data-hc="#fff" title="Voltar"></i></span>Voltar</button>
                                                         </div>
                                                     </div>                                                      
@@ -123,5 +123,6 @@ header('Content-Type: text/html; charset=utf-8');
         </aside>  
     </div>
 
-<!-- Include footer here-->   
+<!-- Include footer here-->
+<script src="js/sgae.validate.plano.js" type="text/javascript"></script>
 <?php include 'footer.php';?>
