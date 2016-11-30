@@ -1,3 +1,4 @@
+<script src="js/sgae.validate.acesso.js" type="text/javascript"></script>
 <?php
 include('inc/verificasession.php');
 
@@ -12,7 +13,7 @@ header('Content-Type: text/html; charset=utf-8');
 ?>
 <!-- Include header here-->
     <?php include 'header.php';?>
-
+    <script src="js/sgae.validate.acesso.js" type="text/javascript"></script>
     <div class="wrapper row-offcanvas row-offcanvas-left">
         <aside class="right-side">
             <!-- Main content -->
@@ -84,8 +85,6 @@ header('Content-Type: text/html; charset=utf-8');
                                                             </div>
                                                         </div>
                                                     </div>                                            
-                                        </div>    
-                                        <div class="row">
                                                     <div class="col-md-6">
                                                         <div class="form-group">
                                                             <label class="control-label col-md-3" for="perfilFiltro">Perfil</label>
@@ -106,26 +105,28 @@ header('Content-Type: text/html; charset=utf-8');
                                                         </div>
                                                     </div>                                            
                                         </div>
-                                        <div class="row">                                  
-                                            </br></br>
-                                            <div class="form-group form-actions">
-                                                <div class="col-md-9 col-md-offset-5">
-                                                    <input type="hidden" name="act" value="insert" />
-                                                    <button type="submit" class="btn btn-labeled btn-success btn-responsive"><span class="btn-label"><i class="livicon" data-name="save" data-size="17" data-loop="true" data-c="#fff" data-hc="#fff" title="Salvar"></i></span>&nbsp;Salvar</button>
-                                                    <button type="button" onclick="location.href='acesso_list.php?loadCriteria=true'" class="btn btn-labeled btn-warning btn-responsive"><span class="btn-label"><i class="livicon" data-name="remove-circle" data-size="17" data-loop="true" data-c="#fff" data-hc="#fff" title="Voltar"></i></span>Voltar</button>
+                                        <div class="row">
+                                            <div id="tabela" class="panel panel-primary filterable">
+                                                <div class="panel-heading clearfix ">
+                                                    <div class="panel-title pull-left">
+                                                        <div class="caption">
+                                                            <i class="livicon" data-name="pencil" data-size="16" data-loop="true" data-c="#fff" data-hc="white"></i>
+                                                            Resultado da busca
+                                                        </div>
+                                                    </div>
+                                                    <div id="tools" class="tools pull-right">
+                                                    </div>
                                                 </div>
-                                            </div>                                                      
-                                        </div>
-                                        <div class="row"> 
-                                            <div class="panel-body table-responsive">
-                                                <table class="table table-bordered " id="ajax_table">
-                                                    <thead>
-                                                        <tr class="filters" bgcolor="#418bca">
-                                                            <th style="width:10px"><input type="checkbox" id="check_all_none" checked></input></th>
-                                                            <th style="width:1000px"><font color="#fff">P&aacute;gina</font></th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
+                                                <br/>
+                                                <div class="panel-body table-responsive">
+                                                    <table class="table table-bordered " id="acesso_insert_table">
+                                                        <thead>
+                                                            <tr class="filters">
+                                                                <th style="width:10px"><input type="checkbox" id="check_all_none" checked></input></th>
+                                                                <th style="width:800px">P&aacute;gina</th>
+                                                            </tr>
+                                                        </thead> 
+                                                         <tbody>
                                                         <?php
                                                            $pdo = $registry->get('sgaedb');
                                                            $stmt = $pdo->prepare("SELECT * FROM pagina WHERE inativo = 0 ORDER BY nome ASC"); 
@@ -136,9 +137,20 @@ header('Content-Type: text/html; charset=utf-8');
                                                            }
                                                         ?>
                                                     </tbody>
-                                                </table>
+                                                    </table>
+                                                </div>
                                             </div>
-                                        </div>
+                                                                        
+                                            </br>
+                                            <div class="form-group form-actions">
+                                                <div class="col-md-9 col-md-offset-5">
+                                                    <input type="hidden" name="act" value="insert" />
+                                                    <button id = "botao_acesso_form_submit" type="submit" class="btn btn-labeled btn-success btn-responsive"><span class="btn-label"><i class="livicon" data-name="save" data-size="17" data-loop="true" data-c="#fff" data-hc="#fff" title="Salvar"></i></span>&nbsp;Salvar</button>
+                                                    <button type="button" onclick="location.href='acesso_list.php?loadCriteria=true'" class="btn btn-labeled btn-warning btn-responsive"><span class="btn-label"><i class="livicon" data-name="remove-circle" data-size="17" data-loop="true" data-c="#fff" data-hc="#fff" title="Voltar"></i></span>Voltar</button>
+                                                </div>
+                                            </div>                                                      
+                                       </div>  
+                                        
                                     </form>
                                 </div>   
                               </div>          
