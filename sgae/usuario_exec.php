@@ -85,10 +85,46 @@ if ( isset($_REQUEST['act']) && !empty($_REQUEST['act']) ) {
 					   'Alteração do Usuário: '.$login,
 					   'media','warning'); 
 
-
 			break;
+	
 		
+		case 'updateSenha':
 
+			$idusu 		 = $_POST['idusu'];
+			$login 		 = $_POST['login'];	
+			$senhaAtual  = md5($_POST['senhaAtual']);
+			$novaSenha	 = md5($_POST['novaSenha']);	
+			
+    		$stmt = $pdo->prepare("SELECT senha
+    								 FROM usuario 
+									WHERE id=:id");	
+			$stmt->bindParam(":id", $idusu);
+	     	$stmt->execute();
+			$result = $stmt->fetchColumn();		
+			
+			if ($result === $senhaAtual) {
+			
+	        	$stmt = $pdo->prepare("UPDATE usuario 
+	        							  SET senha=:senha
+										WHERE id=:id");			
+				$stmt->bindParam(":senha", $novaSenha);
+				$stmt->bindParam(":id", $idusu);
+	        	$stmt->execute();
+				
+				$msg = md5(105);
+				$destino = "usuario_edit_senha.php?idusu=".$idusu."&msg=".$msg;
+				$log->logg($_SERVER['PHP_SELF'].'?act=update&id='.$idusu,
+						   'Alteração de Senha: '.$login,
+						   'media','warning'); 
+			}
+			else {
+				$msg = md5(106);
+				$destino = "usuario_edit_senha.php?idusu=".$idusu."&msg=".$msg;
+			}
+			
+			break;
+
+			
 		case 'delete':		
 
 			$idusu = $_REQUEST['idusu'];

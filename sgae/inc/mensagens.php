@@ -40,6 +40,14 @@ if (isset($_REQUEST['msg'])) {
                         echo utf8_encode('Usu&aacute;rio inserido com sucesso');
 			break;
 
+		case md5(105):
+                        echo utf8_encode('Senha alterada com sucesso');
+			break;
+
+		case md5(106):
+                        echo utf8_encode('Senha atual n&atilde;o confere');
+			break;
+			
 		case md5(201):
                         echo utf8_encode('P&aacute;gina alterada com sucesso');
 			break;
@@ -116,10 +124,6 @@ if (isset($_REQUEST['msg'])) {
                         echo utf8_encode('Cadastro atualizado com sucesso!');
 			break;
 			
-		case md5(540):
-                        echo utf8_encode('Pedido realizado com sucesso... aguarde redirecionamento para o servi&ccedil;o de pagamento.');
-			break;
-			
 		case md5(555):
                         echo utf8_encode('E-mail j&aacute; cadastrado em nosso sistema!');
 			break;
@@ -128,26 +132,6 @@ if (isset($_REQUEST['msg'])) {
 			echo utf8_encode('CPF j&aacute; cadastrado em nosso sistema!');
 			break;			
 			
-		case md5(700):
-                        echo utf8_encode('Carrinho esvaziado com sucesso!');
-                        break;
-		
-		case md5(800):
-                        echo utf8_encode('Voc&ecirc; deve cadastrar as datas de nascimento de todos os passageiros para prosseguir.');
-                        break;
-	
-		case md5(701):
-                        echo utf8_encode('Mensagem enviada para lixeira com sucesso!');
-                        break;
-		
-		case md5(702):
-                        echo utf8_encode('Passageiro alterado com sucesso!');
-                        break;
-		
-		case md5(707):
-                        echo utf8_encode('Passageiro inserido com sucesso!!');
-                        break;
-		
 		case md5(708):
                         echo utf8_encode("Voc&ecirc; est&aacute; utilizando caracteres inv&aacute;lidos. Retire as aspas simples ( ' ) do login e tente novamente.");
                         break;

@@ -482,20 +482,20 @@
                             </li>
                             <!-- Menu Body -->
                             <li>
-                                <a href="#">
+                                <a href="usuario_edit_dados.php?idusu=<?php echo $usuarioID ?>">
                                     <i class="livicon" data-name="user" data-s="18"></i> Meus Dados
                                 </a>
                             </li>
                             <li role="presentation"></li>
                             <li>
-                                <a href="#">
+                                <a href="usuario_edit_senha.php?idusu=<?php echo $usuarioID ?>">
                                     <i class="livicon" data-name="gears" data-s="18"></i> Mudar senha
                                 </a>
                             </li>
                             <!-- Menu Footer-->
                             <li class="user-footer">
                                 <div class="pull-left">
-                                    <a href="lockscreen.html">
+                                    <a href="lockscreen.php">
                                         <i class="livicon" data-name="lock" data-s="18"></i> Bloquear
                                     </a>
                                 </div>

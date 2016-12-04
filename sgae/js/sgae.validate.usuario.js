@@ -19,6 +19,10 @@ $(document).ready(function() {
         var usuarioNome = $('#nome').val();
 		var usuarioLogin = $('#login').val();
 		var usuarioPerfil = $('#perfil').val();
+		var senhaAtual = $('#senhaAtual').val();
+		var senhaNova = $('#senhaNova').val();
+		var senhaConfirma = $('#senhaConfirma').val();
+
 		
 		toastr.remove();
 		
@@ -31,10 +35,31 @@ $(document).ready(function() {
 	        toastr['error']('Por favor, preencha o campo.', 'Nome completo');
 	        error_free=false;
 	    }
+	    
 	    if (usuarioLogin == '') {
 	        toastr['error']('Por favor, preencha o campo.', 'Usuário');
 	        error_free=false;
 	    }
+
+	    if (senhaNova != senhaConfirma) {
+	        toastr['error']('A senha informada não confere.', 'Confirmar nova senha');
+	        error_free=false;
+	    }	  
+	    
+	    if (senhaConfirma == '') {
+	        toastr['error']('Por favor, preencha o campo.', 'Confirmar nova senha');
+	        error_free=false;
+	    }	
+
+	    if (senhaNova == '') {
+	        toastr['error']('Por favor, preencha o campo.', 'Nova senha');
+	        error_free=false;
+	    }	
+	    
+	    if (senhaAtual == '') {
+	        toastr['error']('Por favor, preencha o campo.', 'Senha atual');
+	        error_free=false;
+	    }	
 	    
 	    if (!error_free){
 		 event.preventDefault();
