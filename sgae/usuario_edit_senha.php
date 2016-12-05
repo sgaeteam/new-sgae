@@ -10,6 +10,10 @@ $usuarioUnidade = $_SESSION['UsuarioUnidade'];
 $unidadeNome    = $_SESSION['UnidadeNome'];
 
 header('Content-Type: text/html; charset=utf-8');
+
+if (isset($_GET['idusu']) && is_numeric($_GET['idusu'])) {
+    $idusu = $_GET['idusu'];
+}
 ?>
 <!-- Include header here-->
     <?php include 'header.php';?>
@@ -65,7 +69,7 @@ header('Content-Type: text/html; charset=utf-8');
                                         <div class="row">
                                                     <div class="col-md-9">
                                                             <div class="form-group">
-                                                                <label class="control-label col-md-3" for="login">Senha atual*</label>
+                                                                <label class="control-label col-md-3" for="senhaAtual">Senha atual*</label>
                                                                 <div class="col-md-9">
                                                                     <input type="password" class="form-control" id="senhaAtual" name="senhaAtual" placeholder="Digite a senha"/>
                                                                 </div>
@@ -73,7 +77,7 @@ header('Content-Type: text/html; charset=utf-8');
                                                     </div>
                                                     <div class="col-md-9">
                                                             <div class="form-group">
-                                                                <label class="control-label col-md-3" for="email">Nova senha*</label>
+                                                                <label class="control-label col-md-3" for="senhaNova">Nova senha*</label>
                                                                 <div class="col-md-9">
                                                                     <input type="password" class="form-control" id="senhaNova" name="senhaNova" placeholder="Digite a nova senha"/>
                                                                 </div>
@@ -82,7 +86,7 @@ header('Content-Type: text/html; charset=utf-8');
 
                                                     <div class="col-md-9">
                                                             <div class="form-group">
-                                                                <label class="control-label col-md-3" for="login">Confirmar nova senha*</label>
+                                                                <label class="control-label col-md-3" for="senhaConfirma">Confirmar nova senha*</label>
                                                                 <div class="col-md-9">
                                                                     <input type="password" class="form-control" id="senhaConfirma" name="senhaConfirma" placeholder="Digite a confirmação da senha"/>
                                                                 </div>

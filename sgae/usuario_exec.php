@@ -93,21 +93,21 @@ if ( isset($_REQUEST['act']) && !empty($_REQUEST['act']) ) {
 			$idusu 		 = $_POST['idusu'];
 			$login 		 = $_POST['login'];	
 			$senhaAtual  = md5($_POST['senhaAtual']);
-			$novaSenha	 = md5($_POST['novaSenha']);	
+			$senhaNova	 = md5($_POST['senhaNova']);	
 			
-    		$stmt = $pdo->prepare("SELECT senha
+    		$stmt = $pdo->prepare("SELECT *
     								 FROM usuario 
-									WHERE id=:id");	
+									WHERE id=:id
+									  AND senha=:senha");	
 			$stmt->bindParam(":id", $idusu);
+			$stmt->bindParam(":senha", $senhaAtual);			
 	     	$stmt->execute();
-			$result = $stmt->fetchColumn();		
 			
-			if ($result === $senhaAtual) {
-			
+			if ($stmt->rowCount() > 0) {
 	        	$stmt = $pdo->prepare("UPDATE usuario 
 	        							  SET senha=:senha
 										WHERE id=:id");			
-				$stmt->bindParam(":senha", $novaSenha);
+				$stmt->bindParam(":senha", $senhaNova);
 				$stmt->bindParam(":id", $idusu);
 	        	$stmt->execute();
 				
