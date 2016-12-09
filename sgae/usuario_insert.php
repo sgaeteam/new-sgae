@@ -70,7 +70,7 @@ header('Content-Type: text/html; charset=utf-8');
                                                             <div class="form-group">
                                                                 <label class="control-label col-md-3" for="login">Usu&aacute;rio*</label>
                                                                 <div class="col-md-9">
-                                                                    <input type="text" class="form-control" id="login" placeholder="Digite o login" name="login" size="255">
+                                                                    <input type="text" class="form-control" id="login" placeholder="Digite o login" name="login" maxlength="30">
                                                                 </div>
                                                             </div>
                                                          
@@ -79,7 +79,7 @@ header('Content-Type: text/html; charset=utf-8');
                                                             <div class="form-group">
                                                                 <label class="control-label col-md-3" for="email">E-mail</label>
                                                                 <div class="col-md-9">
-                                                                    <input type="email" class="form-control" id="email" placeholder="Digite o e-mail" name="email" data-bv-field="validateEmail">
+                                                                    <input type="email" class="form-control" id="email" placeholder="Digite o e-mail" name="email" maxlength="40">
                                                                 </div>
                                                             </div>   
                                                     </div>
@@ -89,7 +89,7 @@ header('Content-Type: text/html; charset=utf-8');
                                                             <div class="form-group">
                                                                 <label class="control-label col-md-3" for="nome">Nome completo*</label>
                                                                 <div class="col-md-9">
-                                                                    <input type="text" class="form-control" id="nome" placeholder="Digite o nome" name="nome">
+                                                                    <input type="text" class="form-control" id="nome" placeholder="Digite o nome" name="nome" maxlength="80">
                                                                 </div>
                                                             </div>
                                                          

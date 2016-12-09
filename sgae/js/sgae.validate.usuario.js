@@ -15,10 +15,12 @@ $(document).ready(function() {
 	$("#botao_usuario_form_submit").click(function(event){
         
         var error_free=true;
+        var email_regex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/i;
         
         var usuarioNome = $('#nome').val();
 		var usuarioLogin = $('#login').val();
 		var usuarioPerfil = $('#perfil').val();
+		var usuarioEmail  = $('#email').val();
 		var senhaAtual = $('#senhaAtual').val();
 		var senhaNova = $('#senhaNova').val();
 		var senhaConfirma = $('#senhaConfirma').val();
@@ -34,6 +36,11 @@ $(document).ready(function() {
 	    if (usuarioNome == '') {
 	        toastr['error']('Por favor, preencha o campo.', 'Nome completo');
 	        error_free=false;
+	    }
+	    
+	    if (usuarioEmail != '' && !email_regex.test(usuarioEmail)) {
+	    	toastr['error']('Por favor, informe um endereço de e-mail válido.', 'E-mail');
+	    	error_free=false;
 	    }
 	    
 	    if (usuarioLogin == '') {
