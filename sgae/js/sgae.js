@@ -57,7 +57,7 @@ var checkin = $('#dataIniFiltro').fdatepicker({
 
 var checkout = $('#dataFimFiltro').fdatepicker({
 		     language: 'pt_br',
-		     onRender: function (date) { return date.valueOf() <= checkin.date.valueOf() ? 'disabled' : '';	}
+		     onRender: function (date) { return date.valueOf() < checkin.date.valueOf() ? 'disabled' : '';	}
 }).on('changeDate', function (ev) {
 		checkout.hide();
 }).data('datepicker');

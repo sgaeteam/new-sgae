@@ -27,19 +27,21 @@ if ( isset($_REQUEST['act']) && !empty($_REQUEST['act']) ) {
 
 			$pdo  = $registry->get('sgaedb');
 			
+			$dtInicio   = $dtInicio.' 00:00:01';
+			$dtFim		= $dtFim.' 23:59:59';
 			if (!empty($dtInicio) && !empty($dtFim) && empty($usuario) && empty($prioridade)) {
 			
 				$type 	 = "dtInicio&dtFim"; 
 				$p_array = array(':unidade_id'=>$unidade,':dtInicio'=>$dtInicio,':dtFim'=>$dtFim);
 	    		$p_where = " log.unidade_id = :unidade_id
-	    					 AND DATE_FORMAT(FROM_UNIXTIME(timestamp), '%d/%m/%Y') BETWEEN :dtInicio AND :dtFim ";	
+	    					 AND timestamp between UNIX_TIMESTAMP(STR_TO_DATE(:dtInicio, '%d/%m/%Y %H:%i:%s')) AND UNIX_TIMESTAMP(STR_TO_DATE(:dtFim, '%d/%m/%Y %H:%i:%s')) ";	
 
 			} elseif (!empty($dtInicio) && !empty($dtFim) && !empty($usuario) && empty($prioridade)) {
 		
 				$type 	 = "nome";
 				$p_array = array(':unidade_id'=>$unidade,':dtInicio'=>$dtInicio,':dtFim'=>$dtFim,':usuario'=>"%$usuario%");
 	    		$p_where = " log.unidade_id = :unidade_id
-	    					 AND DATE_FORMAT(FROM_UNIXTIME(timestamp), '%d/%m/%Y') BETWEEN :dtInicio AND :dtFim
+	    					 AND timestamp between UNIX_TIMESTAMP(STR_TO_DATE(:dtInicio, '%d/%m/%Y %H:%i:%s')) AND UNIX_TIMESTAMP(STR_TO_DATE(:dtFim, '%d/%m/%Y %H:%i:%s'))
             	             AND log.login LIKE :usuario";
 	    		
 			} elseif (!empty($dtInicio) && !empty($dtFim) && empty($usuario) && !empty($prioridade)) {
@@ -47,7 +49,7 @@ if ( isset($_REQUEST['act']) && !empty($_REQUEST['act']) ) {
 				$type 	 = "prioridade";
 				$p_array = array(':unidade_id'=>$unidade,':dtInicio'=>$dtInicio,':dtFim'=>$dtFim,':prioridade'=>"%$prioridade%");
 	    		$p_where = " log.unidade_id = :unidade_id
-	    					 AND DATE_FORMAT(FROM_UNIXTIME(timestamp), '%d/%m/%Y') BETWEEN :dtInicio AND :dtFim
+	    					 AND timestamp between UNIX_TIMESTAMP(STR_TO_DATE(:dtInicio, '%d/%m/%Y %H:%i:%s')) AND UNIX_TIMESTAMP(STR_TO_DATE(:dtFim, '%d/%m/%Y %H:%i:%s'))
             	             AND log.priority LIKE :prioridade";
 							
 			} elseif (!empty($dtInicio) && !empty($dtFim) && !empty($usuario) && !empty($prioridade)) {			
@@ -55,7 +57,7 @@ if ( isset($_REQUEST['act']) && !empty($_REQUEST['act']) ) {
 				$type 	 = "all";
 				$p_array = array(':unidade_id'=>$unidade,':dtInicio'=>$dtInicio,':dtFim'=>$dtFim,':usuario'=>"%usuario%",':prioridade'=>"%$prioridade%");
 	    		$p_where = " log.unidade_id = :unidade_id
-	    					 AND DATE_FORMAT(FROM_UNIXTIME(timestamp), '%d/%m/%Y') BETWEEN :dtInicio AND :dtFim
+	    					 AND timestamp between UNIX_TIMESTAMP(STR_TO_DATE(:dtInicio, '%d/%m/%Y %H:%i:%s')) AND UNIX_TIMESTAMP(STR_TO_DATE(:dtFim, '%d/%m/%Y %H:%i:%s'))
 	    					 AND log.login LIKE :usuario
             	             AND log.prioridade LIKE :prioridade"; 
 
@@ -69,7 +71,7 @@ if ( isset($_REQUEST['act']) && !empty($_REQUEST['act']) ) {
             	   "  FROM log ".
             	   " WHERE ". 
             	   	   $p_where.
-				   " ORDER BY  timestamp DESC ";
+				   " ORDER BY id DESC";
 
 			$stmt = $pdo->prepare($sql);		
 			$stmt->execute($p_array);			

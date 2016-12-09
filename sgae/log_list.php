@@ -69,7 +69,7 @@ header('Content-Type: text/html; charset=utf-8');
                                     $dataIniFiltro = $_SESSION['form_param'][2];
                                     $dataFimFiltro = $_SESSION['form_param'][3];
                                     $loadCriteria = 1;
-                                    // print_r(var_dump($_SESSION)); // Para debugar a Session
+                                    //print_r(var_dump($_SESSION)); // Para debugar a Session
                                 } else {
                                     unset($_SESSION['form_param']);
                                     $usuarioFiltro = "";
@@ -80,7 +80,7 @@ header('Content-Type: text/html; charset=utf-8');
                                 }
                             ?>
                             <div class="panel-body">
-                                <form class="form-horizontal" method="post" action="" id="ajax_form" name="ajax_form">
+                                <form class="form-horizontal" method="post" action="" id="ajax_form">
                                     <input type="hidden" id="loadCriteria" value="<?php echo $loadCriteria; ?>"/>
                                     <div class="row">
                                         <div class="col-md-6">
@@ -88,7 +88,6 @@ header('Content-Type: text/html; charset=utf-8');
                                                 <label class="control-label col-md-3" for="usuarioFiltro">Usu&aacute;rio</label>
                                                 <div class="col-md-9">
                                                     <input type="text" class="form-control" id="usuarioFiltro" placeholder="Digite o login" value="<?php echo $usuarioFiltro; ?>">
-                                                    <small class="help-block" data-bv-validator="notEmpty" data-bv-for="usuarioFiltro" data-bv-result="NOT_VALIDATED" style="display: none;">The first name is required and cannot be empty</small>
                                                 </div>
                                             </div>
                                         </div>
@@ -102,10 +101,20 @@ header('Content-Type: text/html; charset=utf-8');
                                                             if ($_GET['loadCriteria'] === 'true' && isset($_SESSION['form_param'])) { 
                                                                 if ($prioridadeFiltro=='baixa') {
                                                                     echo "<option value='baixa' selected>Baixa</option>";
+                                                                    echo "<option value='media'>M&eacute;dia</option>";
+                                                                    echo "<option value='alta'>Alta</option>";
                                                                 } else if ($prioridadeFiltro=='media') {
+                                                                    echo "<option value='baixa'>Baixa</option>";
                                                                     echo "<option value='media' selected>M&eacute;dia</option>";
-                                                                } else {
+                                                                    echo "<option value='alta'>Alta</option>";
+                                                                } else if ($prioridadeFiltro=='alta') {
+                                                                    echo "<option value='baixa'>Baixa</option>";
+                                                                    echo "<option value='media'>M&eacute;dia</option>";
                                                                     echo "<option value='alta' selected>Alta</option>";
+                                                                } else {
+                                                                    echo "<option value='baixa'>Baixa</option>";
+                                                                    echo "<option value='media'>M&eacute;dia</option>";
+                                                                    echo "<option value='alta'>Alta</option>"; 
                                                                 }
                                                             } else { 
                                                                 echo "<option value='baixa'>Baixa</option>";
@@ -136,7 +145,7 @@ header('Content-Type: text/html; charset=utf-8');
                                             </div>
                                         </div>
                                     </div>
-                                </div>
+                                
                                 </form>
                                 </br></br>
                                 <div class="form-group form-actions">
@@ -178,7 +187,8 @@ header('Content-Type: text/html; charset=utf-8');
                                         </table>
                                     </div>
                                 </div>
-                            </div>   
+                            </div>
+                          </div>
                         </div>         
                     </div> 
                 </div>  

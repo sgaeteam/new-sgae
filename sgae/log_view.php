@@ -151,8 +151,54 @@ if (isset($_GET['login'])) {
                                                     </div>
                                         </div>                                                    
                                         <div class="row">
-                                                    
                                                 <div div class="col-md-6">
+                                               <div class="form-group">
+                                                   <label class="control-label col-md-3">IP</label>
+                                                   <div class="col-md-9">
+                                                       <input disabled="" type="text" class="form-control" id="ip" name="ip" value="<?php echo $ip; ?>">
+                                                   </div>                 
+                                               </div>
+                                            </div>
+                                               <div div class="col-md-6">
+                                               <div class="form-group">
+                                                   <label class="control-label col-md-3">Prioridade</label>
+                                                   <div class="col-md-9">
+                                                       <input disabled="" type="text" class="form-control" id="prioridade" name="prioridade" value="<?php echo $prioridade; ?>">
+                                                   </div>                 
+                                               </div>
+                                            </div>
+                                                                                                          
+                                        </div>
+                                         <div class="row">
+                                            <div class="col-md-12">
+                                               <div class="form-group">
+                                                   <label class="control-label col-md-1" style="width:12.50%">URL</label>
+                                                   <div class="col-md-11" style="width:87.50%">
+                                                       <input disabled="" type="text" class="form-control" id="url" name="url" value="<?php echo $url; ?>">
+                                                   </div>                 
+                                               </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div div class="col-md-12">
+                                               <div class="form-group">
+                                                   <label class="control-label col-md-1" style="width:12.50%">Opera&ccedil;&atilde;o</label>
+                                                   <div class="col-md-11" style="width:87.50%">
+                                                       <input disabled="" type="text" class="form-control" id="acao" name="acao" value="<?php echo $msg; ?>">
+                                                   </div>                 
+                                               </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div div class="col-md-6">
+                                               <div class="form-group">
+                                                   <label class="control-label col-md-3">Data</label>
+                                                   <div class="col-md-9">
+                                                       <input disabled="" type="text" class="form-control" id="data" name="data" value="<?php echo $timestamp; ?>">
+                                                   </div>                 
+                                               </div>
+                                            </div>
+                                            <div div class="col-md-6">
                                                          <div class="form-group">
                                                              <label class="control-label col-md-3">Status</label>
                                                              <div class="col-md-9">
@@ -177,51 +223,6 @@ if (isset($_GET['login'])) {
                                                              </div>   
                                                          </div>
                                                     </div>
-                                               <div div class="col-md-6">
-                                               <div class="form-group">
-                                                   <label class="control-label col-md-3">Prioridade</label>
-                                                   <div class="col-md-9">
-                                                       <input disabled="" type="text" class="form-control" id="prioridade" name="prioridade" value="<?php echo $prioridade; ?>">
-                                                   </div>                 
-                                               </div>
-                                            </div>
-                                                                                                          
-                                        </div>
-                                         <div class="row">
-                                            <div div class="col-md-6">
-                                               <div class="form-group">
-                                                   <label class="control-label col-md-3">URL</label>
-                                                   <div class="col-md-9">
-                                                       <input disabled="" type="text" class="form-control" id="url" name="url" value="<?php echo $url; ?>">
-                                                   </div>                 
-                                               </div>
-                                            </div>
-                                             <div div class="col-md-6">
-                                               <div class="form-group">
-                                                   <label class="control-label col-md-3">Opera&ccedil;&atilde;o</label>
-                                                   <div class="col-md-9">
-                                                       <input disabled="" type="text" class="form-control" id="acao" name="acao" value="<?php echo $msg; ?>">
-                                                   </div>                 
-                                               </div>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div div class="col-md-6">
-                                               <div class="form-group">
-                                                   <label class="control-label col-md-3">Data</label>
-                                                   <div class="col-md-9">
-                                                       <input disabled="" type="text" class="form-control" id="data" name="data" value="<?php echo $timestamp; ?>">
-                                                   </div>                 
-                                               </div>
-                                            </div>
-                                             <div div class="col-md-6">
-                                               <div class="form-group">
-                                                   <label class="control-label col-md-3">IP</label>
-                                                   <div class="col-md-9">
-                                                       <input disabled="" type="text" class="form-control" id="ip" name="ip" value="<?php echo $ip; ?>">
-                                                   </div>                 
-                                               </div>
-                                            </div>
                                             </br></br>
                                             <div class="form-group form-actions">
                                                 <div class="col-md-9 col-md-offset-5">
