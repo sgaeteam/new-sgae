@@ -69,7 +69,7 @@ header('Content-Type: text/html; charset=utf-8');
                                                             <div class="form-group">
                                                                 <label class="control-label col-md-3" for="nome">Plano*</label>
                                                                 <div class="col-md-9">
-                                                                    <input type="text" class="form-control" name="nome" id="nome" placeholder="Digite o nome">
+                                                                    <input type="text" class="form-control" name="nome" id="nome" placeholder="Digite o nome" maxlength="50">
                                                                 </div>
                                                             </div>
                                                          
@@ -78,7 +78,7 @@ header('Content-Type: text/html; charset=utf-8');
                                                             <div class="form-group">
                                                                 <label class="control-label col-md-3" for="descricao">Descri&ccedil;&atilde;o*</label>
                                                                 <div class="col-md-9">
-                                                                    <input type="text" class="form-control" id="descricao" name="descricao" placeholder="Digite a descrição do plano" value="<?php echo $descricao; ?>" >
+                                                                    <input type="text" class="form-control" id="descricao" name="descricao" placeholder="Digite a descrição do plano" maxlength="100" >
                                                                 </div>
                                                             </div>   
                                                     </div>
@@ -88,7 +88,7 @@ header('Content-Type: text/html; charset=utf-8');
                                                             <div class="form-group">
                                                                 <label class="control-label col-md-3" for="valor">Valor (R$)*</label>
                                                                 <div class="col-md-9">
-                                                                    <input type="text" class="form-control" id="valor" name="valor" placeholder="Digite um valor" value="<?php echo $valor; ?>" >
+                                                                    <input type="text" class="form-control money" id="valor" name="valor" placeholder="Digite um valor" maxlength="10" >
                                                                 </div>
                                                             </div>   
                                                     </div>

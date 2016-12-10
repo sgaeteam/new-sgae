@@ -67,7 +67,9 @@
     <script src="js/josh.js" type="text/javascript"></script>
     <script src="js/foundation-datepicker.js"></script>
     <script src="vendors/toastr/toastr.min.js"></script>
-
+    <script src="js/jquery.mask.js"></script>
+    <script src="js/sgae.mask.js"></script>
+    
 </head>
 <body class="skin-josh">
     <header class="header">
