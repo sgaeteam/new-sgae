@@ -69,7 +69,7 @@ header('Content-Type: text/html; charset=utf-8');
                                                             <div class="form-group">
                                                                 <label class="control-label col-md-3" for="nome">P&aacute;gina*</label>
                                                                 <div class="col-md-9">
-                                                                    <input type="text" class="form-control" name="nome" id="nome" placeholder="Digite o nome da p&aacute;gina (sem a extensão .php)"> 
+                                                                    <input type="text" class="form-control" name="nome" id="nome" placeholder="Digite o nome da p&aacute;gina (sem a extensão .php)" maxlength="100"> 
                                                                 </div>
                                                             </div>
                                                          

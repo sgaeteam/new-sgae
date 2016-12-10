@@ -95,7 +95,7 @@ if (isset($_GET['idusu']) && is_numeric($_GET['idusu'])) {
                                                             <div class="form-group">
                                                                 <label class="control-label col-md-3" for="nome">P&aacute;gina*</label>
                                                                 <div class="col-md-9">
-                                                                    <input type="text" class="form-control" id="nome" name="nome" placeholder="Digite o nome da p&aacute;gina" value="<?php echo $nome; ?>" >
+                                                                    <input type="text" class="form-control" id="nome" name="nome" placeholder="Digite o nome da p&aacute;gina (sem a extensão .php)" value="<?php echo $nome; ?>" maxlength="100">
                                                                 </div>
                                                             </div>   
                                                     </div>
