@@ -13,8 +13,8 @@ class Database
     private function __construct()
     {
         # Informações sobre o banco de dados:
-        $db_host = "localhost";
-        $db_nome = "sgaedb";
+        $db_host = "db4free.net";
+        $db_nome = "sgae";
         $db_usuario = "sgaeteam";
         $db_senha = "teamsgae";
         $db_driver = "mysql";
