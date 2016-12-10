@@ -92,7 +92,7 @@ if (isset($_GET['idusu']) && is_numeric($_GET['idusu'])) {
                                                             <div class="form-group">
                                                                 <label class="control-label col-md-3" for="tipo">Perfil*</label>
                                                                 <div class="col-md-9">
-                                                                    <input type="text" class="form-control" id="tipo" name="tipo" placeholder="Digite o nome do perfil" value="<?php echo $tipo; ?>" >
+                                                                    <input type="text" class="form-control" id="tipo" name="tipo" placeholder="Digite o nome do perfil" value="<?php echo $tipo; ?>" maxlength="25">
                                                                 </div>
                                                             </div>   
                                                     </div>
@@ -100,7 +100,7 @@ if (isset($_GET['idusu']) && is_numeric($_GET['idusu'])) {
                                                             <div class="form-group">
                                                                 <label class="control-label col-md-3" for="descricao">Descri&ccedil;&atilde;o*</label>
                                                                 <div class="col-md-9">
-                                                                    <input type="text" class="form-control" id="descricao" name="descricao" placeholder="Digite a descrição do perfil" value="<?php echo $descricao; ?>" >
+                                                                    <input type="text" class="form-control" id="descricao" name="descricao" placeholder="Digite a descrição do perfil" value="<?php echo $descricao; ?>" maxlength="100">
                                                                 </div>
                                                             </div>   
                                                     </div>
@@ -110,7 +110,7 @@ if (isset($_GET['idusu']) && is_numeric($_GET['idusu'])) {
                                                             <div class="form-group">
                                                                 <label class="control-label col-md-3" for="sigla">Sigla*</label>
                                                                 <div class="col-md-9">
-                                                                    <input type="text" class="form-control" id="sigla" name="sigla" placeholder="Sigla?" value="<?php echo $sigla; ?>" >
+                                                                    <input type="text" class="form-control" id="sigla" name="sigla" placeholder="Digite a sigla" value="<?php echo $sigla; ?>" maxlength="3">
                                                                 </div>
                                                             </div>   
                                                     </div>
