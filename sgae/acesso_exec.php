@@ -26,7 +26,7 @@ if ( isset($_REQUEST['act']) && !empty($_REQUEST['act']) ) {
 			else {
 				
 			    $N = count($paginas);
-			    $pdo  = $registry->get('sgaedb');
+			    // $pdo  = $registry->get('sgaedb');
 
 			    for($i=0; $i < $N; $i++) {
 			    
@@ -117,7 +117,7 @@ if ( isset($_REQUEST['act']) && !empty($_REQUEST['act']) ) {
 
 			$idusu = $_REQUEST['idusu'];
 			
-			$pdo  = $registry->get('sgaedb');
+			// $pdo  = $registry->get('sgaedb');
     		$stmt = $pdo->prepare("UPDATE acesso_pagina 
     								  SET inativo=1
 									WHERE id=:id");	
@@ -155,7 +155,7 @@ if ( isset($_REQUEST['act']) && !empty($_REQUEST['act']) ) {
 			session_start();
 			$_SESSION['form_param']	 = $form_param;
 	        
-			$pdo  = $registry->get('sgaedb');
+			// $pdo  = $registry->get('sgaedb');
 			
 			if (empty($plano) && empty($perfil)) {
 			

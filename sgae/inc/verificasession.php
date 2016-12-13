@@ -10,6 +10,15 @@ if ( !isset($_SESSION['login']) ) {
 	exit;
 }
 
+// Verifica se o acesso está no lock e devolve o usuário pra lá
+
+if ( $_SESSION['login'] == "lock" ) {
+	header('Window-target: _self');
+	header("location: ./lockscreen.php");
+	exit;
+}
+		
+		
 // Verifica o Controle de acesso e inautoriza acesso se ainda nao tiver permissão
 
 if ( isset($_SESSION['UsuarioPerfil']) && isset($_SESSION['UnidadePlano']) ) {

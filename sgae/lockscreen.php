@@ -1,3 +1,10 @@
+<?php 
+session_start();
+$usuarioLogin      = $_SESSION['UsuarioLogin'];
+$cnpj              = $_SESSION['UnidadeCNPJ'];
+$_SESSION['login'] = "lock";
+
+?>
 <!DOCTYPE html>
 <html>
 
@@ -22,12 +29,22 @@
             <div id="output"></div>
             <div class="avatar"></div>
             <div class="form-box">
-                <form method="POST" name="screen">
-                    <div class="form">
-                        <p class="form-control-static"><?php echo $usuarioLogin ?></p>
-                        <input type="password" name="user" class="form-control" placeholder="Senha">
-                        <button class="btn btn-info btn-block login" id="index" type="submit">GO</button>
-                    </div>
+                <!--<form method="POST" name="screen">-->
+                <!--    <div class="form">-->
+                <!--        <p class="form-control-static"><?php echo $usuarioLogin ?></p>-->
+                <!--        <input type="password" name="user" class="form-control" placeholder="Senha">-->
+                <!--        <button class="btn btn-info btn-block login" id="index" type="submit">OK</button>-->
+                <!--    </div>-->
+                <!--</form>-->
+                <form method="post" action="../dologin.php" id="myForm">
+                  <div class="form-group">
+                    <input class="form-control input-lg" type="password" name="senha" id="senha" size="20" placeholder="Senha"/>
+                  </div>
+                  <div class="form-group">
+                    <input type="submit" id="btn-login" name="sub" value="Acessar o sistema" class="btn btn-success btn-lg"/>
+                    <input type="hidden" name="user2" value="<?php echo $usuarioLogin; ?>" />
+                    <input type="hidden" name="cnpj" value="<?php echo $cnpj; ?>" />
+                  </div>
                 </form>
             </div>
         </div>
