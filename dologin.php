@@ -26,7 +26,7 @@ if (!empty($_POST['cnpj']) && !empty($_POST['user2']) && !empty($_POST['senha'])
 		
 		if (isset($_SESSION['login']) && $_SESSION['login'] == "lock") {
 			$_SESSION['login'] = 'ok';
-			header('Window-target: _self');
+			header('Window-target: _parent');
 			header("location: sgae/index.php");
 			exit;
 		}
@@ -55,10 +55,23 @@ if (!empty($_POST['cnpj']) && !empty($_POST['user2']) && !empty($_POST['senha'])
 	} 
 	else {
 		$msg = utf8_encode('Usu&aacute;rio ou senha inv&aacute;lida');
+
+		// Se o acesso veio da tela bloqueada, devolver ao mesmo com alerta de senha inválida
+		
+		session_start();
+		
+		if (isset($_SESSION['login']) && $_SESSION['login'] == "lock") {
+			$msg = md5($msg);
+			echo $msg;
+			header('Window-target: _parent');
+			header("location: sgae/lockscreen.php?msg=".$msg);
+			exit; 
+		}		
 	}
 }
 else {
 	$msg = utf8_encode('Preencha os dados do formul&aacute;rio corretamente');
+	echo $msg;
 }
-echo $msg;
+
 ?>

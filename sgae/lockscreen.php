@@ -26,7 +26,27 @@ $_SESSION['login'] = "lock";
     </div>
     <div class="container">
         <div class="login-container">
-            <div id="output"></div>
+            <div id="output">
+                <?php
+                    if (isset($_GET['msg'])) {                
+                ?>                
+    	            <div class="row">
+    	                    <div class="col-lg-12">
+    				            <div class="alert alert-success alert-dismissable margin5">
+    				                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+    				                <strong>
+                                        <?php 
+                                                $msg = $_GET['msg'];
+                                                include('inc/mensagens.php');
+                                        ?>
+                                    </strong>
+    				            </div>
+    		            	</div>
+    		        </div>
+                <?php
+                    }
+                ?>   		        
+            </div>
             <div class="avatar"></div>
             <div class="form-box">
                 <!--<form method="POST" name="screen">-->
